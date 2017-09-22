@@ -1,6 +1,6 @@
-all: update generate commit push
+all: update clean generate commit push
 
-.PHONY: update generate commit push
+.PHONY: update clean generate commit push
 
 generate:
 	./generate.ros
@@ -15,3 +15,6 @@ push:
 
 commit:
 	git commit -am 'Update documents'
+
+clean:
+	rm -f *.html
