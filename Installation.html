@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<title>Roswell - Common Lisp environment setup Utility.</title>
+		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+		<link href="https://fonts.googleapis.com/css?family=Orbitron:700" rel="stylesheet">
+		<style>
+html, body {
+	height: 100%;
+}
+main {
+	margin-top: 100px;
+}
+footer {
+	background:#f6f6f6;
+	height: 100px;
+	padding: 10px;
+}
+#title {
+	margin-bottom: 30px;
+}
+.navbar-brand {
+	font-family: 'Orbitron', sans-serif;
+}
+.dropdown-item:hover, .dropdown-item:focus{
+	background-color: transparent;
+}
+		</style>
+	</head>
+	<body>
+		<header>
+			<nav class="navbar fixed-top navbar-expanded-xl navbar-dark bg-success">
+				<a class="navbar-brand" href=".">
+					roswell
+				</a>
+				<div class="navbar-nav mr-auto">
+					<a class="nav-item nav-link text-light github" href="https://github.com/roswell/roswell">
+						Contribute in
+						<i class="fa fa-github" aria-hidden="true"></i>
+					</a>
+				</div>
+				<button class="navbar-toggler d-xs-block d-sm-block d-md-none" type="button" data-toggle="collapse" data-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="menu">
+					<ul class="navbar-nav">
+						
+							<li class="nav-item dropdown">
+								<a id="Home" class="nav-link dropdown-toggle text-light" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expand="false">
+									Home
+								</a>
+								<div class="dropdown-menu bg-success" aria-labelledby="Home">
+									
+										<a class="dropdown-item text-light" href="How-is-Roswell-different.html">
+											How is Roswell different
+										</a>
+									
+										<a class="dropdown-item text-light" href="Home.html">
+											Home
+										</a>
+									
+								</div>
+							</li>
+						
+							<li class="nav-item dropdown">
+								<a id="Getting started" class="nav-link dropdown-toggle text-light" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expand="false">
+									Getting started
+								</a>
+								<div class="dropdown-menu bg-success" aria-labelledby="Getting started">
+									
+										<a class="dropdown-item text-light" href="How-to-setup-a-lisp-dev-environment-on-windows-with-Roswell..html">
+											How to setup a lisp dev environment on windows with Roswell.
+										</a>
+									
+										<a class="dropdown-item text-light" href="Local-installation.html">
+											Local installation
+										</a>
+									
+										<a class="dropdown-item text-light" href="Upgrading-Roswell.html">
+											Upgrading Roswell
+										</a>
+									
+										<a class="dropdown-item text-light" href="Initial-Recommended-Setup.html">
+											Initial Recommended Setup
+										</a>
+									
+										<a class="dropdown-item text-light" href="Installation.html">
+											Installation
+										</a>
+									
+								</div>
+							</li>
+						
+							<li class="nav-item dropdown">
+								<a id="Roswell as a scripting environment" class="nav-link dropdown-toggle text-light" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expand="false">
+									Roswell as a scripting environment
+								</a>
+								<div class="dropdown-menu bg-success" aria-labelledby="Roswell as a scripting environment">
+									
+										<a class="dropdown-item text-light" href="Practical-Usecases.html">
+											Practical Usecases
+										</a>
+									
+										<a class="dropdown-item text-light" href="List-of-Roswell-Installable-Scripts.html">
+											List of Roswell Installable Scripts
+										</a>
+									
+										<a class="dropdown-item text-light" href="Reducing-Startup-Time.html">
+											Reducing Startup Time
+										</a>
+									
+										<a class="dropdown-item text-light" href="Advanced-scripting.html">
+											Advanced scripting
+										</a>
+									
+										<a class="dropdown-item text-light" href="Roswell-as-a-Scripting-Environment.html">
+											Roswell as a Scripting Environment
+										</a>
+									
+								</div>
+							</li>
+						
+							<li class="nav-item dropdown">
+								<a id="Roswell as an implementation manager" class="nav-link dropdown-toggle text-light" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expand="false">
+									Roswell as an implementation manager
+								</a>
+								<div class="dropdown-menu bg-success" aria-labelledby="Roswell as an implementation manager">
+									
+										<a class="dropdown-item text-light" href="Listing-various-resources.html">
+											Listing various resources
+										</a>
+									
+										<a class="dropdown-item text-light" href="Roswell-as-an-implementation-manager.html">
+											Roswell as an implementation manager
+										</a>
+									
+								</div>
+							</li>
+						
+							<li class="nav-item dropdown">
+								<a id="Roswell as a Testing Environment" class="nav-link dropdown-toggle text-light" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expand="false">
+									Roswell as a Testing Environment
+								</a>
+								<div class="dropdown-menu bg-success" aria-labelledby="Roswell as a Testing Environment">
+									
+										<a class="dropdown-item text-light" href="Coveralls.html">
+											Coveralls
+										</a>
+									
+										<a class="dropdown-item text-light" href="Circle-CI.html">
+											Circle CI
+										</a>
+									
+										<a class="dropdown-item text-light" href="Travis-CI.html">
+											Travis CI
+										</a>
+									
+										<a class="dropdown-item text-light" href="Roswell-as-a-Testing-Environment.html">
+											Roswell as a Testing Environment
+										</a>
+									
+								</div>
+							</li>
+						
+							<li class="nav-item dropdown">
+								<a id="Distributing applications" class="nav-link dropdown-toggle text-light" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expand="false">
+									Distributing applications
+								</a>
+								<div class="dropdown-menu bg-success" aria-labelledby="Distributing applications">
+									
+										<a class="dropdown-item text-light" href="How-to-distribute-your-software,-not-library,-on-Quicklisp-ala-python-pip.html">
+											How to distribute your software, not library, on Quicklisp ala python pip
+										</a>
+									
+								</div>
+							</li>
+						
+							<li class="nav-item dropdown">
+								<a id="FAQ" class="nav-link dropdown-toggle text-light" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expand="false">
+									FAQ
+								</a>
+								<div class="dropdown-menu bg-success" aria-labelledby="FAQ">
+									
+										<a class="dropdown-item text-light" href="FAQ.html">
+											FAQ
+										</a>
+									
+								</div>
+							</li>
+						
+					</ul>
+				</div>
+			</nav>
+		</header>
+		<main>
+			<div class="container">
+				<div class="row">
+					<aside class="col-md-4 col-lg-3 d-none d-md-block d-lg-block d-xl-block">
+						<ul class="">
+							
+								<li class="">
+									Home
+									<ul class="">
+										
+										<li>
+											<a class="" href="How-is-Roswell-different.html">
+												How is Roswell different
+											</a>
+										</li>
+										
+										<li>
+											<a class="" href="Home.html">
+												Home
+											</a>
+										</li>
+										
+									</ul>
+								</li>
+							
+								<li class="">
+									Getting started
+									<ul class="">
+										
+										<li>
+											<a class="" href="How-to-setup-a-lisp-dev-environment-on-windows-with-Roswell..html">
+												How to setup a lisp dev environment on windows with Roswell.
+											</a>
+										</li>
+										
+										<li>
+											<a class="" href="Local-installation.html">
+												Local installation
+											</a>
+										</li>
+										
+										<li>
+											<a class="" href="Upgrading-Roswell.html">
+												Upgrading Roswell
+											</a>
+										</li>
+										
+										<li>
+											<a class="" href="Initial-Recommended-Setup.html">
+												Initial Recommended Setup
+											</a>
+										</li>
+										
+										<li>
+											<a class="" href="Installation.html">
+												Installation
+											</a>
+										</li>
+										
+									</ul>
+								</li>
+							
+								<li class="">
+									Roswell as a scripting environment
+									<ul class="">
+										
+										<li>
+											<a class="" href="Practical-Usecases.html">
+												Practical Usecases
+											</a>
+										</li>
+										
+										<li>
+											<a class="" href="List-of-Roswell-Installable-Scripts.html">
+												List of Roswell Installable Scripts
+											</a>
+										</li>
+										
+										<li>
+											<a class="" href="Reducing-Startup-Time.html">
+												Reducing Startup Time
+											</a>
+										</li>
+										
+										<li>
+											<a class="" href="Advanced-scripting.html">
+												Advanced scripting
+											</a>
+										</li>
+										
+										<li>
+											<a class="" href="Roswell-as-a-Scripting-Environment.html">
+												Roswell as a Scripting Environment
+											</a>
+										</li>
+										
+									</ul>
+								</li>
+							
+								<li class="">
+									Roswell as an implementation manager
+									<ul class="">
+										
+										<li>
+											<a class="" href="Listing-various-resources.html">
+												Listing various resources
+											</a>
+										</li>
+										
+										<li>
+											<a class="" href="Roswell-as-an-implementation-manager.html">
+												Roswell as an implementation manager
+											</a>
+										</li>
+										
+									</ul>
+								</li>
+							
+								<li class="">
+									Roswell as a Testing Environment
+									<ul class="">
+										
+										<li>
+											<a class="" href="Coveralls.html">
+												Coveralls
+											</a>
+										</li>
+										
+										<li>
+											<a class="" href="Circle-CI.html">
+												Circle CI
+											</a>
+										</li>
+										
+										<li>
+											<a class="" href="Travis-CI.html">
+												Travis CI
+											</a>
+										</li>
+										
+										<li>
+											<a class="" href="Roswell-as-a-Testing-Environment.html">
+												Roswell as a Testing Environment
+											</a>
+										</li>
+										
+									</ul>
+								</li>
+							
+								<li class="">
+									Distributing applications
+									<ul class="">
+										
+										<li>
+											<a class="" href="How-to-distribute-your-software,-not-library,-on-Quicklisp-ala-python-pip.html">
+												How to distribute your software, not library, on Quicklisp ala python pip
+											</a>
+										</li>
+										
+									</ul>
+								</li>
+							
+								<li class="">
+									FAQ
+									<ul class="">
+										
+										<li>
+											<a class="" href="FAQ.html">
+												FAQ
+											</a>
+										</li>
+										
+									</ul>
+								</li>
+							
+						</ul>
+					</aside>
+					<article class="col-md-8 col-lg-9">
+						<h1 id="title">Installation</h1>
+						<h2>Dependencies</h2>
+
+<ul>
+<li>libcurl (both v3 and v4 should work) : used for downloading the lisp implementation binaries, etc.</li>
+<li>automake (required when building from source)</li>
+<li>developmental headers of libcurl (required when building from source)</li>
+<li>on Ubuntu, libcurl4-openssl-dev works but libcurl4-nss-dev may not work</li>
+</ul>
+
+<h2>Mac OS X + Homebrew</h2>
+
+<pre><code>$ brew install roswell
+</code></pre>
+
+<h2>Linux</h2>
+
+<p>On <a href="https://www.archlinux.org/" >Arch</a>, Roswell is available in AUR:</p>
+
+<pre><code>$ yaourt -S roswell
+</code></pre>
+
+<p>On <a href="https://www.voidlinux.eu/" >Void</a>, Roswell is available in xbps:</p>
+
+<p><pre><code>$ sudo xbps-install -S roswell</code></pre></p>
+
+<p>Support for other distributions/packaging systems (e.g. debian-based, redhat-based) is future work. However, building from source is fairly straightforward and somewhat stable. See the last section.</p>
+
+<p>Or, you can use <a href="http://linuxbrew.sh/" >linuxbrew</a>.
+It's same way.</p>
+
+<pre><code>$ brew install roswell
+</code></pre>
+
+<p>On Ubuntu/Debian, there seems to be someone who managed to install from the release tarball or the deb file in https://github.com/roswell/roswell/releases .</p>
+
+<h2>Windows</h2>
+
+<p>We provide a convenient build procedure for Windows! (Fantastic and unusual experience for Common Lisp, ain't it?) 
+To get the latest prebuilt binary, just follow the link corresponding to your environment (i686 or x86_64).</p>
+
+<ul>
+<li><a href="https://ci.appveyor.com/api/projects/snmsts/roswell-en89n/artifacts/Roswell-x86_64.zip?branch=master&job=Environment%3A%20MSYS2_ARCH%3Dx86_64,%20MSYS2_BITS%3D64,%20MSYSTEM%3DMINGW64,%20METHOD%3Dcross" >Roswell-x86_64.zip</a></li>
+<li><a href="https://ci.appveyor.com/api/projects/snmsts/roswell-en89n/artifacts/Roswell-i686.zip?branch=master&job=Environment%3A%20MSYS2_ARCH%3Di686,%20MSYS2_BITS%3D32,%20MSYSTEM%3DMINGW32,%20METHOD%3Dcross" >Roswell-i686.zip</a></li>
+</ul>
+
+<h2>Building from Source</h2>
+
+<p>Instructions for a system-wide installation follows. The <code>./configure</code> script has several useful options, see <code>./configure --help</code> for details. Note this instruction is for Debian based Linux (Debian, Ubuntu, Mint, etc.).</p>
+
+<pre><code>if which apt-get &gt; /dev/null; then sudo apt-get -y install git build-essential automake libcurl4-openssl-dev;fi
+git clone -b release https://github.com/roswell/roswell.git
+cd roswell
+sh bootstrap
+./configure
+make
+sudo make install
+ros setup
+</code></pre>
+
+<p>On some versions, <a href="https://github.com/roswell/roswell/issues/152" ><code>sudo apt-get install zlib1g-dev</code> may also be necessary</a>.</p>
+
+<p>If you are using a Red Hat based Linux (Fedora, CentOS), replace the first line with 
+* <code>sudo dnf install automake libcurl-devel</code> or
+* <code>sudo yum install automake libcurl-devel</code> (git, make, etc. are installed by default on these Linux).
+* On CentOS <a href="https://github.com/roswell/roswell/issues/152" ><code>sudo yum install zlib-devel</code> may also be necessary</a>.</p>
+
+<p>On <a href="https://www.freebsd.org/" >FreeBSD</a> replace the first line with <code>sudo pkg install git automake curl</code>.
+You may also need to set the include and library search paths prior to running <code>configure</code>.</p>
+
+<pre><code>LDFLAGS=&quot;-L/usr/local/lib/&quot; CFLAGS=&quot;-I/usr/local/include/&quot; ./configure
+</code></pre>
+
+					</article>
+				</div>
+			</div>
+		</main>
+		<footer>
+			<div class="container text-center">
+				<p>
+					<a href="https://github.com/roswell/roswell">Roswell</a> /
+					<a href="https://github.com/roswell/roswell/blob/master/COPYING">Distributed under MIT License</a> /
+					<a href="https://github.com/roswell/roswell/blob/master/README.md#author">Author</a>
+				</p>
+				<p>
+				Found an issue with the docs? Report it <a href="https://github.com/roswell/roswell/issues">here</a>.
+				</p>
+			</div>
+		</footer>
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+	</body>
+</html>

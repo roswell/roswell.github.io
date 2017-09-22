@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<title>Roswell - Common Lisp environment setup Utility.</title>
+		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+		<link href="https://fonts.googleapis.com/css?family=Orbitron:700" rel="stylesheet">
+		<style>
+html, body {
+	height: 100%;
+}
+main {
+	margin-top: 100px;
+}
+footer {
+	background:#f6f6f6;
+	height: 100px;
+	padding: 10px;
+}
+#title {
+	margin-bottom: 30px;
+}
+.navbar-brand {
+	font-family: 'Orbitron', sans-serif;
+}
+.dropdown-item:hover, .dropdown-item:focus{
+	background-color: transparent;
+}
+		</style>
+	</head>
+	<body>
+		<header>
+			<nav class="navbar fixed-top navbar-expanded-xl navbar-dark bg-success">
+				<a class="navbar-brand" href=".">
+					roswell
+				</a>
+				<div class="navbar-nav mr-auto">
+					<a class="nav-item nav-link text-light github" href="https://github.com/roswell/roswell">
+						Contribute in
+						<i class="fa fa-github" aria-hidden="true"></i>
+					</a>
+				</div>
+				<button class="navbar-toggler d-xs-block d-sm-block d-md-none" type="button" data-toggle="collapse" data-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="menu">
+					<ul class="navbar-nav">
+						
+							<li class="nav-item dropdown">
+								<a id="Home" class="nav-link dropdown-toggle text-light" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expand="false">
+									Home
+								</a>
+								<div class="dropdown-menu bg-success" aria-labelledby="Home">
+									
+										<a class="dropdown-item text-light" href="How-is-Roswell-different.html">
+											How is Roswell different
+										</a>
+									
+										<a class="dropdown-item text-light" href="Home.html">
+											Home
+										</a>
+									
+								</div>
+							</li>
+						
+							<li class="nav-item dropdown">
+								<a id="Getting started" class="nav-link dropdown-toggle text-light" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expand="false">
+									Getting started
+								</a>
+								<div class="dropdown-menu bg-success" aria-labelledby="Getting started">
+									
+										<a class="dropdown-item text-light" href="How-to-setup-a-lisp-dev-environment-on-windows-with-Roswell..html">
+											How to setup a lisp dev environment on windows with Roswell.
+										</a>
+									
+										<a class="dropdown-item text-light" href="Local-installation.html">
+											Local installation
+										</a>
+									
+										<a class="dropdown-item text-light" href="Upgrading-Roswell.html">
+											Upgrading Roswell
+										</a>
+									
+										<a class="dropdown-item text-light" href="Initial-Recommended-Setup.html">
+											Initial Recommended Setup
+										</a>
+									
+										<a class="dropdown-item text-light" href="Installation.html">
+											Installation
+										</a>
+									
+								</div>
+							</li>
+						
+							<li class="nav-item dropdown">
+								<a id="Roswell as a scripting environment" class="nav-link dropdown-toggle text-light" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expand="false">
+									Roswell as a scripting environment
+								</a>
+								<div class="dropdown-menu bg-success" aria-labelledby="Roswell as a scripting environment">
+									
+										<a class="dropdown-item text-light" href="Practical-Usecases.html">
+											Practical Usecases
+										</a>
+									
+										<a class="dropdown-item text-light" href="List-of-Roswell-Installable-Scripts.html">
+											List of Roswell Installable Scripts
+										</a>
+									
+										<a class="dropdown-item text-light" href="Reducing-Startup-Time.html">
+											Reducing Startup Time
+										</a>
+									
+										<a class="dropdown-item text-light" href="Advanced-scripting.html">
+											Advanced scripting
+										</a>
+									
+										<a class="dropdown-item text-light" href="Roswell-as-a-Scripting-Environment.html">
+											Roswell as a Scripting Environment
+										</a>
+									
+								</div>
+							</li>
+						
+							<li class="nav-item dropdown">
+								<a id="Roswell as an implementation manager" class="nav-link dropdown-toggle text-light" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expand="false">
+									Roswell as an implementation manager
+								</a>
+								<div class="dropdown-menu bg-success" aria-labelledby="Roswell as an implementation manager">
+									
+										<a class="dropdown-item text-light" href="Listing-various-resources.html">
+											Listing various resources
+										</a>
+									
+										<a class="dropdown-item text-light" href="Roswell-as-an-implementation-manager.html">
+											Roswell as an implementation manager
+										</a>
+									
+								</div>
+							</li>
+						
+							<li class="nav-item dropdown">
+								<a id="Roswell as a Testing Environment" class="nav-link dropdown-toggle text-light" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expand="false">
+									Roswell as a Testing Environment
+								</a>
+								<div class="dropdown-menu bg-success" aria-labelledby="Roswell as a Testing Environment">
+									
+										<a class="dropdown-item text-light" href="Coveralls.html">
+											Coveralls
+										</a>
+									
+										<a class="dropdown-item text-light" href="Circle-CI.html">
+											Circle CI
+										</a>
+									
+										<a class="dropdown-item text-light" href="Travis-CI.html">
+											Travis CI
+										</a>
+									
+										<a class="dropdown-item text-light" href="Roswell-as-a-Testing-Environment.html">
+											Roswell as a Testing Environment
+										</a>
+									
+								</div>
+							</li>
+						
+							<li class="nav-item dropdown">
+								<a id="Distributing applications" class="nav-link dropdown-toggle text-light" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expand="false">
+									Distributing applications
+								</a>
+								<div class="dropdown-menu bg-success" aria-labelledby="Distributing applications">
+									
+										<a class="dropdown-item text-light" href="How-to-distribute-your-software,-not-library,-on-Quicklisp-ala-python-pip.html">
+											How to distribute your software, not library, on Quicklisp ala python pip
+										</a>
+									
+								</div>
+							</li>
+						
+							<li class="nav-item dropdown">
+								<a id="FAQ" class="nav-link dropdown-toggle text-light" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expand="false">
+									FAQ
+								</a>
+								<div class="dropdown-menu bg-success" aria-labelledby="FAQ">
+									
+										<a class="dropdown-item text-light" href="FAQ.html">
+											FAQ
+										</a>
+									
+								</div>
+							</li>
+						
+					</ul>
+				</div>
+			</nav>
+		</header>
+		<main>
+			<div class="container">
+				<div class="row">
+					<aside class="col-md-4 col-lg-3 d-none d-md-block d-lg-block d-xl-block">
+						<ul class="">
+							
+								<li class="">
+									Home
+									<ul class="">
+										
+										<li>
+											<a class="" href="How-is-Roswell-different.html">
+												How is Roswell different
+											</a>
+										</li>
+										
+										<li>
+											<a class="" href="Home.html">
+												Home
+											</a>
+										</li>
+										
+									</ul>
+								</li>
+							
+								<li class="">
+									Getting started
+									<ul class="">
+										
+										<li>
+											<a class="" href="How-to-setup-a-lisp-dev-environment-on-windows-with-Roswell..html">
+												How to setup a lisp dev environment on windows with Roswell.
+											</a>
+										</li>
+										
+										<li>
+											<a class="" href="Local-installation.html">
+												Local installation
+											</a>
+										</li>
+										
+										<li>
+											<a class="" href="Upgrading-Roswell.html">
+												Upgrading Roswell
+											</a>
+										</li>
+										
+										<li>
+											<a class="" href="Initial-Recommended-Setup.html">
+												Initial Recommended Setup
+											</a>
+										</li>
+										
+										<li>
+											<a class="" href="Installation.html">
+												Installation
+											</a>
+										</li>
+										
+									</ul>
+								</li>
+							
+								<li class="">
+									Roswell as a scripting environment
+									<ul class="">
+										
+										<li>
+											<a class="" href="Practical-Usecases.html">
+												Practical Usecases
+											</a>
+										</li>
+										
+										<li>
+											<a class="" href="List-of-Roswell-Installable-Scripts.html">
+												List of Roswell Installable Scripts
+											</a>
+										</li>
+										
+										<li>
+											<a class="" href="Reducing-Startup-Time.html">
+												Reducing Startup Time
+											</a>
+										</li>
+										
+										<li>
+											<a class="" href="Advanced-scripting.html">
+												Advanced scripting
+											</a>
+										</li>
+										
+										<li>
+											<a class="" href="Roswell-as-a-Scripting-Environment.html">
+												Roswell as a Scripting Environment
+											</a>
+										</li>
+										
+									</ul>
+								</li>
+							
+								<li class="">
+									Roswell as an implementation manager
+									<ul class="">
+										
+										<li>
+											<a class="" href="Listing-various-resources.html">
+												Listing various resources
+											</a>
+										</li>
+										
+										<li>
+											<a class="" href="Roswell-as-an-implementation-manager.html">
+												Roswell as an implementation manager
+											</a>
+										</li>
+										
+									</ul>
+								</li>
+							
+								<li class="">
+									Roswell as a Testing Environment
+									<ul class="">
+										
+										<li>
+											<a class="" href="Coveralls.html">
+												Coveralls
+											</a>
+										</li>
+										
+										<li>
+											<a class="" href="Circle-CI.html">
+												Circle CI
+											</a>
+										</li>
+										
+										<li>
+											<a class="" href="Travis-CI.html">
+												Travis CI
+											</a>
+										</li>
+										
+										<li>
+											<a class="" href="Roswell-as-a-Testing-Environment.html">
+												Roswell as a Testing Environment
+											</a>
+										</li>
+										
+									</ul>
+								</li>
+							
+								<li class="">
+									Distributing applications
+									<ul class="">
+										
+										<li>
+											<a class="" href="How-to-distribute-your-software,-not-library,-on-Quicklisp-ala-python-pip.html">
+												How to distribute your software, not library, on Quicklisp ala python pip
+											</a>
+										</li>
+										
+									</ul>
+								</li>
+							
+								<li class="">
+									FAQ
+									<ul class="">
+										
+										<li>
+											<a class="" href="FAQ.html">
+												FAQ
+											</a>
+										</li>
+										
+									</ul>
+								</li>
+							
+						</ul>
+					</aside>
+					<article class="col-md-8 col-lg-9">
+						<h1 id="title">Roswell as a Scripting Environment</h1>
+						<p>Although Roswell is a unified interface to Common Lisp implementations, it also encourages writing scripts with it. A &quot;Roswell script&quot; is an implementation-independent script which can be invoked from a shell command line, launched by Roswell and run under standard CL environment.</p>
+
+<ul>
+<li><p>A roswell script can be <strong>distributed using quicklisp's infrastructure</strong> (if you are a library author), and <strong>installed</strong> with <code>ros install [system]</code>, i.e., those scripts are made available anywhere in your system.</p></li>
+<li><p>Also, the script can be dumped into an executable binary for the distribution purpose or for reducing the startup time. Each subsection below describes each feature.</p></li>
+</ul>
+
+<h2>Initialising a Roswell Script</h2>
+
+<p>To start, run <code>ros init</code> in your terminal:</p>
+
+<pre><code>$ ros init
+Usage: ros init [template] name [options...]
+
+$ ros init fact
+Successfully generated: fact.ros</code></pre>
+
+<!--
+It adds a file extension `.ros`.
+
+Perhaps it's hardly understandable if you have been using only Unix OSes for years like me. Actually, it works well even without `.ros` on Unix, so renaming it to the name which doesn't have `.ros` is a usual manner if the script doesn't have to run on Windows. However, it helps Roswell to differentiate it from shell scripts, and Roswell provides some additional features for it like [Making Executables](#making-executables).
+-->
+
+<p>The content of the file looks like this:</p>
+
+<pre><code><span class="code">#!/bin/sh
+<span class="comment">#|-*- mode:lisp -*-|#</span>
+<span class="comment">#|
+exec ros -Q -- $0 "$@"
+|#</span>
+<span class="paren1">(<span class="code"><i><span class="symbol">defun</span></i> main <span class="paren2">(<span class="code">&amp;rest argv</span>)</span>
+  <span class="paren2">(<span class="code">declare <span class="paren3">(<span class="code">ignorable argv</span>)</span></span>)</span></span>)</span></span></code></pre>
+
+<p>This looks a little bit hacky. It actually is a shell script which <code>exec</code> Roswell immediately. Roswell runs the same script, skips multi-line comments, reads the rest of the file as a Common Lisp program, and finally invokes a function <code>main</code> with command-line arguments.</p>
+
+<p>Here's an example program which takes the exact one argument and prints its factorial:</p>
+
+<pre><code><span class="code">#!/bin/sh
+<span class="comment">#|-*- mode:lisp -*-|#</span>
+<span class="comment">#|
+exec ros -Q -- $0 "$@"
+|#</span>
+
+<span class="paren1">(<span class="code"><i><span class="symbol">defun</span></i> fact <span class="paren2">(<span class="code">n</span>)</span>
+  <span class="paren2">(<span class="code"><i><span class="symbol">if</span></i> <span class="paren3">(<span class="code">zerop n</span>)</span>
+      1
+      <span class="paren3">(<span class="code">* n <span class="paren4">(<span class="code">fact <span class="paren5">(<span class="code">1- n</span>)</span></span>)</span></span>)</span></span>)</span></span>)</span>
+
+<span class="paren1">(<span class="code"><i><span class="symbol">defun</span></i> main <span class="paren2">(<span class="code">n &amp;rest argv</span>)</span>
+  <span class="paren2">(<span class="code">declare <span class="paren3">(<span class="code">ignore argv</span>)</span></span>)</span>
+  <span class="paren2">(<span class="code">format t <span class="string">"~&amp;Factorial ~D = ~D~%"</span> n <span class="paren3">(<span class="code">fact <span class="paren4">(<span class="code">parse-integer n</span>)</span></span>)</span></span>)</span></span>)</span></span></code></pre>
+
+<pre><code>$ fact.ros 3
+Factorial 3 = 6
+
+$ fact.ros 10
+Factorial 10 = 3628800</code></pre>
+
+<p>Though it falls through CL debugger if there's no arguments or non-integer value, I assume it's okay for now as a simple example ;) For further details, see <a href="2.0-Advanced-scripting-with-roswell" >this article</a>.</p>
+
+<h2>Distributing Scripts via Quicklisp</h2>
+
+<p>When you write a script which would make other people happy, let's think about sharing it.
+The easiest way to achieve this is to just send the <code>.ros</code> file to the others.
+However, it is impractical when your script is more like a &quot;library&quot; containing multiple separated source files.</p>
+
+<p>If you're the author of the library, then consider adding the ros file to the repository and automatically providing a roswell-installable command-line interface to it.
+The <code>.ros</code> files should be located in <code>roswell/</code> subdirectory in the repository.
+Once added, <code>ros install</code> recognizes the ros scripts in the repository.
+When <code>ros install &lt;library name&gt;</code> is invoked, it downloads the specified library from Quicklisp
+and then copies the script files to <code>~/.roswell/bin</code>.
+<!-- and gives them an executable flag. -->
+These scripts can be launched via <code>ros exec &lt;script name&gt;</code>.
+Also, when the PATH to <code>~/.roswell/bin</code> is resolved, they are available from the command line.</p>
+
+<pre><code>$ ros install &lt;library name&gt;</code></pre>
+
+<p>For instance, try <code>ros install clack</code>:</p>
+
+<pre><code>$ ros install clack
+found system clack.
+Attempting install scripts...
+/Users/nitro_idiot/.roswell/bin/clackup
+$ ros exec clackup                                                ### launch the web server!</code></pre>
+
+<p>To avoid <code>ros exec</code>, add <code>bin/</code> to the PATH variable:</p>
+
+<pre><code>$ echo 'export PATH="$HOME/.roswell/bin:$PATH"' &gt;&gt; ~/.zshrc
+$ clackup                                                         ### launch the web server!</code></pre>
+
+					</article>
+				</div>
+			</div>
+		</main>
+		<footer>
+			<div class="container text-center">
+				<p>
+					<a href="https://github.com/roswell/roswell">Roswell</a> /
+					<a href="https://github.com/roswell/roswell/blob/master/COPYING">Distributed under MIT License</a> /
+					<a href="https://github.com/roswell/roswell/blob/master/README.md#author">Author</a>
+				</p>
+				<p>
+				Found an issue with the docs? Report it <a href="https://github.com/roswell/roswell/issues">here</a>.
+				</p>
+			</div>
+		</footer>
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+	</body>
+</html>

@@ -1,0 +1,61 @@
+#!/bin/sh
+#|-*- mode:lisp -*-|#
+#| <Put a one-line description here>
+exec ros -Q -- $0 "$@"
+|#
+(progn ;;init forms
+  (ros:ensure-asdf)
+  #+quicklisp
+  (ql:quickload
+   '(:cl-emb 
+     :3bmd
+     :3bmd-ext-code-blocks
+     :3bmd-ext-wiki-links
+     :alexandria 
+     :cl-arrows 
+     :cl-ppcre)
+   :silent t)  
+  )
+
+(defpackage :ros.script.generate.3714898984
+  (:use :cl :cl-arrows))
+(in-package :ros.script.generate.3714898984)
+
+(defun index ()
+  (flet ((extract (s)
+           (cond ((ppcre:scan "^\\[\\[.+\\]\\]$" s)
+                  (let* ((name (ppcre:regex-replace-all "^\\[\\[|\\]\\]$" s ""))
+                         (link (format nil "~A.html" (ppcre:regex-replace-all " " name "-"))))
+                    `(:type page :name ,name :link ,link)))
+                 ((ppcre:scan "#+" s)
+                  (let* ((name (ppcre:regex-replace-all (format nil "#+ *|~%") s "")) )
+                    `(:type category :name ,name :pages ,(make-list 0))))))
+         (accumlate (m s)
+           (if (eql 'category (getf s :type))
+               (cons s m)
+               (let ((name (getf (car m) :name))
+                     (pages (getf (car m) :pages)))
+                 (cons `(:type category :name ,name :pages ,(cons s pages)) (cdr m))))))
+    (-<>> (alexandria:read-file-into-string #p"./roswell.wiki/_Sidebar.md")
+          (cl-ppcre:all-matches-as-strings (format nil "\\[\\[.+\\]\\]|#+.+~%"))
+          (mapcar #'extract)
+          (reduce #'accumlate <> :initial-value nil)
+          reverse)))
+
+(defun page (source)
+  (let ((output (->> source pathname-name (format nil "~A.html") pathname)))
+    (-<>> (with-open-stream (str (make-string-output-stream))
+            (let ((3bmd-code-blocks:*code-blocks* t)
+                  (3bmd-wiki:*wiki-links* t))
+              (3bmd:parse-and-print-to-stream source str))
+            (get-output-stream-string str))
+          (list :index (index) :title (ppcre:regex-replace-all "-" (pathname-name source) " ")  :content)
+          (emb:execute-emb "page" :env)
+          (alexandria:write-string-into-file <> output :if-exists :supersede))))
+
+(defun main (&rest argv)
+  (declare (ignorable argv))
+  (emb:register-emb "page" #p"page.tpl")
+  (mapc #'page (set-difference (directory "./**/*.md") (directory "./**/_*.md"))))
+
+;;; vim: set ft=lisp lisp:
