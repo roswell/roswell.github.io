@@ -4,8 +4,8 @@ generate:
 	./generate.ros
 	cp Home.html index.html
 
-update: roswell.wiki
-	git submodule update
+update:
+	git submodule update --init --recursive
 
 clean:
 	rm -rf *~ *.html
