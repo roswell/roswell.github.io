@@ -14,7 +14,8 @@ push:
 	git push
 
 commit:
-	git commit -am 'Update documents'
+	git add --all
+	git commit -m 'Update documents'
 
 clean:
 	rm -f *.html
