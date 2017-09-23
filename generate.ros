@@ -8,13 +8,12 @@ exec ros -Q -- $0 "$@"
   #+quicklisp
   (ql:quickload
    '(:cl-emb 
-     :3bmd
-     :3bmd-ext-code-blocks
-     :3bmd-ext-wiki-links
      :alexandria 
      :cl-arrows 
-     :cl-ppcre)
-   :silent t)  
+     :cl-ppcre
+     :markdown.cl
+     )
+   :silent t)
   )
 
 (defpackage :ros.script.generate.3714898984
@@ -36,7 +35,7 @@ exec ros -Q -- $0 "$@"
                (let ((name (getf (car m) :name))
                      (pages (getf (car m) :pages)))
                  (cons `(:type category :name ,name :pages ,(cons s pages)) (cdr m))))))
-    (-<>> (alexandria:read-file-into-string #p"./roswell.wiki/_Sidebar.md")
+    (-<>> (alexandria:read-file-into-string #p"roswell.wiki/_Sidebar.md")
           (cl-ppcre:all-matches-as-strings (format nil "\\[\\[.+\\]\\]|#+.+~%"))
           (mapcar #'extract)
           (reduce #'accumlate <> :initial-value nil)
@@ -44,18 +43,15 @@ exec ros -Q -- $0 "$@"
 
 (defun page (source)
   (let ((output (->> source pathname-name (format nil "~A.html") pathname)))
-    (-<>> (with-open-stream (str (make-string-output-stream))
-            (let ((3bmd-code-blocks:*code-blocks* t)
-                  (3bmd-wiki:*wiki-links* t))
-              (3bmd:parse-and-print-to-stream source str))
-            (get-output-stream-string str))
+    (-<>> (markdown.cl:parse-file source)
+          (ppcre:regex-replace-all "<table>" <> "<table class=\"table table-bordered\">")
           (list :index (index) :title (ppcre:regex-replace-all "-" (pathname-name source) " ")  :content)
-          (emb:execute-emb "page" :env)
+          (emb:execute-emb "page" :env)          
           (alexandria:write-string-into-file <> output :if-exists :supersede))))
 
 (defun main (&rest argv)
   (declare (ignorable argv))
   (emb:register-emb "page" #p"page.tpl")
-  (mapc #'page (set-difference (directory "./**/*.md") (directory "./**/_*.md"))))
+  (mapc #'page (set-difference (directory "**/*.md") (directory "**/_*.md"))))
 
 ;;; vim: set ft=lisp lisp:

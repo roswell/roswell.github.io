@@ -374,22 +374,33 @@ footer {
 					</aside>
 					<article class="col-md-8 col-lg-9">
 						<h1 id="title">Roswell as a Testing Environment</h1>
-						<p><a href="https://travis-ci.org/" >Travis CI</a> is currently known as the most prevalent cloud CI service. Although it does not have an official support for Common Lisp, roswell almost eliminates the otherwise huge amount of effort for testing your Common Lisp product.</p>
-
-<p><a href="https://circleci.com" >Circle CI</a> is another cloud CI service supported by roswell. It supports newer Ubuntu package and the tests runs generally faster than in Travis-CI.</p>
-
-<p><a href="https://coveralls.io" >Coveralls</a> is a web service used for recording the code coverage. Roswell works together with 
-<a href="https://github.com/fukamachi/cl-coveralls" >cl-coveralls</a>, a library which measure and post the code coverage results to Coveralls. Note that it runs only when <code>$COVERALLS</code> is set to true.</p>
-
-<p>Read the corresponding pages for a detailed description of how to use each service.</p>
+						<p>
+<a href="https://travis-ci.org/">Travis CI</a> is currently known as the most prevalent cloud CI service. Although it does not have an official support for Common Lisp, roswell almost eliminates the otherwise huge amount of effort for testing your Common Lisp product.
+</p>
+<p>
+<a href="https://circleci.com">Circle CI</a> is another cloud CI service supported by roswell. It supports newer Ubuntu package and the tests runs generally faster than in Travis-CI.
+</p>
+<p>
+<a href="https://coveralls.io">Coveralls</a> is a web service used for recording the code coverage. Roswell works together with 
+<a href="https://github.com/fukamachi/cl-coveralls">cl-coveralls</a>, a library which measure and post the code coverage results to Coveralls. Note that it runs only when <code>$COVERALLS</code> is set to true.
+</p>
+<p>
+Read the corresponding pages for a detailed description of how to use each service.
+</p>
 
 <h2>Using a fork of Roswell (for developers)</h2>
 
-<p>To choose where to get the source code of Roswell, configure these environment variables in <code>.travis.yml</code>.</p>
+<p>
+To choose where to get the source code of Roswell, configure these environment variables in <code>.travis.yml</code>.
+</p>
 
 <ul>
-<li><code>ROSWELL_REPO</code>: Roswell repository to install. The default is <code>https://github.com/roswell/roswell</code>.</li>
-<li><code>ROSWELL_BRANCH</code> Roswell branch or tag name to install. The default is <code>release</code>. (ex. <code>v0.0.3.41</code>)</li>
+<li>
+<code>ROSWELL&lt;em&gt;REPO</code>: Roswell repository to install. The default is <code>https://github.com/roswell/roswell</code>.
+</li>
+<li>
+<code>ROSWELL&lt;/em&gt;BRANCH</code> Roswell branch or tag name to install. The default is <code>release</code>. (ex. <code>v0.0.3.41</code>)
+</li>
 </ul>
 
 					</article>

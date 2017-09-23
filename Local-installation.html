@@ -374,24 +374,29 @@ footer {
 					</aside>
 					<article class="col-md-8 col-lg-9">
 						<h1 id="title">Local installation</h1>
-						<p>In Installation, we described how to install roswell from the source. However, it assumed the global installation.</p>
-
-<p><strong>Local installation</strong> is available by specifying <code>--prefix</code> option to <code>./configure</code>. The default location is <code>/usr/local</code>. Actual binary and supporting files are finally installed into <code>$PREFIX/share/common-lisp/source/roswell/</code>.</p>
-
-<p>This is useful when using roswell as a backend of CI services (e.g. travis): When you specify a directory accessible without root permission, then you can switch to the new <a href="http://docs.travis-ci.com/user/workers/container-based-infrastructure/" >container-based infrastructure</a> for faster startup (of the tests). 
-<a href="4.-Roswell-as-a-Testing-Environment-(Travis-CI-and-Coverall)" >We already provide such a script for Travis, CircleCI and Coverall</a> using this feature. </p>
-
-<p>Another usage is for bundling roswell in a standalone project which does not alter the user environment at all.</p>
-
-<p>Example:</p>
+						<p>
+In [[Installation]], we described how to install roswell from the source. However, it assumed the global installation.
+</p>
+<p>
+<strong>Local installation</strong> is available by specifying <code>--prefix</code> option to <code>./configure</code>. The default location is <code>/usr/local</code>. Actual binary and supporting files are finally installed into <code>$PREFIX/share/common-lisp/source/roswell/</code>.
+</p>
+<p>
+This is useful when using roswell as a backend of CI services (e.g. travis): When you specify a directory accessible without root permission, then you can switch to the new <a href="http://docs.travis-ci.com/user/workers/container-based-infrastructure/">container-based infrastructure</a> for faster startup (of the tests). 
+[We already provide such a script for Travis, CircleCI and Coverall](4.-Roswell-as-a-Testing-Environment-(Travis-CI-and-Coverall)) using this feature.
+</p>
+<p>
+Another usage is for bundling roswell in a standalone project which does not alter the user environment at all.
+</p>
+<p>
+Example:
+</p>
 
 <pre><code>$ git clone -b release https://github.com/roswell/roswell.git
 $ cd roswell
 $ sh bootstrap
 $ ./configure --prefix ~/.local/
-$ make &amp;&amp; make install              ### in this case, no sudo is required!
-$ ~/.local/bin/ros
-</code></pre>
+$ make && make install              ### in this case, no sudo is required!
+$ ~/.local/bin/ros</code></pre>
 
 					</article>
 				</div>

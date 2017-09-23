@@ -374,41 +374,86 @@ footer {
 					</aside>
 					<article class="col-md-8 col-lg-9">
 						<h1 id="title">Circle CI</h1>
-						<p>CircleCI is another continuous integration framework.
+						<p>
+CircleCI is another continuous integration framework.
 It's test runs much faster than in Travis-CI, which is very convenient.
 Another pros are that it supports much wider apt-packages than in Travis-CI, including newer/backported Ubuntu/Debian packages in 14.04. If you pay, it also supports concurrent builds.
-Below is a sample CircleCI yaml script from <a href="https://github.com/guicho271828/eazy-opencl" >eazy-opencl</a> .</p>
-
-<pre><code>machine:
+Below is a sample CircleCI yaml script from <a href="https://github.com/guicho271828/eazy-opencl">eazy-opencl</a> .
+</p>
+<p>
+<code></code>`yaml
+machine:
   environment:
     PATH: ~/.roswell/bin:$PATH
     LLVM_CONFIG: /usr/lib/llvm-3.6/bin/llvm-config
-
+</p>
+<p>
 dependencies:
   pre:
-    - sudo bash -c 'echo "deb http://mirrors.kernel.org/ubuntu vivid main universe" &gt;&gt; /etc/apt/sources.list'
-    - sudo apt-get update
-    - apt-cache search pocl 
-    - apt-cache search icd
-    - apt-cache search opencl
-    - sudo apt-get install -y libltdl3-dev libhwloc-dev ocl-icd-opencl-dev g++-4.8 clang-3.6 libclang-3.6-dev llvm-3.6-dev libedit-dev
-    - ./build-pocl.sh
-    - sudo make -C pocl install
-    - curl -L https://raw.githubusercontent.com/roswell/roswell/master/scripts/install-for-ci.sh | sh
-    - ros install ccl-bin
-    - git clone https://github.com/cffi/cffi.git ~/lisp/cffi
-  post:
-    - ros install cffi
-    - ros install cffi-grovel
-    - ros install eazy-opencl
-  cache_directories:
-    - ~/.roswell/
-    - pocl
+</p>
+<ul>
+<li>
+sudo bash -c 'echo "deb http://mirrors.kernel.org/ubuntu vivid main universe" &gt;&gt; /etc/apt/sources.list'
+</li>
+<li>
+sudo apt-get update
+</li>
+<li>
+apt-cache search pocl
+</li>
+<li>
+apt-cache search icd
+</li>
+<li>
+apt-cache search opencl
+</li>
+<li>
+sudo apt-get install -y libltdl3-dev libhwloc-dev ocl-icd-opencl-dev g++-4.8 clang-3.6 libclang-3.6-dev llvm-3.6-dev libedit-dev
+</li>
+<li>
+./build-pocl.sh
+</li>
+<li>
+sudo make -C pocl install
+</li>
+<li>
+curl -L https://raw.githubusercontent.com/roswell/roswell/master/scripts/install-for-ci.sh | sh
+</li>
+<li>
+ros install ccl-bin
+</li>
+<li>
+git clone https://github.com/cffi/cffi.git ~/lisp/cffi post:
+</li>
+<li>
+ros install cffi
+</li>
+<li>
+ros install cffi-grovel
+</li>
+<li>
+ros install eazy-opencl cache_directories:
+</li>
+<li>
+~/.roswell/
+</li>
+<li>
+pocl
+</li>
+</ul>
 
+<p>
 test:
   override:
-    - ros -L sbcl-bin testscr.ros
-    - ros -L ccl-bin testscr.ros</code></pre>
+</p>
+<ul>
+<li>
+ros -L sbcl-bin testscr.ros
+</li>
+<li>
+ros -L ccl-bin testscr.ros <code></code>`
+</li>
+</ul>
 
 					</article>
 				</div>

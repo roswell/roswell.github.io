@@ -373,46 +373,70 @@ footer {
 						</ul>
 					</aside>
 					<article class="col-md-8 col-lg-9">
-						<h1 id="title">Upgrading roswell</h1>
-						<h1>Installed from source</h1>
+						<h1 id="title">Upgrading Roswell</h1>
+						
+<h1>Installed from source</h1>
+
 
 <ol>
-<li>Uninstall the old version<sup><a href="#footnote1" >1</a></sup></li>
-<li>Upgrade the source</li>
-<li>build &amp; install again</li>
+<li>
+Uninstall the old version<sup><a href="#footnote1">1</a></sup>
+</li>
+<li>
+Upgrade the source
+</li>
+<li>
+build & install again
+</li>
 </ol>
 
-<p>The commands are as follows.</p>
-
-<pre><code>[step 1]$ sudo make uninstall   # uninstall it before upgrading the source code, then run
+<p>
+The commands are as follows.
+</p>
+<p>
+<code>`sh
+[step 1]$ sudo make uninstall   # uninstall it before upgrading the source code, then run
 [step 2]$ git pull              # or whatever needed to upgrade the source code of roswell
 [step 3]$ make                  # compile C-based part of roswell (`ros` binary)
 [step 4]$ sudo make install     # install C-based binary and lisp source code to /usr/.../roswell
-[step 5]$ ros setup             # build (compile&load&dump) the lisp-based part of roswell, using `ros` binary. Results are the dumped lisp image and are saved in ~/.roswell</code></pre>
-
-<p>In case of trouble, try <code>sudo rm -r /usr/local/etc/roswell/</code> and resume from step 4.</p>
-
-<p>If it still doesn't help, try <code>rm -r ~/.roswell/</code> and resume from step 5</p>
+[step 5]$ ros setup             # build (compile&load&dump) the lisp-based part of roswell, using `ros` binary. Results are the dumped lisp image and are saved in ~/.roswell
+</code>`
+</p>
+<p>
+In case of trouble, try <code>sudo rm -r /usr/local/etc/roswell/</code> and resume from step 4.
+</p>
+<p>
+If it still doesn't help, try <code>rm -r ~/.roswell/</code> and resume from step 5
+</p>
 
 <h1>Archlinux AUR</h1>
 
-<h2>yaourt</h2>
-
-<p><code>yaourt -Sua roswell</code></p>
+<p>
+## yaourt
+</p>
+<p>
+<code>yaourt -Sua roswell</code>
+</p>
 
 <h2>Makepkg</h2>
 
+
 <ul>
-<li>Download new PKGBUILD file</li>
-<li>in directory of PKGBUILD run <code>makepkg -i</code></li>
+<li>
+Download new PKGBUILD file
+</li>
+<li>
+in directory of PKGBUILD run <code>makepkg -i</code>
+</li>
 </ul>
 
-<p>TBP</p>
-
+<p>
+TBP
+</p>
 <hr/>
-
-<p><a name="footnote1">1</a>: If you pull before uninstalling, <code>ros setup</code> might fail. It is because some old incompatible lisp file remains in <code>lispdir</code> (<code>lispdir</code> is /usr/local/etc/roswell/ in the recent version of roswell. You can check it by <code>ros version</code>). In this case, remove all files in <code>lispdir</code> and try <code>sudo make install</code> again.</p>
-
+<p>
+<a name="footnote1">1</a>: If you pull before uninstalling, <code>ros setup</code> might fail. It is because some old incompatible lisp file remains in <code>lispdir</code> (<code>lispdir</code> is /usr/local/etc/roswell/ in the recent version of roswell. You can check it by <code>ros version</code>). In this case, remove all files in <code>lispdir</code> and try <code>sudo make install</code> again.
+</p>
 					</article>
 				</div>
 			</div>
