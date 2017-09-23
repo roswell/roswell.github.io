@@ -11,8 +11,7 @@ exec ros -Q -- $0 "$@"
      :alexandria 
      :cl-arrows 
      :cl-ppcre
-     :markdown.cl
-     )
+     :markdown.cl)
    :silent t)
   )
 
@@ -42,11 +41,13 @@ exec ros -Q -- $0 "$@"
           reverse)))
 
 (defun page (source)
-  (let ((output (->> source pathname-name (format nil "~A.html") pathname)))
+  (let ((output (->> source pathname-name (format nil "~A.html") pathname))
+        (title (-<> source pathname-name (ppcre:regex-replace-all "-" <> " "))))
     (-<>> (markdown.cl:parse-file source)
           (ppcre:regex-replace-all "<table>" <> "<table class=\"table table-bordered\">")
-          (list :index (index) :title (ppcre:regex-replace-all "-" (pathname-name source) " ")  :content)
-          (emb:execute-emb "page" :env)          
+          (ppcre:regex-replace-all "\\[\\[|\\]\\]" <> "")
+          (list :index (index) :title title :content)
+          (emb:execute-emb "page" :env)
           (alexandria:write-string-into-file <> output :if-exists :supersede))))
 
 (defun main (&rest argv)
