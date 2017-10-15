@@ -374,108 +374,57 @@ footer {
 					</aside>
 					<article class="col-md-8 col-lg-9">
 						<h1 id="title">Reducing Startup Time</h1>
-						
-<h1>Step 1 -- stop loading Quicklisp</h1>
+						<h1>Step 1 -- stop loading Quicklisp</h1>
 
-<p>
-Despite its speed, scripting in Common Lisp usually have to face its startup time.
-</p>
-<p>
-<code>`
-$ time fact.ros 10
+<p>Despite its speed, scripting in Common Lisp usually have to face its startup time.</p>
+
+<pre><code>$ time fact.ros 10
 Factorial 10 = 3628800
-fact.ros 10  0.74s user 0.21s system 95% cpu 0.994 total
-</code>`
-</p>
-<p>
-This very simple program took 0.74s to print the answer. Considering that all Common Lispers can easily compute the factorial of 10 in less than 1 sec, it is unbearably slow.
-</p>
-<p>
-The first easy step to reduce the startup time is to skip loading Quicklisp, as it's not necessary for this program. Replace <code>-Q</code> flag by <code>+Q</code> in the <code>ros</code> command:
-</p>
-<p>
-<code></code>`diff
-</p>
+fact.ros 10  0.74s user 0.21s system 95% cpu 0.994 total</code></pre>
 
-<h1>!/bin/sh</h1>
+<p>This very simple program took 0.74s to print the answer. Considering that all Common Lispers can easily compute the factorial of 10 in less than 1 sec, it is unbearably slow.</p>
 
-<p>
-#|-<em>- mode:lisp -</em>-|#
-</p>
+<p>The first easy step to reduce the startup time is to skip loading Quicklisp, as it's not necessary for this program. Replace <code>-Q</code> flag by <code>+Q</code> in the <code>ros</code> command:</p>
 
-<h1>|</h1>
+<pre><code><span class="code"><span class="diff-normal">#!/bin/sh</span><span class="diff-normal">
+</span><span class="diff-normal">#|-*- mode:lisp -*-|#</span><span class="diff-normal">
+</span><span class="diff-normal">#|</span><span class="diff-normal">
+</span><span class="diff-deleted">-exec ros -Q -- $0 "$@"
+</span><span class="diff-added">+exec ros +Q -- $0 "$@"
+</span><span class="diff-normal">|#</span></span></code></pre>
 
+<p>Retry <code>time</code> command to see how it worked:</p>
 
-<ul>
-<li>
-exec ros -Q -- $0 "$@"
-</li>
-</ul>
-<ol>
-<li>
-exec ros +Q -- $0 "$@" |# <code></code>`
-</li>
-</ol>
+<pre><code><span class="code"><span class="diff-normal">$ time fact.ros 10</span><span class="diff-normal">
+</span><span class="diff-normal">Factorial 10 = 3628800</span><span class="diff-normal">
+</span><span class="diff-deleted">-fact.ros 10  0.74s user 0.21s system 95% cpu 0.994 total
+</span><span class="diff-added">+fact.ros 10  0.57s user 0.19s system 97% cpu 0.780 total</span></span></code></pre>
 
-<p>
-Retry <code>time</code> command to see how it worked:
-</p>
-<p>
-<code>`diff
-$ time fact.ros 10
-Factorial 10 = 3628800
-</p>
-&lt;ul&gt;
-&lt;li&gt;
-fact.ros 10  0.74s user 0.21s system 95% cpu 0.994 total
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ol&gt;
-&lt;li&gt;
-fact.ros 10  0.57s user 0.19s system 97% cpu 0.780 total </code>`
-</li>
-</ol>
-
-<p>
-It's mildly better.
-</p>
+<p>It's mildly better.</p>
 
 <h1>Reducing the Startup Time : Step 2 -- Making Executables (dump)</h1>
 
-<p>
-Roswell also provides a command to convert a script into an executable, <code>ros build</code>:
-</p>
-<p>
-<code>`
-$ ros build fact.ros
-&lt;a href=""&gt;undoing binding stack and other enclosing state... done&lt;/a&gt;
-</code>`
-</p>
-<p>
-It generates an executable named as <code>fact</code>. If your script doesn't have a file extension <code>.ros</code>, Roswell overrides your file and the behaviour is unknown.
-</p>
-<p>
-Try <code>time</code> for the executable:
-</p>
-<p>
-<code>`diff
-$ time fact 10
-Factorial 10 = 3628800
-</p>
-&lt;ul&gt;
-&lt;li&gt;
-fact.ros 10  0.57s user 0.19s system 97% cpu 0.780 total
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ol&gt;
-&lt;li&gt;
-fact 10  0.00s user 0.02s system 96% cpu 0.024 total </code>`
-</li>
-</ol>
+<p>Roswell also provides a command to convert a script into an executable, <code>ros build</code>:</p>
 
-<p>
-Well, is it fast enough now? :)
-</p>
+<pre><code>$ ros build fact.ros
+[undoing binding stack and other enclosing state... done]
+[saving current Lisp image into fact:
+writing 4976 bytes from the read-only space at 0x20000000
+writing 3168 bytes from the static space at 0x20100000
+writing 52330496 bytes from the dynamic space at 0x1000000000
+done]</code></pre>
+
+<p>It generates an executable named as <code>fact</code>. If your script doesn't have a file extension <code>.ros</code>, Roswell overrides your file and the behaviour is unknown.</p>
+
+<p>Try <code>time</code> for the executable:</p>
+
+<pre><code><span class="code"><span class="diff-normal">$ time fact 10</span><span class="diff-normal">
+</span><span class="diff-normal">Factorial 10 = 3628800</span><span class="diff-normal">
+</span><span class="diff-deleted">-fact.ros 10  0.57s user 0.19s system 97% cpu 0.780 total
+</span><span class="diff-added">+fact 10  0.00s user 0.02s system 96% cpu 0.024 total</span></span></code></pre>
+
+<p>Well, is it fast enough now? :)</p>
+
 					</article>
 				</div>
 			</div>

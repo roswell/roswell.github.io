@@ -11,13 +11,22 @@ exec ros -Q -- $0 "$@"
      :alexandria 
      :cl-arrows 
      :cl-ppcre
-     :markdown.cl)
+     :3bmd
+     :3bmd-ext-code-blocks
+     :3bmd-ext-tables)
    :silent t)
   )
 
 (defpackage :ros.script.generate.3714898984
   (:use :cl :cl-arrows))
 (in-package :ros.script.generate.3714898984)
+
+(defun parse-file (source)
+  (with-open-stream (str (make-string-output-stream))
+    (let ((3bmd-code-blocks:*code-blocks* t)
+	  (3bmd-tables:*tables* t))
+      (3bmd:parse-and-print-to-stream source str))
+    (get-output-stream-string str)))
 
 (defun index ()
   (flet ((extract (s)
@@ -46,8 +55,8 @@ exec ros -Q -- $0 "$@"
   (let* ((name (pathname-name source))
          (output (pathname (format nil "~A.html" name)))
          (title (ppcre:regex-replace-all "-" name " ")))
-    (-<>> (markdown.cl:parse-file source)
-          (ppcre:regex-replace-all "<table>" <> "<table class=\"table table-bordered\">")
+    (-<>> (parse-file source)
+          (ppcre:regex-replace-all "<table >" <> "<table class=\"table table-bordered\">")
           (ppcre:regex-replace-all "\\[\\[|\\]\\]" <> "")
           (list :index (index) :title title :content)
           (emb:execute-emb "page" :env)
@@ -56,6 +65,6 @@ exec ros -Q -- $0 "$@"
 (defun main (&rest argv)
   (declare (ignorable argv))
   (emb:register-emb "page" #p"page.tpl")
-  (mapc #'page (set-difference (directory "**/*.md") (directory "**/_*.md"))))
+  (mapc #'page (set-difference (directory #p"roswell.wiki/*.md") (directory #p"roswell.wiki/_*.md"))))
 
 ;;; vim: set ft=lisp lisp:

@@ -3,7 +3,7 @@ all: update clean generate commit push
 .PHONY: update clean generate commit push
 
 generate:
-	./generate.ros
+	qlot exec ./generate.ros
 	cp Home.html index.html
 
 update:
@@ -14,8 +14,7 @@ push:
 	git push
 
 commit:
-	git add --all
-	git commit -m 'Update documents'
+	git commit -am 'Update documents'
 
 clean:
 	rm -f *.html

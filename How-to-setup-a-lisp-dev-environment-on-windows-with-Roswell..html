@@ -374,54 +374,35 @@ footer {
 					</aside>
 					<article class="col-md-8 col-lg-9">
 						<h1 id="title">How to setup a lisp dev environment on windows with Roswell.</h1>
-						<p>
-by SANO Masatoshi
-</p>
-<p>
-<strong>this tentative document is WIP and intend for brave who volunteers testing roswell windows. </strong>
-</p>
-<p>
-By my experience of visiting some lisp conferences,I notice that windows is not popular platform for common lispers at least most of open source developers use linux or osx for their daily use.
+						<p>by SANO Masatoshi</p>
+
+<p>*<em>this tentative document is WIP and intend for brave who volunteers testing roswell windows. *</em></p>
+
+<p>By my experience of visiting some lisp conferences,I notice that windows is not popular platform for common lispers at least most of open source developers use linux or osx for their daily use.
 It is not healthy for lisp community that many library looks abandoned for windows users and beginners required to have unix experience to start common lisp.
 I would like to change the situation by roswell but implementation of roswell windows is not well tested yet.
-this memo is to help setup lisp dev environment with roswell.
-</p>
+this memo is to help setup lisp dev environment with roswell.</p>
 
 <h1>downloading roswell binary.</h1>
 
-<p>
-download release file <a href="https://ci.appveyor.com/api/projects/snmsts/roswell-en89n/artifacts/Roswell-i686.zip?branch=release&job=Environment%3A%20MSYS2_ARCH%3Di686,%20MSYS2_BITS%3D32,%20MSYSTEM%3DMINGW32,%20METHOD%3Dcross">Roswell-i686.zip</a> and extract it somewhere.
-</p>
+<p>download release file <a href="https://ci.appveyor.com/api/projects/snmsts/roswell-en89n/artifacts/Roswell-i686.zip?branch=release&job=Environment%3A%20MSYS2_ARCH%3Di686,%20MSYS2_BITS%3D32,%20MSYSTEM%3DMINGW32,%20METHOD%3Dcross" >Roswell-i686.zip</a> and extract it somewhere.</p>
 
 <h1>setup msys2</h1>
 
-<p>
-lauch command prompt and execute ros.exe with parameter shell
-</p>
-<p>
-<code>`
-ros shell
-</code>`
-</p>
-<p>
-at first launch roswell install msys2 and launch bash of msys2.
-</p>
+<p>lauch command prompt and execute ros.exe with parameter shell</p>
+
+<pre><code>ros shell</code></pre>
+
+<p>at first launch roswell install msys2 and launch bash of msys2.</p>
 
 <h1>install emacs and setup slime.</h1>
 
-<p>
-<code>`
-pacman -S emacs
-</code>`
-</p>
-<p>
-then launch
-</p>
-<p>
-<code>`
-ros emacs &
-</code>`
-</p>
+<pre><code>pacman -S emacs</code></pre>
+
+<p>then launch</p>
+
+<pre><code>ros emacs &</code></pre>
+
 					</article>
 				</div>
 			</div>

@@ -374,86 +374,46 @@ footer {
 					</aside>
 					<article class="col-md-8 col-lg-9">
 						<h1 id="title">Initial Recommended Setup</h1>
-						
-<h2>Setting up Emacs and SLIME</h2>
-
+						<h2>Setting up Emacs and SLIME</h2>
 
 <ul>
-<li>
-Run the following command on the command line:
-<ul>
-<li>
-<code>ros install slime</code> (from release 16.12.8.72)
-</li>
-<li>
-Add the following lines to init.el, as suggested by the message
-</li>
-<li>
-<code>(load (expand-file-name "~/.roswell/helper.el"))</code>
-</li>
-</ul>
-</li>
-<li>
-Also add the following lines to init.el.
-</li>
+<li>Run the following command on the command line:</li>
+<li><code>ros install slime</code> (from release 16.12.8.72)</li>
+<li>Add the following lines to init.el, as suggested by the message</li>
+<li><code>(load (expand-file-name &quot;~/.roswell/helper.el&quot;))</code></li>
+<li>Also add the following lines to init.el.</li>
 </ul>
 
-<p>
-<code>`elisp
-(setq inferior-lisp-program "ros -Q run")
-</code>`
-</p>
-<p>
-The actual implementation launched by roswell depends on the current configuration.
-Initially, the implementation is set to SBCL. You can later check it with <code>ros config</code> and change it with <code>ros use</code>.
-</p>
-<p>
-Slime also has another (and historically newer) interface for switching between multiple lisps through a variable <code>slime-lisp-implementations</code>. Expert lispers may already have this variable customized and if you are a bit conservative you might want to add roswell as just one of them. The following sample code does not override the existing setting:
-</p>
-<p>
-<code>`elisp
-(setf slime-lisp-implementations
-      `((sbcl    ("sbcl" "--dynamic-space-size" "2000"))
-        (roswell ("ros" "-Q" "run"))))
-(setf slime-default-lisp 'roswell)
-</code>`
-</p>
+<pre><code><span class="code"><span class="paren1">(<span class="code"><a href="http://www.gnu.org/software/emacs/elisp-manual/html_node/elisp_146.html#IDX436" class="symbol"><i><span class="symbol">setq</span></i></a> inferior-lisp-program <span class="string">"ros -Q run"</span></span>)</span></span></code></pre>
+
+<p>The actual implementation launched by roswell depends on the current configuration.
+Initially, the implementation is set to SBCL. You can later check it with <code>ros config</code> and change it with <code>ros use</code>.</p>
+
+<p>Slime also has another (and historically newer) interface for switching between multiple lisps through a variable <code>slime-lisp-implementations</code>. Expert lispers may already have this variable customized and if you are a bit conservative you might want to add roswell as just one of them. The following sample code does not override the existing setting:</p>
+
+<pre><code><span class="code"><span class="paren1">(<span class="code">setf slime-lisp-implementations
+      `<span class="paren2">(<span class="code"><span class="paren3">(<span class="code">sbcl    <span class="paren4">(<span class="code"><span class="string">"sbcl"</span> <span class="string">"--dynamic-space-size"</span> <span class="string">"2000"</span></span>)</span></span>)</span>
+        <span class="paren3">(<span class="code">roswell <span class="paren4">(<span class="code"><span class="string">"ros"</span> <span class="string">"-Q"</span> <span class="string">"run"</span></span>)</span></span>)</span></span>)</span></span>)</span>
+<span class="paren1">(<span class="code">setf slime-default-lisp 'roswell</span>)</span></span></code></pre>
 
 <ul>
-<li>
-In order to load with <code>.sbclrc</code>, try the following instead:
-</li>
+<li>In order to load with <code>.sbclrc</code>, try the following instead:</li>
 </ul>
 
-<p>
-<code>`elisp
-(setq inferior-lisp-program "ros -L sbcl -Q -l ~/.sbclrc run")
-</code>`
-</p>
+<pre><code><span class="code"><span class="paren1">(<span class="code"><a href="http://www.gnu.org/software/emacs/elisp-manual/html_node/elisp_146.html#IDX436" class="symbol"><i><span class="symbol">setq</span></i></a> inferior-lisp-program <span class="string">"ros -L sbcl -Q -l ~/.sbclrc run"</span></span>)</span></span></code></pre>
+
 <ul>
-<li>
-<p>
-When you need to jump to the implementation source code with M-. , run <code>ros install sbcl</code> which compiles the new sbcl from the source code.
-</p>
-</li>
-<li>
-<p>
-<code>ros emacs</code> also launches emacs with slime setup.
-</p>
-</li>
+<li><p>When you need to jump to the implementation source code with M-. , run <code>ros install sbcl</code> which compiles the new sbcl from the source code.</p></li>
+<li><p><code>ros emacs</code> also launches emacs with slime setup.</p></li>
 </ul>
 
 <h2>Configuring the environment</h2>
 
-<p>
-To have the Roswell <code>configdir</code> be somewhere other than your home directory, set the environment variable <code>ROSWELL_HOME</code>:
-</p>
-<p>
-<code>`shell
-export ROSWELL_HOME=/tmp
-ros init # will create /tmp/.roswell and install files there instead of ~/.roswell
-</code>`
-</p>
+<p>To have the Roswell <code>configdir</code> be somewhere other than your home directory, set the environment variable <code>ROSWELL_HOME</code>:</p>
+
+<pre><code>export ROSWELL_HOME=/tmp
+ros init # will create /tmp/.roswell and install files there instead of ~/.roswell</code></pre>
+
 					</article>
 				</div>
 			</div>

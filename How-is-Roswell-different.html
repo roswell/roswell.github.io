@@ -374,72 +374,253 @@ footer {
 					</aside>
 					<article class="col-md-8 col-lg-9">
 						<h1 id="title">How is Roswell different</h1>
-						<p>
-<em>You might have already noticed that there are bunch of "command line interface" libraries for Common Lisp. What's the difference!?</em>
-</p>
-<p>
-Below is a brief comparison of different libraries. The evaluation
-thoroughly depends on my (Masataro Asai aka guicho271828) personal taste
-and not subject to rigorous tests, however I hope it would give you a grasp of the relationship / dominance between these libraries.
-</p>
-<p>
-&lt;!-- Obscure feature is almost equivalent to be nonexistent. -- a bit too strong, since other people may know of those features. --&gt;
-</p>
-<p>
-See also: <a href="http://eudoxia.me/article/common-lisp-sotu-2015">State of the Common Lisp Ecosystem, 2015</a>
-</p>
+						<p><em>You might have already noticed that there are bunch of &quot;command
+line interface&quot; libraries for Common Lisp. What's the difference!?</em></p>
 
+<p>Below is a brief comparison of different libraries. The evaluation
+thoroughly depends on my (Masataro Asai aka guicho271828) personal taste
+and not subject to rigorous tests, however I hope it would give you a grasp of the relationship / dominance between these libraries.</p>
+
+<!-- Obscure feature is almost equivalent to be nonexistent. -- a bit too strong, since other people may know of those features. -->
+
+<p>See also: <a href="http://eudoxia.me/article/common-lisp-sotu-2015" >State of the Common Lisp Ecosystem, 2015</a></p>
 <table class="table table-bordered">
-  <theader>
-    <tr><th> Feature                                                  </th><th> Roswell </th><th> CIM                            </th><th> cl-launch             </th><th> buildapp   </th></tr>
-  </theader>
-  <tbody>
-    <tr><td> --- <strong>Implementation Management</strong>                          </td><td>         </td><td>                                </td><td>                       </td><td>            </td></tr>
-    <tr><td> Launching a script with different lisp impls             </td><td> ✔       </td><td> ✔                              </td><td> ✔                     </td><td> ⚠         </td></tr>
-    <tr><td> Managing (install, switch) lisp impls                    </td><td> ✔       </td><td> ✔                              </td><td>                       </td><td>            </td></tr>
-    <tr><td> Managing (install, switch) lisp impls+versions           </td><td> ✔       </td><td> ✔                              </td><td>                       </td><td>            </td></tr>
-    <tr><td> --- <strong>Supported Impl</strong>                                     </td><td>         </td><td>                                </td><td>                       </td><td>            </td></tr>
-    <tr><td> sbcl                                                     </td><td> ✔       </td><td> ✔                              </td><td> ✔                     </td><td> ✔          </td></tr>
-    <tr><td> ccl                                                      </td><td> ✔       </td><td> ✔                              </td><td> ✔                     </td><td> ✔          </td></tr>
-    <tr><td> ecl                                                      </td><td> ✔       </td><td> ✔                              </td><td> ✔                     </td><td>            </td></tr>
-    <tr><td> clisp                                                    </td><td> ✔       </td><td> ✔                              </td><td> ✔                     </td><td>            </td></tr>
-    <tr><td> lispworks                                                </td><td>         </td><td>                                </td><td> ✔                     </td><td>            </td></tr>
-    <tr><td> abcl                                                     </td><td> ✔       </td><td> ✔                              </td><td> ✔2                    </td><td>            </td></tr>
-    <tr><td> cmucl                                                    </td><td> ✔       </td><td> ✔                              </td><td> ✔                     </td><td>            </td></tr>
-    <tr><td> alisp (allegro)                                          </td><td> ✔       </td><td> ✔                              </td><td> ✔1                    </td><td>            </td></tr>
-    <tr><td> gcl (obsoleted, not ANSI anyway)                         </td><td>         </td><td>                                </td><td> ✔1 (ANSI mode)        </td><td>            </td></tr>
-    <tr><td> scienner (who cares?)                                    </td><td>         </td><td>                                </td><td> ✔1                    </td><td>            </td></tr>
-    <tr><td> xcl (seems dead: last update 2010 Oct)                   </td><td>         </td><td>                                </td><td> ✔2                    </td><td>            </td></tr>
-    <tr><td> --- <strong>Scripting</strong>                                          </td><td>         </td><td>                                </td><td>                       </td><td>            </td></tr>
-    <tr><td> Script templates                                         </td><td> ✔       </td><td>                                </td><td>                       </td><td>            </td></tr>
-    <tr><td> Managing several script templates                        </td><td> ✔       </td><td>                                </td><td>                       </td><td>            </td></tr>
-    <tr><td> Managing scripts                                         </td><td> ✔       </td><td>                                </td><td>                       </td><td>            </td></tr>
-    <tr><td> Bundling/installing a script to/from a quicklisp library </td><td> ✔       </td><td>                                </td><td>                       </td><td>            </td></tr>
-    <tr><td> Shell integration (e.g. bash completion)                 </td><td> ✔       </td><td> ✔                              </td><td>                       </td><td>            </td></tr>
-    <tr><td> --- <strong>Dumping</strong>                                            </td><td>         </td><td>                                </td><td>                       </td><td>            </td></tr>
-    <tr><td> Dump feature                                             </td><td> ✔       </td><td>                                </td><td> ✔                     </td><td> ✔          </td></tr>
-    <tr><td> Managing dumped images                                   </td><td> ✔       </td><td>                                </td><td>                       </td><td>            </td></tr>
-    <tr><td> --- <strong>CI integration</strong>                                     </td><td>         </td><td>                                </td><td>                       </td><td>            </td></tr>
-    <tr><td> Local installation (no sudo)                             </td><td> ✔       </td><td>                                </td><td>                       </td><td>            </td></tr>
-    <tr><td> Helper scripts                                           </td><td> ✔       </td><td> ⚠ (via cl-travis)             </td><td>                       </td><td>            </td></tr>
-    <tr><td> --- <strong>Quality</strong>                                            </td><td>         </td><td>                                </td><td>                       </td><td>            </td></tr>
-    <tr><td> Documentation                                            </td><td> ✔ organized manpage </td><td> ✔ organized man page           </td><td> ⚠ Overlength manual @ <a href="http://www.cliki.net/cl-launch">--help / cliki</a>     </td><td> ✔ <a href="http://www.xach.com/lisp/buildapp/">web page</a> </td></tr>
-    <tr><td> Code Quality                                             </td><td> clean?  </td><td> "sh circus" (シェル芸) (keens) </td><td> <a href="https://gitlab.common-lisp.net/xcvb/cl-launch/blob/master/89INTERNALS#L9">"Hard to Hack"</a> (fare) </td><td> clean?     </td></tr>
-    <tr><td> CI-Tested                                                </td><td> ✔       </td><td>                                </td><td>                       </td><td>            </td></tr>
-    <tr><td> --- <strong>Others</strong>                                             </td><td>         </td><td>                                </td><td>                       </td><td>            </td></tr>
-    <tr><td> Windows support                                          </td><td> ✔       </td><td>                                </td><td>                       </td><td>            </td></tr>
-    <tr><td> Easy Upgrade                                             </td><td>         </td><td> ✔ cim get                      </td><td>                       </td><td>            </td></tr>
-    <tr><td> Practical Use Case (reputation)                          </td><td> good    </td><td> mainly on CI?                  </td><td> fair?                 </td><td> good       </td></tr>
-    <tr><td> Implemented in                                           </td><td> C+lisp  </td><td> sh+lisp                        </td><td> sh+lisp               </td><td> lisp       </td></tr>
-  </tbody>
+<thead>
+<tr><th>
+Feature</th><th>
+Roswell</th><th>
+CIM</th><th>
+cl-launch</th><th>
+buildapp</th></tr>
+</thead>
+<tbody>
+<tr><td>
+--- <strong>Implementation Management</strong></td><td>
+</td><td>
+</td><td>
+</td><td>
+</td></tr>
+<tr><td>
+Launching a script with different lisp impls</td><td>
+✔</td><td>
+✔</td><td>
+✔</td><td>
+⚠</td></tr>
+<tr><td>
+Managing (install, switch) lisp impls</td><td>
+✔</td><td>
+✔</td><td>
+</td><td>
+</td></tr>
+<tr><td>
+Managing (install, switch) lisp impls+versions</td><td>
+✔</td><td>
+✔</td><td>
+</td><td>
+</td></tr>
+<tr><td>
+--- <strong>Supported Impl</strong></td><td>
+</td><td>
+</td><td>
+</td><td>
+</td></tr>
+<tr><td>
+sbcl</td><td>
+✔</td><td>
+✔</td><td>
+✔</td><td>
+✔</td></tr>
+<tr><td>
+ccl</td><td>
+✔</td><td>
+✔</td><td>
+✔</td><td>
+✔</td></tr>
+<tr><td>
+ecl</td><td>
+✔</td><td>
+✔</td><td>
+✔</td><td>
+</td></tr>
+<tr><td>
+clisp</td><td>
+✔</td><td>
+✔</td><td>
+✔</td><td>
+</td></tr>
+<tr><td>
+lispworks</td><td>
+</td><td>
+</td><td>
+✔</td><td>
+</td></tr>
+<tr><td>
+abcl</td><td>
+✔</td><td>
+✔</td><td>
+✔2</td><td>
+</td></tr>
+<tr><td>
+cmucl</td><td>
+✔</td><td>
+✔</td><td>
+✔</td><td>
+</td></tr>
+<tr><td>
+alisp (allegro)</td><td>
+✔</td><td>
+✔</td><td>
+✔1</td><td>
+</td></tr>
+<tr><td>
+gcl (obsoleted, not ANSI anyway)</td><td>
+</td><td>
+</td><td>
+✔1 (ANSI mode)</td><td>
+</td></tr>
+<tr><td>
+scienner (who cares?)</td><td>
+</td><td>
+</td><td>
+✔1</td><td>
+</td></tr>
+<tr><td>
+xcl (seems dead: last update 2010 Oct)</td><td>
+</td><td>
+</td><td>
+✔2</td><td>
+</td></tr>
+<tr><td>
+--- <strong>Scripting</strong></td><td>
+</td><td>
+</td><td>
+</td><td>
+</td></tr>
+<tr><td>
+Script templates</td><td>
+✔</td><td>
+</td><td>
+</td><td>
+</td></tr>
+<tr><td>
+Managing several script templates</td><td>
+✔</td><td>
+</td><td>
+</td><td>
+</td></tr>
+<tr><td>
+Managing scripts</td><td>
+✔</td><td>
+</td><td>
+</td><td>
+</td></tr>
+<tr><td>
+Bundling/installing a script to/from a quicklisp library</td><td>
+✔</td><td>
+</td><td>
+</td><td>
+</td></tr>
+<tr><td>
+Shell integration (e.g. bash completion)</td><td>
+✔</td><td>
+✔</td><td>
+</td><td>
+</td></tr>
+<tr><td>
+--- <strong>Dumping</strong></td><td>
+</td><td>
+</td><td>
+</td><td>
+</td></tr>
+<tr><td>
+Dump feature</td><td>
+✔</td><td>
+</td><td>
+✔</td><td>
+✔</td></tr>
+<tr><td>
+Managing dumped images</td><td>
+✔</td><td>
+</td><td>
+</td><td>
+</td></tr>
+<tr><td>
+--- <strong>CI integration</strong></td><td>
+</td><td>
+</td><td>
+</td><td>
+</td></tr>
+<tr><td>
+Local installation (no sudo)</td><td>
+✔</td><td>
+</td><td>
+</td><td>
+</td></tr>
+<tr><td>
+Helper scripts</td><td>
+✔</td><td>
+⚠ (via cl-travis)</td><td>
+</td><td>
+</td></tr>
+<tr><td>
+--- <strong>Quality</strong></td><td>
+</td><td>
+</td><td>
+</td><td>
+</td></tr>
+<tr><td>
+Documentation</td><td>
+✔ organized manpage</td><td>
+✔ organized man page</td><td>
+⚠ Overlength manual @ <a href="http://www.cliki.net/cl-launch" >--help / cliki</a></td><td>
+✔ <a href="http://www.xach.com/lisp/buildapp/" >web page</a></td></tr>
+<tr><td>
+Code Quality</td><td>
+clean?</td><td>
+&quot;sh circus&quot; (シェル芸) (keens)</td><td>
+<a href="https://gitlab.common-lisp.net/xcvb/cl-launch/blob/master/89INTERNALS#L9" >&quot;Hard to Hack&quot;</a> (fare)</td><td>
+clean?</td></tr>
+<tr><td>
+CI-Tested</td><td>
+✔</td><td>
+</td><td>
+</td><td>
+</td></tr>
+<tr><td>
+--- <strong>Others</strong></td><td>
+</td><td>
+</td><td>
+</td><td>
+</td></tr>
+<tr><td>
+Windows support</td><td>
+✔</td><td>
+</td><td>
+</td><td>
+</td></tr>
+<tr><td>
+Easy Upgrade</td><td>
+</td><td>
+✔ cim get</td><td>
+</td><td>
+</td></tr>
+<tr><td>
+Practical Use Case (reputation)</td><td>
+good</td><td>
+mainly on CI?</td><td>
+fair?</td><td>
+good</td></tr>
+<tr><td>
+Implemented in</td><td>
+C+lisp</td><td>
+sh+lisp</td><td>
+sh+lisp</td><td>
+lisp</td></tr>
+</tbody>
 </table>
 
-<p>
-Re: Shelly, the author (Fukamachi) declared (to be precise, "I think I heard him saying") it as deprecated and "dead" by himself.
-</p>
-<p>
-                                                                                                                      
-</p>
+<p>Re: Shelly, the author (Fukamachi) declared (to be precise, &quot;I think I heard him saying&quot;) it as deprecated and &quot;dead&quot; by himself.</p>
+
 					</article>
 				</div>
 			</div>

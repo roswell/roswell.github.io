@@ -374,38 +374,195 @@ footer {
 					</aside>
 					<article class="col-md-8 col-lg-9">
 						<h1 id="title">Home</h1>
-						<p>
-Roswell intends to be a lisp installer and launcher for the major environments that just work.
-</p>
-<p>
-Look at the sidebar to get started !
-</p>
-<p>
-We also have a FAQ.
-</p>
+						<h1>Roswell - Common Lisp environment setup Utility.</h1>
+
+<p>Roswell is a Lisp implementation installer/manager, launcher, and much more!</p>
+
+<p>Roswell started out as a command-line tool with the aim to make installing and managing Common Lisp implementations really simple and easy.</p>
+
+<p>Roswell has now evolved into a full-stack environment for Common Lisp development, and has many features that makes it easy to test, share, and distribute your Lisp applications.
+With Roswell, we aim to push the Common Lisp community to a whole new level of productivity.</p>
+
+<p>Roswell is still in beta. Despite this, the basic interfaces are stable and not likely to change. Roswell currently works well on Unix-like platforms such as Linux, Mac OS X and FreeBSD.
+Roswell also works on other operating systems, but currently some parts or features might be missing or unstable.</p>
+
+<p>Checkout the <a href="https://github.com/roswell/roswell/issues" >issues list</a> if you are interested in what's lacking.</p>
+
+<h2>Installation, Dependency &amp; Usage</h2>
+
+<p>See the sidebar for details.</p>
+
+<p>We provide prebuilt binaries for homebrew on OSX, AUR on Arch and <strong>also on Windows</strong>.
+* <a href="https://github.com/roswell/roswell/wiki/Installation#linux" >Linux (arch)</a>
+* <a href="https://github.com/roswell/roswell/wiki/Installation#mac-os-x--homebrew" >Mac OS X (brew)</a>
+* <a href="https://github.com/roswell/roswell/wiki/Installation#windows" >Windows</a>
+* <a href="https://github.com/roswell/roswell/wiki/Installation#building-from-source" >Building from Source</a></p>
+
+<h2>Features</h2>
+
+<ul>
+<li>Implementation Manager</li>
+<li>Scripting environment (similar to cl-launch)</li>
+<li>Building utility (similar to buildapp)</li>
+<li><strong>Novel</strong> : Easier setup for initializing a script</li>
+<li><strong>Novel</strong> : Better integration to the command-line interface (Bash completion, etc)</li>
+<li><strong>Novel</strong> : Infrastructure for bundling/installing the scripts to/from a quicklisp system</li>
+<li><strong>Novel</strong> : Better support for Windows environment (tested exhaustively)</li>
+<li><strong>Novel</strong> : Better integration to CI environment (e.g. <a href="https://github.com/roswell/roswell/wiki/4.1-Travis-CI" >Travis-CI</a>, <a href="https://github.com/roswell/roswell/wiki/4.2-Circle-CI" >CircleCI</a>, <a href="https://github.com/roswell/roswell/wiki/Coveralls" >Coveralls</a>)</li>
+</ul>
+
+<h2>Usage</h2>
+
+<p>Roswell has git-like subcommands which resemble that of cl-launch, buildapp.</p>
+
+<pre><code>$ ros
+Common Lisp environment setup Utility.
+
+Usage:
+
+   ros [options] Command [arguments...]
+or
+   ros [options] --] script-path arguments...]
+
+commands:
+   run       Run repl
+   install   Install a given implementation or a system for roswell environment
+   update    Update installed systems.
+   build     Make executable from script.
+   use       Change default implementation.
+   init      Creates a new ros script, optionally based on a template.
+   list      List Information
+   delete    Delete installed implementations
+   config    Get and set options
+   version   Show the roswell version information
+
+Use "ros help [command]" for more information about a command.
+
+Additional help topics:
+
+   options
+
+Use "ros help [topic]" for more information about the topic.</code></pre>
+
+<h3>Managing/Installing Several Lisp Installations</h3>
+
+<pre><code>$ ros install               # displays a list of all installable implementations
+
+$ ros install sbcl-bin      # default sbcl
+$ ros install sbcl          # The newest released version of sbcl
+$ ros install ccl-bin       # default prebuilt binary of ccl
+$ ros install sbcl/1.2.0    # A specific version of sbcl
+
+$ ros list installed sbcl   # Listing the installed implementations
+$ ros run -- --version      # check which implementation is used
+SBCL 1.2.15
+$ ros use sbcl/1.2.3        # change the default implementation
+</code></pre>
+
+<p>To use an implementation that was not installed by roswell, use i.e. <code>ros use sbcl/system</code>.</p>
+
+<p>The list of supported implementations continues to grow!</p>
+
+<h3>Installing scripts</h3>
+
+<p>It is also possible to install scripts using <code>ros install</code>:</p>
+
+<pre><code>$ ros install qlot            # will install a program from quicklisp
+$ ros install fukamachi/qlot  # will install it from the GitHub
+</code></pre>
+
+<p>To add installable scripts into the system, you need to put roswell
+scripts (files having <code>.ros</code> extensions) into a <code>roswell</code> subdirectory.
+Take a look at <a href="https://github.com/fukamachi/qlot/tree/master/roswell" >qlot's roswell/qlot.ros</a>.</p>
+
+<h3>Scripting with Roswell</h3>
+
+<pre><code><span class="code"><span class="diff-normal">$ ros init</span><span class="diff-normal">
+</span><span class="diff-normal">Usage: ros init [template] name [options...]</span><span class="diff-normal">
+</span><span class="diff-normal">
+</span><span class="diff-normal">$ ros init fact</span><span class="diff-normal">
+</span><span class="diff-normal">Successfully generated: fact.ros</span><span class="diff-normal">
+</span><span class="diff-normal">
+</span><span class="diff-normal">$ emacs fact.ros</span><span class="diff-normal">
+</span><span class="diff-normal">## editing the fact.ros ...</span><span class="diff-normal">
+</span><span class="diff-normal">
+</span><span class="diff-normal">$ cat fact.ros</span><span class="diff-normal">
+</span><span class="diff-normal">#!/bin/sh</span><span class="diff-normal">
+</span><span class="diff-normal">#|-*- mode:lisp -*-|#</span><span class="diff-normal">
+</span><span class="diff-normal">#|</span><span class="diff-normal">
+</span><span class="diff-normal">exec ros -Q -- $0 "$@"</span><span class="diff-normal">
+</span><span class="diff-normal">|#</span><span class="diff-normal">
+</span><span class="diff-normal">
+</span><span class="diff-normal">(defun fact (n)</span><span class="diff-normal">
+</span><span class="diff-normal">  (if (zerop n)</span><span class="diff-normal">
+</span><span class="diff-normal">      1</span><span class="diff-normal">
+</span><span class="diff-normal">      (* n (fact (1- n)))))</span><span class="diff-normal">
+</span><span class="diff-normal">
+</span><span class="diff-normal">(defun main (n &amp;rest argv)</span><span class="diff-normal">
+</span><span class="diff-normal">  (declare (ignore argv))</span><span class="diff-normal">
+</span><span class="diff-normal">  (format t "~&amp;Factorial ~D = ~D~%" n (fact (parse-integer n))))</span><span class="diff-normal">
+</span><span class="diff-normal">
+</span><span class="diff-normal">$ ./fact.ros 10</span><span class="diff-normal">
+</span><span class="diff-normal">Factorial 10 = 3628800</span></span></code></pre>
+
+<h2>Chef recipe for roswell</h2>
+
+<p><a href="https://github.com/Rudolph-Miller" >@Rudolph-Miller</a> is providing a Chef recipe for setting roswell up.</p>
+
+<ul>
+<li><a href="https://github.com/Rudolph-Miller/chef-roswell" >Rudolph-Miller/chef-roswell</a></li>
+</ul>
+
+<h2>Roswell with CircleCI</h2>
+
+<p><a href="https://github.com/fukamachi" >@fukamachi</a> uses Roswell with CircleCI.</p>
+
+<ul>
+<li><a href="https://github.com/fukamachi/legion/blob/master/circle.yml" >fukamachi/legion/circle.yml</a></li>
+</ul>
+
+<h2>Name Origin</h2>
+
+<p>From &lsquo;<a href="http://www.lisperati.com/logo.html" >made with secret alien technology</a>&rsquo;.</p>
+
+<p>I felt making it easier to use Lisp for people is a kind of making opportunity for humanbeings to mingle with alien technology. I recall &lsquo;roswell incident&rsquo; by the concept. I'm not sure what you feel.</p>
+
+<h2>Author</h2>
+
+<p>SANO Masatoshi (snmsts@gmail.com)</p>
+
+<h2>Contributors</h2>
+
+<ul>
+<li>Eitaro Fukamachi (e.arrows@gmail.com)</li>
+<li>Tomoya KAWANISHI (chopsticks.tk.ppfm@gmail.com)</li>
+<li>Masataro Asai (guicho2.71828@gmail.com)</li>
+</ul>
+
+<h2>Special Thanks to</h2>
+
+<ul>
+<li>Eitaro Fukamachi (e.arrows@gmail.com) for naming this project.</li>
+<li>Sunrin SHIMURA for <a href="https://github.com/keens/cim" >keens/cim</a> that motivate me to start this project.</li>
+</ul>
+
+<h2>License</h2>
+
+<p>Licensed under the MIT License.</p>
 
 <h3>Found a bug ?</h3>
 
-<p>
-Report it in the <a href="https://github.com/roswell/roswell/issues">Issues</a> page.
-If you find a bug, don't forget to include the following information in the report:
-</p>
+<p>Report it in the <a href="https://github.com/roswell/roswell/issues" >Issues</a> page.
+If you find a bug, don't forget to include the following information in the report:</p>
 
 <ul>
-<li>
-your OS and its version
-</li>
-<li>
-<code>ros version</code>
-</li>
-<li>
-<code>ros config</code>
-</li>
+<li>your OS and its version</li>
+<li><code>ros version</code></li>
+<li><code>ros config</code></li>
 </ul>
 
-<p>
-Thanks !
-</p>
+<p>Thanks !</p>
+
 					</article>
 				</div>
 			</div>

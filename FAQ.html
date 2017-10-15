@@ -374,140 +374,82 @@ footer {
 					</aside>
 					<article class="col-md-8 col-lg-9">
 						<h1 id="title">FAQ</h1>
-						
-<h2>Roswell Usage & Customization</h2>
+						<h2>Roswell Usage &amp; Customization</h2>
 
-<p>
-### Where should I put my local projects?
-</p>
-<p>
-Roswell adds <code>~/.roswell/local-projects/</code> to ASDF's source registry (from version 0.0.3.34).
+<h3>Where should I put my local projects?</h3>
+
+<p>Roswell adds <code>~/.roswell/local-projects/</code> to ASDF's source registry (from version 0.0.3.34).
 <code>~/common-lisp/</code> is also available, as it's the default local directory ASDF uses to look for systems.
-See in the <a href="http://common-lisp.net/project/asdf/asdf/Configuring-ASDF.htm">ASDF manual</a> for further information.
-</p>
+See in the <a href="http://common-lisp.net/project/asdf/asdf/Configuring-ASDF.htm" >ASDF manual</a> for further information.</p>
 
 <h3>Sure, but I don't want to change the dir I'm using now.</h3>
 
-<p>
-Create a symlink from  <code>~/.roswell/local-projects/</code> to whatever your favorite directory is. ASDF searches for system definitions recursively.
-</p>
+<p>Create a symlink from  <code>~/.roswell/local-projects/</code> to whatever your favorite directory is. ASDF searches for system definitions recursively.</p>
 
 <h3>My SLIME does not jump to the source code of implementation with <code>M-.</code>.</h3>
 
-<p>
-If you are using <code>sbcl-bin</code> with roswell, the installation doesn't include source code. You need to install the source via <code>ros install sbcl[/version] --without-install</code> which downloads the sbcl source code for sbcl-bin.
-</p>
+<p>If you are using <code>sbcl-bin</code> with roswell, the installation doesn't include source code. You need to install the source via <code>ros install sbcl[/version] --without-install</code> which downloads the sbcl source code for sbcl-bin.</p>
 
 <h3>How do I customize the system-wide installation dir?</h3>
 
-<p>
-See Local installation.
-</p>
+<p>See Local installation.</p>
 
 <h3>How to Setup Slime with Roswell?</h3>
 
-<p>
-See Initial Recommended Setup.
-</p>
+<p>See Initial Recommended Setup.</p>
 
-<h2>Writing & Launching Roswell Scripts</h2>
+<h2>Writing &amp; Launching Roswell Scripts</h2>
 
-<p>
-### How are roswell scripts evaluated?
-</p>
+<h3>How are roswell scripts evaluated?</h3>
 
 <h4>Related: What's the default package when launching the script?</h4>
 
-<p>
-#### Related: In what environment is <code>main</code> executed?
-</p>
-<p>
-In interpreter mode (without dump), the script is evaluated as a top-level form.
+<h4>Related: In what environment is <code>main</code> executed?</h4>
+
+<p>In interpreter mode (without dump), the script is evaluated as a top-level form.
 So, if you use <code>in-package</code> within the script, that same package will be effective when launching the <code>main</code> function.
-The <code>main</code> function called by roswell should be in this last effective package.
-</p>
-<p>
-Edit: now it acts the same in the dumped images. 2015/12/11
-</p>
+The <code>main</code> function called by roswell should be in this last effective package.</p>
+
+<p>Edit: now it acts the same in the dumped images. 2015/12/11</p>
 
 <h3>How can I extend the dynamic space size? (sbcl-specific)</h3>
 
-<p>
-<code>`lisp
-$ ros dynamic-space-size=2000 -- ... 
-</code>`
-</p>
+<pre><code><span class="code">$ ros dynamic-space-size=2000 -- ... </span></code></pre>
 
 <h3>Roswell seems to disable the debugger.</h3>
 
-<p>
-On sbcl, try <code>#+sbcl (sb-ext:enable-debugger)</code>. You may use other impl-specific interfaces in other implementations.
-</p>
+<p>On sbcl, try <code>#+sbcl (sb-ext:enable-debugger)</code>. You may use other impl-specific interfaces in other implementations.</p>
 
 <h3>Quick recipe for building a binary with my private subprojects</h3>
 
-
 <ol>
-<li>
-Place your subprojects under the main projects.
-</li>
+<li>Place your subprojects under the main projects.</li>
 </ol>
 
-<p>
-<code>`
-</p>
-&lt;ul&gt;
-&lt;li&gt;
-projects/
-&lt;ul&gt;
-&lt;li&gt;
-main.ros
-&lt;/li&gt;
-&lt;li&gt;
-src/
-&lt;/li&gt;
-&lt;li&gt;
-t/
-&lt;/li&gt;
-&lt;li&gt;
-subproj1/
-&lt;/li&gt;
-&lt;li&gt;
-subproj2/   ;; or
-&lt;/li&gt;
-&lt;li&gt;
-local-projects/
-&lt;ul&gt;
-&lt;li&gt;
-subproj1/
-&lt;/li&gt;
-&lt;li&gt;
-subproj2/ </code>`
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
+<pre><code>+ projects/
+  + main.ros
+  + src/
+  + t/
+  + subproj1/
+  + subproj2/   ;; or
+  + local-projects/
+    + subproj1/
+    + subproj2/</code></pre>
 
 <ol>
-<li>
-use <code>ros -e "(setf ql:*local-project-directories* '(#p\"$(PWD)/\"))" dump executable main.ros</code> or equivalent. If you build it with <code>make</code>, use <code>CURDIR</code> instead of <code>PWD</code>, since it is robust against <code>make -C ...</code>.
-</li>
+<li>use <code>ros -e &quot;(setf ql:*local-project-directories* '(#p\&quot;$(PWD)/\&quot;))&quot; dump executable main.ros</code> or equivalent.
+   If you build it with <code>make</code>, use <code>CURDIR</code> instead of <code>PWD</code>, since it is robust against <code>make -C ...</code>.</li>
 </ol>
 
-<p>
-I (guicho2.71828) use the following makefile:
-<code></code>`makefile
+<p>I (guicho2.71828) use the following makefile:
+```makefile
 submodules:
-    git submodule update --init --recursive --remote
-</p>
-<p>
-mwup: $(shell find -name "<em>.lisp") submodules
-    ros -e "(setf ql:</em>local-project-directories* '(#p\"$(CURDIR)/\"))(ql:register-local-projects)" dump executable ./main.ros
-<code></code>`
-</p>
+    git submodule update --init --recursive --remote</p>
+
+<p>mwup: $(shell find -name &quot;<em>.lisp&quot;) submodules
+    ros -e &quot;(setf ql:</em>local-project-directories* '(#p\&quot;$(CURDIR)/\&quot;))(ql:register-local-projects)&quot; dump executable ./main.ros
+```</p>
+
 					</article>
 				</div>
 			</div>

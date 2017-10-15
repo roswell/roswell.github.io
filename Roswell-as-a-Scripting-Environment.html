@@ -374,167 +374,96 @@ footer {
 					</aside>
 					<article class="col-md-8 col-lg-9">
 						<h1 id="title">Roswell as a Scripting Environment</h1>
-						<p>
-Although Roswell is a unified interface to Common Lisp implementations, it also encourages writing scripts with it. A "Roswell script" is an implementation-independent script which can be invoked from a shell command line, launched by Roswell and run under standard CL environment.
-</p>
+						<p>Although Roswell is a unified interface to Common Lisp implementations, it also encourages writing scripts with it. A &quot;Roswell script&quot; is an implementation-independent script which can be invoked from a shell command line, launched by Roswell and run under standard CL environment.</p>
+
 <ul>
-<li>
-<p>
-A roswell script can be <strong>distributed using quicklisp's infrastructure</strong> (if you are a library author), and <strong>installed</strong> with <code>ros install [system]</code>, i.e., those scripts are made available anywhere in your system.
-</p>
-</li>
-<li>
-<p>
-Also, the script can be dumped into an executable binary for the distribution purpose or for reducing the startup time. Each subsection below describes each feature.
-</p>
-</li>
+<li><p>A roswell script can be <strong>distributed using quicklisp's infrastructure</strong> (if you are a library author), and <strong>installed</strong> with <code>ros install [system]</code>, i.e., those scripts are made available anywhere in your system.</p></li>
+<li><p>Also, the script can be dumped into an executable binary for the distribution purpose or for reducing the startup time. Each subsection below describes each feature.</p></li>
 </ul>
 
 <h2>Initialising a Roswell Script</h2>
 
-<p>
-To start, run <code>ros init</code> in your terminal:
-</p>
-<p>
-<code></code>`
-$ ros init
+<p>To start, run <code>ros init</code> in your terminal:</p>
+
+<pre><code>$ ros init
 Usage: ros init [template] name [options...]
-</p>
-<p>
+
 $ ros init fact
-Successfully generated: fact.ros
-<code></code>`
-</p>
-<p>
-&lt;!--
-It adds a file extension <code>.ros</code>.
-</p>
-<p>
-Perhaps it's hardly understandable if you have been using only Unix OSes for years like me. Actually, it works well even without <code>.ros</code> on Unix, so renaming it to the name which doesn't have <code>.ros</code> is a usual manner if the script doesn't have to run on Windows. However, it helps Roswell to differentiate it from shell scripts, and Roswell provides some additional features for it like <a href="#making-executables">Making Executables</a>.
-</p>
-<ul>
-<li>
-<ul>
-<li>
-&gt;
-</li>
-</ul>
-</li>
-</ul>
+Successfully generated: fact.ros</code></pre>
 
-<p>
-The content of the file looks like this:
-</p>
-<p>
-<code></code>`common-lisp
-</p>
+<!--
+It adds a file extension `.ros`.
 
-<h1>!/bin/sh</h1>
+Perhaps it's hardly understandable if you have been using only Unix OSes for years like me. Actually, it works well even without `.ros` on Unix, so renaming it to the name which doesn't have `.ros` is a usual manner if the script doesn't have to run on Windows. However, it helps Roswell to differentiate it from shell scripts, and Roswell provides some additional features for it like [Making Executables](#making-executables).
+-->
 
-<p>
-#|-<em>- mode:lisp -</em>-|#
-</p>
+<p>The content of the file looks like this:</p>
 
-<h1>|</h1>
-
-<p>
+<pre><code><span class="code">#!/bin/sh
+<span class="comment">#|-*- mode:lisp -*-|#</span>
+<span class="comment">#|
 exec ros -Q -- $0 "$@"
-|#
-(defun main (&rest argv)
-  (declare (ignorable argv)))
-<code></code>`
-</p>
-<p>
-This looks a little bit hacky. It actually is a shell script which <code>exec</code> Roswell immediately. Roswell runs the same script, skips multi-line comments, reads the rest of the file as a Common Lisp program, and finally invokes a function <code>main</code> with command-line arguments.
-</p>
-<p>
-Here's an example program which takes the exact one argument and prints its factorial:
-</p>
-<p>
-<code></code>`common-lisp
-</p>
+|#</span>
+<span class="paren1">(<span class="code"><i><span class="symbol">defun</span></i> main <span class="paren2">(<span class="code">&amp;rest argv</span>)</span>
+  <span class="paren2">(<span class="code">declare <span class="paren3">(<span class="code">ignorable argv</span>)</span></span>)</span></span>)</span></span></code></pre>
 
-<h1>!/bin/sh</h1>
+<p>This looks a little bit hacky. It actually is a shell script which <code>exec</code> Roswell immediately. Roswell runs the same script, skips multi-line comments, reads the rest of the file as a Common Lisp program, and finally invokes a function <code>main</code> with command-line arguments.</p>
 
-<p>
-#|-<em>- mode:lisp -</em>-|#
-</p>
+<p>Here's an example program which takes the exact one argument and prints its factorial:</p>
 
-<h1>|</h1>
-
-<p>
+<pre><code><span class="code">#!/bin/sh
+<span class="comment">#|-*- mode:lisp -*-|#</span>
+<span class="comment">#|
 exec ros -Q -- $0 "$@"
-|#
-</p>
-<p>
-(defun fact (n)
-  (if (zerop n)
+|#</span>
+
+<span class="paren1">(<span class="code"><i><span class="symbol">defun</span></i> fact <span class="paren2">(<span class="code">n</span>)</span>
+  <span class="paren2">(<span class="code"><i><span class="symbol">if</span></i> <span class="paren3">(<span class="code">zerop n</span>)</span>
       1
-      (* n (fact (1- n)))))
-</p>
-<p>
-(defun main (n &rest argv)
-  (declare (ignore argv))
-  (format t "~&Factorial ~D = ~D~%" n (fact (parse-integer n))))
-<code></code>`
-</p>
-<p>
-<code></code>`
-$ fact.ros 3
+      <span class="paren3">(<span class="code">* n <span class="paren4">(<span class="code">fact <span class="paren5">(<span class="code">1- n</span>)</span></span>)</span></span>)</span></span>)</span></span>)</span>
+
+<span class="paren1">(<span class="code"><i><span class="symbol">defun</span></i> main <span class="paren2">(<span class="code">n &amp;rest argv</span>)</span>
+  <span class="paren2">(<span class="code">declare <span class="paren3">(<span class="code">ignore argv</span>)</span></span>)</span>
+  <span class="paren2">(<span class="code">format t <span class="string">"~&amp;Factorial ~D = ~D~%"</span> n <span class="paren3">(<span class="code">fact <span class="paren4">(<span class="code">parse-integer n</span>)</span></span>)</span></span>)</span></span>)</span></span></code></pre>
+
+<pre><code>$ fact.ros 3
 Factorial 3 = 6
-</p>
-<p>
+
 $ fact.ros 10
-Factorial 10 = 3628800
-<code></code>`
-</p>
-<p>
-Though it falls through CL debugger if there's no arguments or non-integer value, I assume it's okay for now as a simple example ;) For further details, see <a href="2.0-Advanced-scripting-with-roswell">this article</a>.
-</p>
+Factorial 10 = 3628800</code></pre>
+
+<p>Though it falls through CL debugger if there's no arguments or non-integer value, I assume it's okay for now as a simple example ;) For further details, see <a href="Advanced-scripting" >this article</a>.</p>
 
 <h2>Distributing Scripts via Quicklisp</h2>
 
-<p>
-When you write a script which would make other people happy, let's think about sharing it.
+<p>When you write a script which would make other people happy, let's think about sharing it.
 The easiest way to achieve this is to just send the <code>.ros</code> file to the others.
-However, it is impractical when your script is more like a "library" containing multiple separated source files.
-</p>
-<p>
-If you're the author of the library, then consider adding the ros file to the repository and automatically providing a roswell-installable command-line interface to it.
+However, it is impractical when your script is more like a &quot;library&quot; containing multiple separated source files.</p>
+
+<p>If you're the author of the library, then consider adding the ros file to the repository and automatically providing a roswell-installable command-line interface to it.
 The <code>.ros</code> files should be located in <code>roswell/</code> subdirectory in the repository.
 Once added, <code>ros install</code> recognizes the ros scripts in the repository.
 When <code>ros install &lt;library name&gt;</code> is invoked, it downloads the specified library from Quicklisp
 and then copies the script files to <code>~/.roswell/bin</code>.
-&lt;!-- and gives them an executable flag. --&gt;
+<!-- and gives them an executable flag. -->
 These scripts can be launched via <code>ros exec &lt;script name&gt;</code>.
-Also, when the PATH to <code>~/.roswell/bin</code> is resolved, they are available from the command line.
-</p>
-<p>
-<code>`
-$ ros install &lt;library name&gt;
-</code>`
-</p>
-<p>
-For instance, try <code>ros install clack</code>:
-</p>
-<p>
-<code>`
-$ ros install clack
+Also, when the PATH to <code>~/.roswell/bin</code> is resolved, they are available from the command line.</p>
+
+<pre><code>$ ros install &lt;library name&gt;</code></pre>
+
+<p>For instance, try <code>ros install clack</code>:</p>
+
+<pre><code>$ ros install clack
 found system clack.
 Attempting install scripts...
 /Users/nitro_idiot/.roswell/bin/clackup
-$ ros exec clackup                                                ### launch the web server!
-</code>`
-</p>
-<p>
-To avoid <code>ros exec</code>, add <code>bin/</code> to the PATH variable:
-</p>
-<p>
-<code>`
-$ echo 'export PATH="$HOME/.roswell/bin:$PATH"' &gt;&gt; ~/.zshrc
-$ clackup                                                         ### launch the web server!
-</code>`
-</p>
+$ ros exec clackup                                                ### launch the web server!</code></pre>
+
+<p>To avoid <code>ros exec</code>, add <code>bin/</code> to the PATH variable:</p>
+
+<pre><code>$ echo 'export PATH="$HOME/.roswell/bin:$PATH"' &gt;&gt; ~/.zshrc
+$ clackup                                                         ### launch the web server!</code></pre>
+
 					</article>
 				</div>
 			</div>

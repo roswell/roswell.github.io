@@ -374,55 +374,33 @@ footer {
 					</aside>
 					<article class="col-md-8 col-lg-9">
 						<h1 id="title">Roswell as an implementation manager</h1>
-						<p>
-Largely TBP
-</p>
+						<p>Largely TBP </p>
 
 <h2>Installing CL implementations</h2>
 
-<p>
-<code></code>`
-</p>
-
-<h1>Installing SBCL 1.2.14</h1>
-
-<p>
+<pre><code># Installing SBCL 1.2.14
 $ ros install sbcl/1.2.14
-</p>
 
-<h1>Installing the latest SBCL</h1>
-
-<p>
+# Installing the latest SBCL
 $ ros install sbcl
-</p>
 
-<h1>Installing Clozure CL</h1>
+# Installing Clozure CL
+$ ros install ccl-bin</code></pre>
 
-<p>
-$ ros install ccl-bin
-<code></code>`
-</p>
-<p>
-<code>`
-$ ros list installed
-</code>`
-</p>
+<pre><code>$ ros list installed</code></pre>
 
 <h3>Managing/Installing Several Lisp Installations</h3>
-
 
 <pre><code>$ ros install sbcl-bin      # default sbcl
 $ ros install sbcl          # The newest released version of sbcl
 $ ros install ccl-bin       # default prebuilt binary of ccl
 $ ros install sbcl/1.2.0    # A specific version of sbcl
-$ ros list installed sbcl   # Listing the installed implementations</code></pre>
+$ ros list installed sbcl   # Listing the installed implementations
+</code></pre>
 
-<p>
-The list is growing further!
-</p>
+<p>The list is growing further!</p>
 
 <h4>Show installable Lisp implements.</h4>
-
 
 <pre><code>$ ros list versions
 candidates for ros list versions [impl] are:
@@ -437,39 +415,32 @@ ecl
 quicklisp
 sbcl-bin
 sbcl
-slime</code></pre>
-
+slime
+</code></pre>
 
 <h4>Compile Options</h4>
 
-<p>
-You can see the compile options by
-</p>
+<p>You can see the compile options by</p>
 
-<pre><code>$ ros help install sbcl</code></pre>
-
+<pre><code>$ ros help install sbcl
+</code></pre>
 
 <h3>Checking and Setting the default implementation used by ros</h3>
 
-
 <pre><code>$ ros run -- --version      # check which implementation is used
 SBCL 1.2.15
-$ ros use sbcl/1.2.3        # change the default implementation</code></pre>
-
+$ ros use sbcl/1.2.3        # change the default implementation
+</code></pre>
 
 <h2>Specifying which implementation to use</h2>
 
-
-<pre><code>$ ros -L sbcl/1.2.3 my-script.lisp</code></pre>
-
+<pre><code>$ ros -L sbcl/1.2.3 my-script.lisp
+</code></pre>
 
 <h2>Using SBCL's dynamic-space-size</h2>
 
-<p>
-<code>`
-$ ros dynamic-space-size=400 run
-</code>`
-</p>
+<pre><code>$ ros dynamic-space-size=400 run</code></pre>
+
 					</article>
 				</div>
 			</div>

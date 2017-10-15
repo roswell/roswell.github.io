@@ -374,84 +374,54 @@ footer {
 					</aside>
 					<article class="col-md-8 col-lg-9">
 						<h1 id="title">Installation</h1>
-						
-<h2>Dependencies</h2>
-
+						<h2>Dependencies</h2>
 
 <ul>
-<li>
-libcurl (both v3 and v4 should work) : used for downloading the lisp implementation binaries, etc.
-</li>
-<li>
-automake (required when building from source)
-</li>
-<li>
-developmental headers of libcurl (required when building from source)
-<ul>
-<li>
-on Ubuntu, libcurl4-openssl-dev works but libcurl4-nss-dev may not work
-</li>
+<li>libcurl (both v3 and v4 should work) : used for downloading the lisp implementation binaries, etc.</li>
+<li>automake (required when building from source)</li>
+<li>developmental headers of libcurl (required when building from source)</li>
+<li>on Ubuntu, libcurl4-openssl-dev works but libcurl4-nss-dev may not work</li>
 </ul>
-</li>
-</ul>
-
 
 <h2>Mac OS X + Homebrew</h2>
 
-
-<pre><code>$ brew install roswell</code></pre>
-
+<pre><code>$ brew install roswell
+</code></pre>
 
 <h2>Linux</h2>
 
-<p>
-On <a href="https://www.archlinux.org/">Arch</a>, Roswell is available in AUR:
-</p>
+<p>On <a href="https://www.archlinux.org/" >Arch</a>, Roswell is available in AUR:</p>
 
-<pre><code>$ yaourt -S roswell</code></pre>
+<pre><code>$ yaourt -S roswell
+</code></pre>
 
-<p>
-On <a href="https://www.voidlinux.eu/">Void</a>, Roswell is available in xbps:
-</p>
+<p>On <a href="https://www.voidlinux.eu/" >Void</a>, Roswell is available in xbps:</p>
 
-<pre><code>$ sudo xbps-install -S roswell</code></pre>
+<p><pre><code>$ sudo xbps-install -S roswell</code></pre></p>
 
-<p>
-Support for other distributions/packaging systems (e.g. debian-based, redhat-based) is future work. However, building from source is fairly straightforward and somewhat stable. See the last section.
-</p>
-<p>
-Or, you can use <a href="http://linuxbrew.sh/">linuxbrew</a>.
-It's same way.
-</p>
+<p>Support for other distributions/packaging systems (e.g. debian-based, redhat-based) is future work. However, building from source is fairly straightforward and somewhat stable. See the last section.</p>
 
-<pre><code>$ brew install roswell</code></pre>
+<p>Or, you can use <a href="http://linuxbrew.sh/" >linuxbrew</a>.
+It's same way.</p>
 
-<p>
-On Ubuntu/Debian, there seems to be someone who managed to install from the release tarball or the deb file in https://github.com/roswell/roswell/releases .
-</p>
+<pre><code>$ brew install roswell
+</code></pre>
+
+<p>On Ubuntu/Debian, there seems to be someone who managed to install from the release tarball or the deb file in https://github.com/roswell/roswell/releases .</p>
 
 <h2>Windows</h2>
 
-<p>
-We provide a convenient build procedure for Windows! (Fantastic and unusual experience for Common Lisp, ain't it?) 
-To get the latest prebuilt binary, just follow the link corresponding to your environment (i686 or x86_64).
-</p>
+<p>We provide a convenient build procedure for Windows! (Fantastic and unusual experience for Common Lisp, ain't it?) 
+To get the latest prebuilt binary, just follow the link corresponding to your environment (i686 or x86_64).</p>
 
 <ul>
-<li>
-<a href="https://ci.appveyor.com/api/projects/snmsts/roswell-en89n/artifacts/Roswell-x86_64.zip?branch=master&job=Environment%3A%20MSYS2_ARCH%3Dx86_64,%20MSYS2_BITS%3D64,%20MSYSTEM%3DMINGW64,%20METHOD%3Dcross">Roswell-x86_64.zip</a>
-</li>
-<li>
-<a href="https://ci.appveyor.com/api/projects/snmsts/roswell-en89n/artifacts/Roswell-i686.zip?branch=master&job=Environment%3A%20MSYS2_ARCH%3Di686,%20MSYS2_BITS%3D32,%20MSYSTEM%3DMINGW32,%20METHOD%3Dcross">Roswell-i686.zip</a>
-</li>
+<li><a href="https://ci.appveyor.com/api/projects/snmsts/roswell-en89n/artifacts/Roswell-x86_64.zip?branch=master&job=Environment%3A%20MSYS2_ARCH%3Dx86_64,%20MSYS2_BITS%3D64,%20MSYSTEM%3DMINGW64,%20METHOD%3Dcross" >Roswell-x86_64.zip</a></li>
+<li><a href="https://ci.appveyor.com/api/projects/snmsts/roswell-en89n/artifacts/Roswell-i686.zip?branch=master&job=Environment%3A%20MSYS2_ARCH%3Di686,%20MSYS2_BITS%3D32,%20MSYSTEM%3DMINGW32,%20METHOD%3Dcross" >Roswell-i686.zip</a></li>
 </ul>
-
 
 <h2>Building from Source</h2>
 
-<p>
-Instructions for a system-wide installation follows. The <code>./configure</code> script has several useful options, see <code>./configure --help</code> for details. Note this instruction is for Debian based Linux (Debian, Ubuntu, Mint, etc.).
-</p>
+<p>Instructions for a system-wide installation follows. The <code>./configure</code> script has several useful options, see <code>./configure --help</code> for details. Note this instruction is for Debian based Linux (Debian, Ubuntu, Mint, etc.).</p>
 
 <pre><code>if which apt-get &gt; /dev/null; then sudo apt-get -y install git build-essential automake libcurl4-openssl-dev;fi
 git clone -b release https://github.com/roswell/roswell.git
@@ -460,32 +430,21 @@ sh bootstrap
 ./configure
 make
 sudo make install
-ros setup</code></pre>
+ros setup
+</code></pre>
 
-<p>
-On some versions, <a href="https://github.com/roswell/roswell/issues/152"><code>sudo apt-get install zlib1g-dev</code> may also be necessary</a>.
-</p>
-<p>
-If you are using a Red Hat based Linux (Fedora, CentOS), replace the first line with 
-</p>
-<ul>
-<li>
-<code>sudo dnf install automake libcurl-devel</code> or
-</li>
-<li>
-<code>sudo yum install automake libcurl-devel</code> (git, make, etc. are installed by default on these Linux).
-</li>
-<li>
-On CentOS <a href="https://github.com/roswell/roswell/issues/152"><code>sudo yum install zlib-devel</code> may also be necessary</a>.
-</li>
-</ul>
+<p>On some versions, <a href="https://github.com/roswell/roswell/issues/152" ><code>sudo apt-get install zlib1g-dev</code> may also be necessary</a>.</p>
 
-<p>
-On <a href="https://www.freebsd.org/">FreeBSD</a> replace the first line with <code>sudo pkg install git automake curl</code>.
-You may also need to set the include and library search paths prior to running <code>configure</code>.
-</p>
+<p>If you are using a Red Hat based Linux (Fedora, CentOS), replace the first line with 
+* <code>sudo dnf install automake libcurl-devel</code> or
+* <code>sudo yum install automake libcurl-devel</code> (git, make, etc. are installed by default on these Linux).
+* On CentOS <a href="https://github.com/roswell/roswell/issues/152" ><code>sudo yum install zlib-devel</code> may also be necessary</a>.</p>
 
-<pre><code>LDFLAGS="-L/usr/local/lib/" CFLAGS="-I/usr/local/include/" ./configure</code></pre>
+<p>On <a href="https://www.freebsd.org/" >FreeBSD</a> replace the first line with <code>sudo pkg install git automake curl</code>.
+You may also need to set the include and library search paths prior to running <code>configure</code>.</p>
+
+<pre><code>LDFLAGS=&quot;-L/usr/local/lib/&quot; CFLAGS=&quot;-I/usr/local/include/&quot; ./configure
+</code></pre>
 
 					</article>
 				</div>
