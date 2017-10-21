@@ -31,6 +31,7 @@ install:
 
 script:
   - make update
+  - qlot install
   - make generate
   - git status
   - cat /tmp/proxy-log || true
