@@ -8,7 +8,7 @@ env:
     - ROSWELL_INSTALL_DIR=$HOME/.roswell
     - ROSWELL_QUICKLISP_DIST_URI=https://github.com/roswell/quicklisp/releases/download/dist/quicklisp.txt
   matrix:
-    - METHOD=ci LISP=sbcl-bin
+    - LISP=sbcl-bin
 
 os:
   - linux
@@ -26,7 +26,7 @@ install:
   - mkdir ~/.roswell
   - echo "ros.proxy	0	localhost:5000" > ~/.roswell/config
   - echo "proxy.http.only	0	1" >> ~/.roswell/config
-  - if [ "$METHOD" = "ci" ]; then sh ./scripts/install-for-ci.sh; fi
+  - curl -L https://raw.githubusercontent.com/roswell/roswell/release/scripts/install-for-ci.sh | sh
   - ros install qlot
 
 script:
