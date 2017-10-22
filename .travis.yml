@@ -30,6 +30,8 @@ install:
   - ros install qlot
 
 script:
+  - mkdir -p wiki/
+  - make clean
   - make update
   - qlot install
   - make generate

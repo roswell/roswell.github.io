@@ -53,7 +53,7 @@ exec ros -Q -- $0 "$@"
 
 (defun page (source)
   (let* ((name (pathname-name source))
-         (output (pathname (format nil "~A.html" name)))
+         (output (pathname (format nil "wiki/~A.html" name)))
          (title (ppcre:regex-replace-all "-" name " ")))
     (-<>> (parse-file source)
           (ppcre:regex-replace-all "<table >" <> "<table class=\"table table-bordered\">")

@@ -4,7 +4,7 @@ all: update clean generate commit push
 
 generate:
 	qlot exec ./generate.ros
-	cp Home.html index.html
+	mv wiki/Home.html wiki/index.html
 
 update:
 	git submodule update --init
@@ -17,4 +17,4 @@ commit:
 	git commit -am 'Update documents'
 
 clean:
-	rm -f *.html
+	rm -f wiki/*.html
