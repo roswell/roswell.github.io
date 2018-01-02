@@ -2,6 +2,7 @@ all: clean update
 	git clone https://github.com/roswell/roswell.github.io.git _public
 	rm -rf _public/*
 	./wiki2html.ros
+	cp _public/Home.html _public/index.html
 	cp style.css _public/style.css
 
 .PHONY: update clean upload
