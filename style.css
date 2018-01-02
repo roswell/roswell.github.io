@@ -1,0 +1,54 @@
+header, footer, main {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+header {
+    border-bottom: solid 3px green;
+    border-right: solid 3px green;
+    border-left: solid 3px green;
+    box-shadow: 3px 3px 5px;
+    border-radius: 3px;
+}
+header a.pure-menu-heading {
+    color: green;
+}
+#index h2 {
+    font-weight: normal;
+    color: gray;
+    font-size: 1em;
+}
+#index a {
+    text-decoration: none;
+    color: black;
+}
+#index a:hover {
+    display: block;
+    background: rgba(200,200,200,0.6);
+}
+#index, #content {
+    box-sizing: border-box;
+    padding: 10px;
+}
+#content h1,
+#content h2,
+#content h3,
+#content h4,
+#content h5 {
+    color: #555;
+}
+#content h1 {
+    padding-left: 10px;
+    border-left: solid 10px green;
+    border-bottom: solid 3px green;
+}
+#content h2 {
+    padding-left: 10px;
+    border-left: solid 5px green;
+}
+#content a {
+    color: green;
+}
+footer {
+    text-align: center;
+    padding: 30px;
+}

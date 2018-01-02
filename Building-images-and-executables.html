@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Building images and executables</title>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/tomorrow.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/languages/lisp.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/languages/yaml.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  <body>
+    <header class="pure-menu pure-menu-horizontal">
+      <a href="https://roswell.github.io/" class="pure-menu-heading pure-menu-link">Roswell</a>
+      <ul class="pure-menu-list">
+	<li class="pure-menu-item">
+	  <a class="pure-menu-link" href="https://github.com/roswell/roswell">
+	    Contribute in GitHub
+	  </a>
+	</li>
+      </ul>
+    </header>
+    <main class="pure-g">
+      <div id="index" class="pure-u-1-1 pure-u-md-1-4">
+      <h2>Home</h2>
+
+<ul>
+<li><a href="Home.html">Home</a></li>
+<li><a href="How-is-Roswell-different.html">How is Roswell different</a></li>
+</ul>
+
+<h2>Getting started</h2>
+
+<ul>
+<li><a href="Installation.html">Installation</a></li>
+<li><a href="Initial-Recommended-Setup.html">Initial Recommended Setup</a></li>
+<li><a href="Upgrading-Roswell.html">Upgrading Roswell</a></li>
+<li><a href="Local-installation.html">Local installation</a></li>
+<li><a href="How-to-setup-a-lisp-dev-environment-on-windows-with-Roswell..html">How to setup a lisp dev environment on windows with Roswell.</a></li>
+</ul>
+
+<h2>Roswell as a scripting environment</h2>
+
+<ul>
+<li><a href="Roswell-as-a-Scripting-Environment.html">Roswell as a Scripting Environment</a></li>
+<li><a href="Advanced-scripting.html">Advanced scripting</a></li>
+<li><a href="Reducing-Startup-Time.html">Reducing Startup Time</a></li>
+<li><a href="List-of-Roswell-Installable-Scripts.html">List of Roswell Installable Scripts</a></li>
+<li><a href="Practical-Usecases.html">Practical Usecases</a></li>
+<li><a href="Building-images-and-executables.html">Building images and executables</a></li>
+</ul>
+
+<h2>Roswell as an implementation manager</h2>
+
+<ul>
+<li><a href="Roswell-as-an-implementation-manager.html">Roswell as an implementation manager</a></li>
+<li><a href="Listing-various-resources.html">Listing various resources</a></li>
+</ul>
+
+<h2>Roswell as a Testing Environment</h2>
+
+<ul>
+<li><a href="Roswell-as-a-Testing-Environment.html">Roswell as a Testing Environment</a></li>
+<li><a href="Travis-CI.html">Travis CI</a></li>
+<li><a href="Circle-CI.html">Circle CI</a></li>
+<li><a href="Coveralls.html">Coveralls</a></li>
+</ul>
+
+<h2>Distributing applications</h2>
+
+<ul>
+<li><a href="How-to-distribute-your-software,-not-library,-on-Quicklisp-ala-python-pip.html">How to distribute your software, not library, on Quicklisp ala python pip</a></li>
+</ul>
+
+<h2>FAQ</h2>
+
+<ul>
+<li><a href="FAQ.html">FAQ</a></li>
+</ul>
+
+<h2>For Developpers/Maintainers</h2>
+
+<ul>
+<li><a href="Release-Roswell.html">Release Roswell</a></li>
+</ul>
+</div>
+      <div id="content" class="pure-u-1-1 pure-u-md-3-4">
+	<h1>Building images and executables</h1>
+	<article><p>ros-dump - make a dumped image of a roswell script</p>
+
+<p>ros build is an alias for <code>ros dump executable</code>.</p>
+
+<h1>Synopsis</h1>
+
+<p><strong>ros [OPTIONS1...] MODE</strong> args...</p>
+
+<p><code>OPTIONS1</code> specify the standard roswell options such as <code>-L</code> or <code>-m LISP</code>.
+<code>OPTIONS2</code> specify the image reduction options we describe later.
+<code>MODE</code> is either <code>output</code> or <code>executable</code>.</p>
+
+<h1>Description</h1>
+
+<p><code>ros-dump</code> creates a dumped lisp image of the state after processing all
+options <code>OPTIONS1</code>.</p>
+
+<p>It has two modes <code>output</code> and <code>executable</code>.
+In both modes, the global environment (e.g. global binding to special
+variables such as <code>*package*</code>) of the state just after the restart is
+the environment which was effective when the script was dumped.</p>
+
+<!-- Fixme: what kind of? this is unnecessarily retracting the users from using this feature -->
+
+<!-- There might be a limitation regarding this feature depending on the lisp -->
+
+<!-- implementation used by roswell at the time of building.   -->
+
+<p>The dumped image is generally not compatible between the different
+implementations, and also between the versions.</p>
+
+<h1>Dump modes</h1>
+
+<h2>output [-f] NAME</h2>
+
+<p>It loads the roswell script <code>NAME</code> and saves the current lisp state to an image.</p>
+
+<p>The image file is by default written to an internal directory of roswell in an organized manner,
+i.e., somewhere under <code>$ROSWELL_INSTALL_DIR</code> deduced by the current
+implementation, its version and the given NAME.</p>
+
+<p>When the output file already exists, the command fails with an error code.</p>
+
+<p>The image can be loaded by <code>ros -m IMAGE</code>. When restarting from the image, standard roswell
+subcommands and additional arguments to the script are also available, for
+example <code>ros run</code> to resume with a repl, or <code>--restart FUNC</code> to call a
+specific function, leaving some flexibility.</p>
+
+<p><code>-o OUTPUT</code></p>
+
+<p>: The image is written to <code>OUTPUT</code> instead of the default location.</p>
+
+<p><code>-f</code></p>
+
+<p>: Force output when the output already exists.</p>
+
+<h2>executable NAME [-o OUTPUT]</h2>
+
+<p>When a script is dumped with <code>executable</code>, the dumped image
+becomes an self-contained executable binary which implies <code>--restart main</code>.</p>
+
+<p>If <code>OUTPUT</code> is given, the resulting binary is written to this file.
+Otherwise, the output filename is deduced from <code>NAME</code> and is written in the same directory.
+On Windows and if <code>SCRIPT</code> has <code>.ros</code> extension, the filename will be <code>SCRIPT.exe</code>.
+On the other systems, the result will be <code>SCRIPT</code> (without extension).</p>
+
+<p>This feature is supported on SBCL, CCL, CMUCL, CLISP, ECL.</p>
+
+<h1>Image Reduction Options</h1>
+
+<p>These options unlink some references to the runtime objects and allow gcs to
+reclaim some memory, which eventually reduces the size of the dumped image.</p>
+
+<p>Care should be taken to ensure the resulting program works as expected, as some
+of these operation may destroy the common assumptions of the conforming
+programs. For example, package-related reduction options may inhibit the runtime
+calls to <code>READ</code> after the restart.</p>
+
+<p>Reduction options are processed in the left-to-right manner.</p>
+
+<p>--disable-compression, --enable-compression, -c</p>
+
+<p>: These options disable/enable/enable the core compression feature in SBCL. Thus this option is meaningful
+  only on SBCL. Compression is enabled by default.</p>
+
+<p>--remove-docstrings</p>
+
+<p>: This option removes all docstrings from all symbols in the entire lisp image.</p>
+
+<p>--delete-package PKG</p>
+
+<p>: This option can be specified multiple times. It uninterns the symbols in
+    PACKAGE, calls <code>makeunbound</code> and <code>fmakeunbound</code> on each symbol
+    and deletes the package. Package names are automatically string-upcase'd.</p>
+
+<p>--delete-all-packages</p>
+
+<p>: This option applies --delete-package PKG on all packages, except some
+    blacklisted packages (keyword, roswell, ROS.SCRIPT.DUMP, and the package
+    of the main function symbol).</p>
+
+<p>--delete-packages-except PACKAGE</p>
+
+<p>: This option can be specified multiple times. It is identical to
+    --delete-all-packages except that it adds PACKAGE to
+    the blacklist. Package names are automatically string-upcase'd.</p>
+
+<p>--destroy-packages-sbcl</p>
+
+<p>: This is an sbcl-specific option which is even more aggressive than the
+    above methods (&gt;10MB reduction). It destroys the package system by
+    modifying the internal tables for packages, cleaning up the caches for
+    package-use-list etc.  The blacklist is shared among --delete-all-packages
+    and --destroy-packages-sbcl.  However, this method does not call
+    fmakunbound/makunbound, so combining the two methods can result in a more
+    aggressive image size reduction.  Due to the nature of this option, it is
+    desirable to specify it as the last method (i.e. rightmost).</p>
+
+<p>--purify, --no-purify</p>
+
+<p>: This is common to CCL, SBCL, CMUCL. Moves all objects to the static space
+  where GC does not scan, for the later performance of GC.  Purification is
+  enabled by default.</p>
+
+<p>--impurify, --no-impurify</p>
+
+<p>: This is an CCL-specific option (enabled by default).
+  It moves all objects to the dynamic space before saving the image.
+  This allows the static-space objects to be GC'ed.
+  When purification is enabled, it impurifies all objects before running the purifying GC.</p>
+
+<p>--delete-debug-info</p>
+
+<p>: This removes the debug infomation of functions (used to show the stack frame etc),
+    as well as the source locations and the deprecation information of various symbols.
+    SBCL only. This option has a large effect (+10MB reduction).</p>
+
+<p>--delete-macro-definitions, --delete-compiler-macro-definitions</p>
+
+<p>: This removes all definitions of macros and compiler-macros, assuming that
+    no runtime compilation/interpretation of code will be performed.
+    This option should be portable across implementations.
+    It has ~2MB reduction on SBCL.</p>
+
+<p>--delete-compiler-information-sbcl</p>
+
+<p>: This is an SBCL-specific option which is more aggressive than the above
+    methods (~4MB reduction). In addition to the macro and the compiler-macro
+    definitions, it destroys the internal compiler systems of SBCL by also
+    removing the inlining information, IR1 transformer and IR2 (VOP).</p>
+
+<!-- # options -->
+
+<!--  -->
+
+<!-- # Environmental Variables -->
+
+<h1>SEE ALSO</h1>
+
+<p><em>sbcl</em>(1) <em>ros</em>(1) <em>ros-init</em>(1)</p>
+</article>
+      </div>
+    </main>
+    <footer>
+      Copyright © 2018 Roswell All Rights Reserved.
+    </footer>
+  </body>
+</html>
