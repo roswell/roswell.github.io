@@ -89,7 +89,23 @@
 </div>
       <div id="content" class="pure-u-1-1 pure-u-md-3-4">
 	<h1>FAQ</h1>
-	<article><h2>Roswell Usage &amp; Customization</h2>
+	<article><h2>Policy on How Roswell affects/manipulates your system</h2>
+
+<p>Roswell keeps its effect on the system to the minimum.</p>
+
+<p>Installing roswell on linux causes the core C runtime (<code>ros</code> binary) in <code>/usr/local/bin/</code> and a few lisp files under <code>/usr/local/etc/roswell</code>. They are completely safe to remove once you decide to remove roswell.
+You can optionally change this installation directory by <code>./configure --prefix=/path/</code>. See <a href="https://github.com/roswell/roswell/wiki/Local-installation">Local installation</a>.</p>
+
+<p>Roswell <em>DOES NOT</em> use this directory for its runtime operation (subcommands like <code>ros install sbcl</code>).
+Files downloaded/created/manipulated by Roswell are kept under <code>~/.roswell</code> directory. It is completely safe to remove this directory without affect the integrity of the system, nor roswell itself. Removing this directory means resetting Roswell to the blank state, just like removing <code>~/.mozilla</code> for firefox which removes all of your preferences/history/plugins.</p>
+
+<p>Quicklisp, ASDF, or Quicklisp libraries installed by Roswell does not affect, nor is affected by, the Quicklisp, ASDF, or the libraries that you installed manually. Roswell downloads and keeps them separately under <code>~/.roswell</code>.</p>
+
+<p>Implementations installed by Roswell does not affect, nor is affected by, the implementations already installed on the system. However, roswell is able to use those systems by <code>ros use &lt;IMPL&gt;/system</code> (e.g. <code>ros use sbcl/system</code>) or <code>ros -L &lt;IMPL&gt;/system ...</code> which uses the binary visible from PATH.</p>
+
+<p>Roswell does not write to system configuration files nor user configuration files outside roswell, such as <code>.profile</code>, <code>.bashrc</code>, <code>.emacs</code> or <code>.sbclrc</code>. Nor does Roswell magically alter the environment variables like PATH.</p>
+
+<h2>Roswell Usage &amp; Customization</h2>
 
 <h3>Where should I put my local projects?</h3>
 

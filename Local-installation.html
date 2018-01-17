@@ -91,7 +91,7 @@
 	<h1>Local installation</h1>
 	<article><p>In <a href="Installation.html">Installation</a>, we described how to install roswell from the source. However, it assumed the global installation.</p>
 
-<p><strong>Local installation</strong> is available by specifying <code>--prefix</code> option to <code>./configure</code>. The default location is <code>/usr/local</code>. Actual binary and supporting files are finally installed into <code>$PREFIX/share/common-lisp/source/roswell/</code>.</p>
+<p><strong>Local installation</strong> is available by specifying <code>--prefix</code> option to <code>./configure</code>. The default location is <code>/usr/local</code>. Actual binary is installed in <code>$PREFIX/bin</code> and supporting files are installed into <code>$PREFIX/etc/roswell/</code>.</p>
 
 <p>This is useful when using roswell as a backend of CI services (e.g. travis): When you specify a directory accessible without root permission, then you can switch to the new <a href="http://docs.travis-ci.com/user/workers/container-based-infrastructure/">container-based infrastructure</a> for faster startup (of the tests). 
 <a href="https://github.com/roswell/roswell/wiki/Roswell-as-a-Testing-Environment">We already provide such a script for Travis, CircleCI and Coverall</a> using this feature. </p>

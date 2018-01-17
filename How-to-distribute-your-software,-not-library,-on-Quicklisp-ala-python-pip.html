@@ -91,7 +91,7 @@
 	<h1>How to distribute your software, not library, on Quicklisp ala python pip</h1>
 	<article><p>written by: Masataro Asai</p>
 
-<h1>Introduction</h1>
+<h2>Introduction</h2>
 
 <p>Most libraries in Quicklisp are created for lispers' sake, i.e. they are meant for lisp programmers who write lisp softwares. In comparison, many libraries in Python's <code>pip</code> also come with command-line interfaces. For example:</p>
 
@@ -107,9 +107,9 @@ cfncluster: error: too few arguments</code></pre>
 
 <p>This feature is crucial when you want your <strong>software</strong> to be used by non-lisp users.
 Here, I distinguish <strong>libraries</strong> and <strong>software</strong>, <strong>software</strong> meaning being stand-alone. They are useful tools for their own specific tasks. The <code>cfncluster</code> above is a tool for managing AWS cluster as a supercomputer. 
-In contrast, <strong>libraries</strong> are for writing softwares. In order to use them you have to know how to write software in the target programming language. Sadly, most people don't understand Lisp but we cannot change this fact (or <a href="http://paulgraham.com/avg.html">we don't want to</a>). But you <strong>DO</strong> want people to use your <strong>software</strong> for your career, money or your personal satisfaction.</p>
+In contrast, <strong>libraries</strong> are for writing software. In order to use them you have to know how to write software in the target programming language. Sadly, most people don't understand Lisp but we cannot change this fact (or <a href="http://paulgraham.com/avg.html">we don't want to</a>). But you <strong>DO</strong> want people to use your <strong>software</strong> for your career, money or your personal satisfaction.</p>
 
-<p>Softwares need to be black-boxes. Users usually do not care whether it is written in C or python or Lisp. They are happy as long as they are usable, useful, fast and flexible. They do not want to know lisp-specific issues. They do not want to learn how to build a lisp executable. They do not want to know where Quicklisp stores its downloaded archives and unpacks them into. They want software and not lisp.</p>
+<p>Software need to be black-boxes. Users usually do not care whether it is written in C or python or Lisp. They are happy as long as they are usable, useful, fast and flexible. They do not want to know lisp-specific issues. They do not want to learn how to build a lisp executable. They do not want to know where Quicklisp stores its downloaded archives and unpacks them into. They want software and not lisp.</p>
 
 <p>There are many ways to distribute lisp <strong>software</strong>, but they are usually cumbersome, fail to hide the internals, or have some other drawbacks. We first review these approaches and then show how Roswell solves this.</p>
 
@@ -119,7 +119,7 @@ In contrast, <strong>libraries</strong> are for writing softwares. In order to u
 
 <ul>
 <li>There is no concept of <em>installing</em> or <em>uninstalling</em>. Users have to manage the downloaded binaries by themselves. They have to set up the central location for the downloaded lisp binaries by themselves. There is no central location from where to download the binaries, either.</li>
-<li>There is no concept of <em>updating</em> or <em>versions</em> whatsoever. Each binary may have <code>--version</code> option, but this is hardly coherent across different softwares. You can include the version number in the file name of the binary, but then you end up specifing the name each time from the command line (e.g. <code>$ cfncluster-1.1.1</code>), or you build another system for managing them (or use Roswell!)</li>
+<li>There is no concept of <em>updating</em> or <em>versions</em> whatsoever. Each binary may have <code>--version</code> option, but this is hardly coherent across different software. You can include the version number in the file name of the binary, but then you end up specifying the name each time from the command line (e.g. <code>$ cfncluster-1.1.1</code>), or you build another system for managing them (or use Roswell!)</li>
 </ul>
 
 <h2>Distributing the binary from Packaging System</h2>
@@ -128,7 +128,7 @@ In contrast, <strong>libraries</strong> are for writing softwares. In order to u
 
 <ul>
 <li>Packaging systems e.g. rpm, apt, brew, chocolatey (Dear Microsoft, you finally have your own package manager) are OS-specific.</li>
-<li>It is sometimes hard to make the software available in packaging system. The cost of managing the package is high and as a result, usually the software is less frequently updated without the support from the huge community and userbase. It is not suitable for lean startups.</li>
+<li>It is sometimes hard to make the software available in packaging system. The cost of managing the package is high and as a result, usually the software is less frequently updated without the support from the huge community and user base. It is not suitable for lean startups.</li>
 </ul>
 
 <h2>Custom shell scripts, Makefile and lisp file for building</h2>
@@ -152,7 +152,7 @@ In contrast, <strong>libraries</strong> are for writing softwares. In order to u
 
 <ul>
 <li>Instead of writing a lisp script that contains the <code>main</code> function and builds an executable, write a <a href="https://github.com/roswell/roswell/wiki/Roswell-as-a-Scripting-Environment">roswell script</a> with a <code>main</code> function. Neither you nor your users have to care about how to build it.</li>
-<li>Put the roswell script in the roswell/ subdirectory of the repository that <em>may or may not be</em> already available in Quicklisp, like <a href="https://github.com/fukamachi/prove/tree/master/roswell">this</a>.</li>
+<li>Put the roswell script in the roswell/ subdirectory of the repository. It does not have to be in Quicklisp, since Roswell have github-installation facility. See man page for <code>ros-install(8)</code>.</li>
 <li>Done! Now your script is available from a single command line. Example:</li>
 </ul>
 
@@ -176,7 +176,12 @@ $ run-prove</code></pre>
 <p>Roswell can automatically compile the installed script so that the later invocations of the command become much faster.
 In order to make it compilable, add <code>-m &lt;name&gt;</code> to the fourth line of the script.</p>
 
-<p><strong>Note</strong>: Compilation happens only when the script is located in <code>.roswell/bin</code>, i.e. when it was already <code>ros install</code>ed.</p>
+<ul>
+<li><strong>Note</strong>: Compilation happens only when the script is located in <code>.roswell/bin</code>, i.e. when it was already <code>ros install</code>ed.</li>
+<li><strong>Bug (or a feature)</strong>: The implementation supporting this auto-dump feature is <code>-L sbcl-bin</code> only.</li>
+</ul>
+
+<!-- Compilation may run again and again when the fourth line does not include the implementation specifier `-L sbcl-bin`. -->
 
 <pre><code>#!/bin/sh
 #|-*- mode:lisp -*-|#

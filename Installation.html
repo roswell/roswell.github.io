@@ -126,6 +126,10 @@ It's same way.</p>
 
 <p>On Ubuntu/Debian, there seems to be someone who managed to install from the release tarball or the deb file in https://github.com/roswell/roswell/releases .</p>
 
+<p>If you want to get a latest debian package, you can do that with;</p>
+
+<pre><code>curl -sOL `curl -s https://api.github.com/repos/roswell/roswell/releases/latest | jq -r '.assets | .[] | select(.name|test(&quot;deb$&quot;)) | .browser_download_url'`</code></pre>
+
 <h2>Windows</h2>
 
 <p>We provide a convenient build procedure for Windows! (Fantastic and unusual experience for Common Lisp, ain't it?) 

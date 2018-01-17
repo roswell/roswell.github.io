@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>List of Roswell Installable Scripts</title>
+    <title>Why C? (draft)</title>
     <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/tomorrow.min.css">
@@ -88,38 +88,51 @@
 </ul>
 </div>
       <div id="content" class="pure-u-1-1 pure-u-md-3-4">
-	<h1>List of Roswell Installable Scripts</h1>
-	<article><p>Here're libraries bundling Roswell scripts. The list is not comprehensive, contribute your script!</p>
-
-<p>These commands can be installed by <code>ros install package-name</code>, e.g. <code>ros install clack</code></p>
+	<h1>Why C? (draft)</h1>
+	<article><p>Initial draft</p>
 
 <ul>
-<li>Clack's <a href="https://github.com/fukamachi/clack/blob/master/roswell/clackup.ros">clackup</a></li>
-<li>Qlot's <a href="https://github.com/fukamachi/qlot/blob/master/roswell/qlot.ros">qlot</a></li>
-<li>prove's <a href="https://github.com/fukamachi/prove/blob/master/roswell/run-prove.ros">run-prove</a></li>
-<li>ufo by <a href="https://github.com/ta2gch/UFO/blob/master/roswell/ufo.ros">UFO</a></li>
-<li>qps  by <code>ros install</code> <a href="https://github.com/guicho271828/quicklisp-project-submission">quicklisp-project-submission</a></li>
-<li>make-project by <code>ros install</code> <a href="https://github.com/fukamachi/cl-project">cl-project</a></li>
-<li>eazy-project by <code>ros install</code> <a href="https://github.com/guicho271828/eazy-project">eazy-project</a></li>
-<li>lake in https://github.com/takagi/lake</li>
-<li>cl-mpi's test script @ https://github.com/marcoheisig/cl-mpi</li>
-<li>asd-generator @ https://github.com/phoe-krk/asd-generator</li>
-<li>asdf-viz @ https://github.com/guicho271828/asdf-viz</li>
-<li>cldomain @ http://40ants.com/cldomain/ an extension for the Sphinx documentation generation tool that allow sphinx to generate documentation for Common Lisp libraries.</li>
-<li><a href="https://github.com/cxxxr/lem">cxxxr/lem</a> - a full-featured zero-configuration Common Lisp editor, also with an Electron version.</li>
-<li><a href="https://github.com/koji-kojiro/cl-repl">koji-kojiro/cl-repl</a>,  A full-featured ipython-like repl.</li>
-<li>https://github.com/singy15/ministg Mini shooting game in OpenGL</li>
+<li>It should build in a non-conventional environment.</li>
+<li>For example, Windows servers where a basic unix-compatible shell is not available.</li>
+<li>Old linux servers with an incompatible libc version, possibly the kernel is also older.</li>
+<li>BSD or other non-conventional OSes.</li>
+<li>Its requirement should be small and conventional. They should be something easy for you to persuade the management to install them, or something that is already available. In roswell, it is just a C compiler suite, the curl header and autotools.</li>
+<li>Execution speed and memory footprint.</li>
+<li>Perl launches itself under 0.01sec, Python does it under 0.02sec, making them reasonable choices for writing command line scripts.</li>
+<li>At the time of starting the project, we once considered writing roswell in lisp. However, there was no lisp implementation that can launch itself, parse the arguments and <code>exec</code> the dispatched implementation in a memory-restricted environment under 0.1 sec.</li>
+<li>This is added to the launch time of the dispatched implementation.</li>
+<li>This hinders the application of lisp taking a nice part of a sequence of command lines under <code>for</code> loop.</li>
+<li>We did not agree that &quot;we have REPL so we don't need CLI&quot;. Instead we say &quot;lisp has a nice REPL but it lacks a coherent, usable CLI&quot;. Lacking is lacking, and the rejection is just a sour grape situation. Lisp should have both.</li>
 </ul>
 
-<p>Below are just ideas .... send the pull request adding the roswell scripts, let the <a href="https://en.wikipedia.org/wiki/Roswell_UFO_incident">incidents</a> happen!!!</p>
+<pre><code>$ time python -c &quot;print('hi')&quot;
+hi
 
-<ul>
-<li>fiveam and more testing libraries</li>
-<li>codex, sb-texinfo and other doc-generation libraries</li>
-<li>games or irc bots or other misc standalone programs</li>
-<li>in-memory database using cl-fuse</li>
-<li>clever/hilarious ideas are welcome!</li>
-</ul>
+real    0m0.021s
+user    0m0.012s
+sys 0m0.008s
+
+$ time perl -e &quot;print('hi')&quot;
+hi
+real    0m0.006s
+user    0m0.008s
+sys 0m0.000s
+
+                                                       # +Q for disable loading quicklisp
+$ time ros -L sbcl +Q -e &quot;(print :hi)&quot;
+
+:HI 
+real    0m0.167s
+user    0m0.140s
+sys 0m0.012s
+
+$ time ros -L ccl-bin +Q -e &quot;(print :hi)&quot;
+
+:HI 
+
+real    0m0.114s
+user    0m0.072s
+sys 0m0.020s</code></pre>
 </article>
       </div>
     </main>
