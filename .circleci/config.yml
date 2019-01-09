@@ -10,7 +10,9 @@ jobs:
       - checkout
       - run:
           name: Generate Locale files
-          command: locale-gen en_US.UTF-8 
+          command: |
+            apt-get install -y locales
+            locale-gen en_US.UTF-8 
       - run:
           name: Install latest roswell
           command: |
