@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: debian:stable
+      - image: ubuntu:latest
     environment:
       LC_ALL: en_US.UTF-8
     working_directory: ~/repo
@@ -11,6 +11,7 @@ jobs:
       - run:
           name: Generate Locale files
           command: |
+            apt-get update
             apt-get install -y locales
             locale-gen en_US.UTF-8 
       - run:
