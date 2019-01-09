@@ -41,7 +41,7 @@ jobs:
             git config --global user.name "TANIGUCHI Masaya"
             git add *.html 
             git commit -m 'Update documents' || :
-            git push git@github.com:roswell/roswell.github.io HEAD:master
+            yes | git push git@github.com:roswell/roswell.github.io HEAD:master
 workflows:
   version: 2
   commit-workflow:
