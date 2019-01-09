@@ -8,7 +8,9 @@ jobs:
       - checkout
       - run:
           name: Install git
-          command: apt install -y git
+          command: |
+            apt update
+            apt install -y git
       - run:
           name: Clone origin/script
           command: git clone https://github.com/roswell/roswell.github.io.git -b script script
