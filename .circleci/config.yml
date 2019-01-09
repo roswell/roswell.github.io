@@ -12,7 +12,7 @@ jobs:
           name: Install latest roswell
           command: |
             apt-get update
-            apt-get install -y curl jq git build-essential libcurl4-openssl-dev 
+            apt-get install -y curl jq git build-essential libcurl4-openssl-dev locales
             curl -sOL `curl -s https://api.github.com/repos/roswell/roswell/releases/latest | jq -r '.assets | .[] | select(.name|test("deb$")) | .browser_download_url'` 
             dpkg -i *.deb
       - run:
