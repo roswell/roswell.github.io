@@ -3,11 +3,13 @@ jobs:
   build:
     docker:
       - image: debian:stable
+    environment:
+      LC_CTYPE: en_US.UTF-8
     working_directory: ~/repo
     steps:
       - checkout
       - run:
-          name: Install git
+          name: Install latest roswell
           command: |
             apt-get update
             apt-get install -y curl jq git build-essential libcurl4-openssl-dev 
