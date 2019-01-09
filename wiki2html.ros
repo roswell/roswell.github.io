@@ -57,7 +57,7 @@ exec ros -Q -- $0 "$@"
      (alexandria:write-string-into-file
       (render-html title article navigation)
       (make-pathname
-       :directory '(:relative "_public")
+       :directory '(:relative ".")
        :name (pathname-name file)
        :type "html")
       :if-exists :supersede
