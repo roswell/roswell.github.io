@@ -7,32 +7,29 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Update submodule
-          command: git submodule update --init --remote
+          name: Clone origin/script
+          command: git clone https://github.com/roswell/roswell.github.io.git -b script script
       - run:
-          name: Clone origin/master
-          command: git clone https://github.com/roswell/roswell.github.io.git _public
+          name: Update submodule
+          command: git -C script submodule update --init --remote
       - run:
           name: Build website
           command: |
-            rm -rf _public/*
-            ./wiki2html.ros
-            cp _public/Home.html _public/index.html
-            cp style.css _public/style.css
+            rm *.html
+            script/wiki2html.ros
+            cp Home.html index.html
+            cp script/style.css style.css
       - run:
           name: Push new website to origin/master
           command: |
-            git -C _public add *.html 
-            git -C _public commit -m 'Update documents' || :
-            git -C _public push
+            git add *.html 
+            git commit -m 'Update documents' || :
+            git push
 workflows:
   version: 2
   commit-workflow:
     jobs:
-      - build:
-          filters:
-            branches:
-              only: ci
+      - build
   scheduled-workflow:
     triggers:
       - schedule:
