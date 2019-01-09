@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/buildpack-deps:stable
+      - image: circleci/buildpack-deps:bionic
     environment:
       LC_ALL: en_US.UTF-8
     working_directory: ~/repo
