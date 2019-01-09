@@ -37,6 +37,8 @@ jobs:
       - run:
           name: Push new website to origin/master
           command: |
+            git config --global user.email "ta2gch@users.noreply.github.com"
+            git config --global user.name "TANIGUCHI Masaya"
             git add *.html 
             git commit -m 'Update documents' || :
             git push
