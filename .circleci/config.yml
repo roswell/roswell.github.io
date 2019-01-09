@@ -36,6 +36,6 @@ workflows:
           cron: "0 15 * * *"
           filters:
             branches:
-              only: ci
+              only: master
     jobs:
       - build
