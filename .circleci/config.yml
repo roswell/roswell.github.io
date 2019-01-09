@@ -21,6 +21,7 @@ jobs:
           name: Build website
           command: |
             rm *.html
+            export LC_CTYPE=en_US.UTF-8 
             script/wiki2html.ros
             cp Home.html index.html
             cp script/style.css style.css

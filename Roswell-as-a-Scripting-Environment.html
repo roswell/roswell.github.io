@@ -32,14 +32,20 @@
 <li><a href="How-is-Roswell-different.html">How is Roswell different</a></li>
 </ul>
 
-<h2>Getting started</h2>
+<h2>Getting started / Tutorials</h2>
 
 <ul>
 <li><a href="Installation.html">Installation</a></li>
 <li><a href="Initial-Recommended-Setup.html">Initial Recommended Setup</a></li>
+<li><a href="Roswell-as-a-Scripting-Environment.html">Roswell as a Scripting Environment</a></li>
+</ul>
+
+<h2>Advanced Installation</h2>
+
+<ul>
 <li><a href="Upgrading-Roswell.html">Upgrading Roswell</a></li>
 <li><a href="Local-installation.html">Local installation</a></li>
-<li><a href="How-to-setup-a-lisp-dev-environment-on-windows-with-Roswell..html">How to setup a lisp dev environment on windows with Roswell.</a></li>
+<li><a href="How-to-setup-a-lisp-dev-environment-on-windows-with-Roswell.html">How to setup a lisp dev environment on windows with Roswell</a></li>
 </ul>
 
 <h2>Roswell as a scripting environment</h2>
@@ -67,6 +73,7 @@
 <li><a href="Travis-CI.html">Travis CI</a></li>
 <li><a href="Circle-CI.html">Circle CI</a></li>
 <li><a href="Coveralls.html">Coveralls</a></li>
+<li><a href="Roswell-in-Virtual-Environments.html">Roswell in Virtual Environments</a></li>
 </ul>
 
 <h2>Distributing applications</h2>
@@ -85,16 +92,20 @@
 
 <ul>
 <li><a href="Release-Roswell.html">Release Roswell</a></li>
+<li><a href="Support-New-implementation.html">Support New implementation</a></li>
 </ul>
 </div>
       <div id="content" class="pure-u-1-1 pure-u-md-3-4">
 	<h1>Roswell as a Scripting Environment</h1>
 	<article><p>Although Roswell is a unified interface to Common Lisp implementations, it also encourages writing scripts with it. A &quot;Roswell script&quot; is an implementation-independent script which can be invoked from a shell command line, launched by Roswell and run under standard CL environment.</p>
 
-<ul>
-<li><p>A roswell script can be <strong>distributed using quicklisp's infrastructure</strong> (if you are a library author), and <strong>installed</strong> with <code>ros install [system]</code>, i.e., those scripts are made available anywhere in your system.</p></li>
-<li><p>Also, the script can be dumped into an executable binary for the distribution purpose or for reducing the startup time. Each subsection below describes each feature.</p></li>
-</ul>
+<blockquote>
+<p><em>To relatively new users of common lisp</em>: Roswell scripts are just like shell scripts, but for lisp. Most tutorials you will find on the internet will be assuming a REPL (read-eval-print-loop), but you can do the same thing in a file.</p>
+
+<p><em>To advanced users</em>: Compared to writing a normal lisp script (e.g. by <code>#!/usr/bin/sbcl -l</code>), Roswell scripts have the following advantages:
+* A roswell script can be <em>distributed using quicklisp's infrastructure</em> (if you are a library author), and <em>installed</em> with <code>ros install [system]</code>, i.e., those scripts are made available anywhere in your system.
+* Also, the script can be dumped into an executable binary for the distribution purpose or for reducing the startup time. Each subsection below describes each feature.</p>
+</blockquote>
 
 <h2>Initialising a Roswell Script</h2>
 
@@ -149,7 +160,9 @@ Factorial 10 = 3628800</code></pre>
 
 <p>Though it falls through CL debugger if there's no arguments or non-integer value, I assume it's okay for now as a simple example ;) For further details, see <a href="Advanced-scripting">this article</a>.</p>
 
-<h2>Distributing Scripts via Quicklisp</h2>
+<p>Another thing you may notice is the speed --- why it takes so long to just compute the factorial? It is due to the slow startup time, and you can easily reduce it. See <a href="Reducing-Startup-Time.html">Reducing Startup Time</a>.</p>
+
+<h2>Distributing Scripts via Quicklisp (for advanced users)</h2>
 
 <p>When you write a script which would make other people happy, let's think about sharing it.
 The easiest way to achieve this is to just send the <code>.ros</code> file to the others.
