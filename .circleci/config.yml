@@ -4,15 +4,18 @@ jobs:
     docker:
       - image: debian:stable
     environment:
-      LC_CTYPE: en_US.UTF-8
+      LC_ALL: en_US.UTF-8
     working_directory: ~/repo
     steps:
       - checkout
       - run:
+          name: Generate Locale files
+          command: locale-gen en_US.UTF-8 
+      - run:
           name: Install latest roswell
           command: |
             apt-get update
-            apt-get install -y curl jq git build-essential libcurl4-openssl-dev locales
+            apt-get install -y curl jq git build-essential libcurl4-openssl-dev
             curl -sOL `curl -s https://api.github.com/repos/roswell/roswell/releases/latest | jq -r '.assets | .[] | select(.name|test("deb$")) | .browser_download_url'` 
             dpkg -i *.deb
       - run:
