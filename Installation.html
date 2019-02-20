@@ -138,6 +138,8 @@ It's same way.</p>
 
 <pre><code>curl -sOL `curl -s https://api.github.com/repos/roswell/roswell/releases/latest | jq -r '.assets | .[] | select(.name|test(&quot;deb$&quot;)) | .browser_download_url'`</code></pre>
 
+<p>(you need <a href="https://stedolan.github.io/jq/">jq</a> superior to 1.4)</p>
+
 <h2>Windows</h2>
 
 <p>We provide a convenient build procedure for Windows! (Fantastic and unusual experience for Common Lisp, ain't it?) 
