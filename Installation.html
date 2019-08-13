@@ -119,12 +119,19 @@
 
 <p>On <a href="https://www.archlinux.org/">Arch</a>, Roswell is available in AUR:</p>
 
-<pre><code>$ aurman -S roswell
+<pre><code>$ yay -S roswell
 </code></pre>
 
 <p>On <a href="https://voidlinux.org/">Void</a>, Roswell is available in xbps:</p>
 
 <p><pre><code>$ sudo xbps-install -S roswell</code></pre></p>
+
+<p>on <a href="https://www.gentoo.org/">Gentoo</a>, Roswell is available in <a href="https://packages.gentoo.org/packages/dev-lisp/roswell">portage</a>:</p>
+
+<pre><code>$ emerge --ask dev-lisp/roswell
+</code></pre>
+
+<p>(Please note that you cannot install Roswell and <code>dev-libs/librouteros</code> simultaneously due to <a href="https://bugs.gentoo.org/691754">binary file collision</a>.)</p>
 
 <p>Support for other distributions/packaging systems (e.g. debian-based, redhat-based) is future work. However, building from source is fairly straightforward and somewhat stable. See the last section.</p>
 
