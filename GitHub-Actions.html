@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>Advanced scripting</title>
+    <title>GitHub Actions</title>
     <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/tomorrow.min.css">
@@ -97,12 +97,59 @@
 </ul>
 </div>
       <div id="content" class="pure-u-1-1 pure-u-md-3-4">
-	<h1>Advanced scripting</h1>
-	<article><p>TBP</p>
+	<h1>GitHub Actions</h1>
+	<article><p><a href="https://github.com/features/actions">GitHub Actions</a> is an automation service by GitHub. Its notable advantages are seamless GitHub integration and good OS support -- Ubuntu, macOS and Windows.</p>
 
-<h1>installation hook</h1>
+<p>It's still in limited public beta and the API is likely to change. We're working on its testing to provide better experience with GitHub Actions, but please remember its still quite experimental.</p>
 
-<p>During the installation of the quicklisp library using <code>ros install [system]</code>, <code>roswell</code> adds <code>:ros.installing</code> to <code>*features*</code>, and also calls <code>ros:*build-hook*</code> when <code>ql:quickload</code> is complete. You can set this hook to a function with no arguments.</p>
+<h2>Getting Started</h2>
+
+<p>Add a workflow YAML file at <code>.github/workflows/ci.yaml</code> something like this:</p>
+
+<pre><code>name: CI
+
+on: [push]
+
+jobs:
+  test:
+    name: ${{ matrix.lisp }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        lisp: [sbcl-bin]
+        os: [ubuntu-latest, macOS-latest]
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Install Roswell
+        env:
+          LISP: ${{ matrix.lisp }}
+        run: |
+          curl -L https://raw.githubusercontent.com/roswell/roswell/master/scripts/install-for-ci.sh | sh
+      - name: Install Rove
+        run: ros install rove
+      - name: Run tests
+        run: |
+          PATH=&quot;~/.roswell/bin:$PATH&quot;
+          rove qlot.asd</code></pre>
+
+<h2>Known issues</h2>
+
+<ul>
+<li>The latest <code>install-for-ci.sh</code> is required until <a href="https://github.com/roswell/roswell/commit/158bdeb63e0238b80a8e2cad7e9fd33011b732f3">158bdeb6</a> will have been released.</li>
+<li>[Windows] <code>ROSWELL_INSTALL_DIR</code> has to be set <code>/usr</code> on Windows because <code>/usr/local/bin</code> is not in PATH.</li>
+<li>[Windows] Roswell scripts can't be executed with cmd.exe</li>
+<li>Execute them through <code>ros</code> command like <code>ros %userprofile%\.roswell\bin\rove</code></li>
+<li>Use <code>bash</code> by setting <code>jobs.&lt;job-id&gt;.steps.shell</code> to <code>bash</code>.</li>
+<li>[Windows] ASDF configuration is not set</li>
+<li>Set the source registry by yourself like <code>ros -S . -s rove -e ...</code></li>
+</ul>
+
+<h2>See Also</h2>
+
+<ul>
+<li><a href="https://help.github.com/en/categories/automating-your-workflow-with-github-actions">Automating your workflow with GitHub Actions - GitHub Help</a> (Official document)</li>
+</ul>
 </article>
       </div>
     </main>
