@@ -137,12 +137,15 @@ jobs:
 
 <ul>
 <li>The latest <code>install-for-ci.sh</code> is required until <a href="https://github.com/roswell/roswell/commit/158bdeb63e0238b80a8e2cad7e9fd33011b732f3">158bdeb6</a> will have been released.</li>
-<li>[Windows] <code>ROSWELL_INSTALL_DIR</code> has to be set <code>/usr</code> on Windows because <code>/usr/local/bin</code> is not in PATH.</li>
+<li>[Windows] <code>ROSWELL_INSTALL_DIR</code> has to be set <code>/c/roswell</code> on Windows</li>
+<li>Because <code>/usr/local/bin</code> is not in PATH.</li>
+<li><code>/usr/bin</code> is in PATH, but its actual directory path is under <code>C:/Program Files/</code> and Roswell can't be executed when its pathname containing spaces.</li>
+<li>Roswell exe file will be installed at <code>/c/roswell/bin/ros</code>.</li>
 <li>[Windows] Roswell scripts can't be executed with cmd.exe</li>
-<li>Execute them through <code>ros</code> command like <code>ros %userprofile%\.roswell\bin\rove</code></li>
+<li>Execute them through <code>ros</code> command like <code>C:\roswell\bin\ros %userprofile%\.roswell\bin\rove</code></li>
 <li>Use <code>bash</code> by setting <code>jobs.&lt;job-id&gt;.steps.shell</code> to <code>bash</code>.</li>
 <li>[Windows] ASDF configuration is not set</li>
-<li>Set the source registry by yourself like <code>ros -S . -s rove -e ...</code></li>
+<li>Set the source registry by yourself like <code>/c/roswell/bin/ros -S . -s rove -e ...</code></li>
 </ul>
 
 <h2>See Also</h2>
