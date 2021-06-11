@@ -42,7 +42,7 @@ exec ros -Q -- $0 "$@"
 
 (defun render-html (title article navigation)
   (clip:process-to-string
-   (alexandria:read-file-into-string #p"./script/_template.html")
+   (alexandria:read-file-into-string #p"./_template.html")
    :title title
    :article article
    :navigation navigation))
@@ -50,8 +50,8 @@ exec ros -Q -- $0 "$@"
 (defun main (&rest argv)
   (declare (ignorable argv))
   (loop
-     :with navigation := (render-markdown #p"./script/roswell.wiki/_Sidebar.md")
-     :for file :in (directory #p"./script/roswell.wiki/*.md")
+     :with navigation := (render-markdown #p"./roswell.wiki/_Sidebar.md")
+     :for file :in (directory #p"./roswell.wiki/*.md")
      :for (article title) := (multiple-value-list (render-markdown file))
      :unless (string= (pathname-name file) "_Sidebar") :do
      (alexandria:write-string-into-file
