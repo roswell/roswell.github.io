@@ -1,0 +1,15 @@
+name: CI
+on:
+  push:
+    branches: [ master, script ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Roswell
+        env:
+          LISP: sbcl-bin
+        run: curl -L https://raw.githubusercontent.com/roswell/roswell/master/scripts/install-for-ci.sh | sh
+      - name: build HTML
+        run: ./wiki2html.ros
