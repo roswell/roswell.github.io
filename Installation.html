@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Installation</title>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/tomorrow.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/languages/lisp.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/languages/yaml.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  <body>
+    <header class="pure-menu pure-menu-horizontal">
+      <a href="https://roswell.github.io/" class="pure-menu-heading pure-menu-link">Roswell</a>
+      <ul class="pure-menu-list">
+	<li class="pure-menu-item">
+	  <a class="pure-menu-link" href="https://github.com/roswell/roswell">
+	    Contribute in GitHub
+	  </a>
+	</li>
+      </ul>
+    </header>
+    <main class="pure-g">
+      <div id="index" class="pure-u-1-1 pure-u-md-1-4">
+      <h2>Home</h2>
+
+<ul>
+<li><a href="Home.html">Home</a></li>
+<li><a href="How-is-Roswell-different.html">How is Roswell different</a></li>
+</ul>
+
+<h2>Getting started / Tutorials</h2>
+
+<ul>
+<li><a href="Installation.html">Installation</a></li>
+<li><a href="Initial-Recommended-Setup.html">Initial Recommended Setup</a></li>
+<li><a href="Roswell-as-a-Scripting-Environment.html">Roswell as a Scripting Environment</a></li>
+</ul>
+
+<h2>Advanced Installation</h2>
+
+<ul>
+<li><a href="Upgrading-Roswell.html">Upgrading Roswell</a></li>
+<li><a href="Local-installation.html">Local installation</a></li>
+<li><a href="How-to-setup-a-lisp-dev-environment-on-windows-with-Roswell.html">How to setup a lisp dev environment on windows with Roswell</a></li>
+</ul>
+
+<h2>Roswell as a scripting environment</h2>
+
+<ul>
+<li><a href="Roswell-as-a-Scripting-Environment.html">Roswell as a Scripting Environment</a></li>
+<li><a href="Advanced-scripting.html">Advanced scripting</a></li>
+<li><a href="Reducing-Startup-Time.html">Reducing Startup Time</a></li>
+<li><a href="List-of-Roswell-Installable-Scripts.html">List of Roswell Installable Scripts</a></li>
+<li><a href="Practical-Usecases.html">Practical Usecases</a></li>
+<li><a href="Building-images-and-executables.html">Building images and executables</a></li>
+</ul>
+
+<h2>Roswell as an implementation manager</h2>
+
+<ul>
+<li><a href="Roswell-as-an-implementation-manager.html">Roswell as an implementation manager</a></li>
+<li><a href="Listing-various-resources.html">Listing various resources</a></li>
+</ul>
+
+<h2>Roswell as a Testing Environment</h2>
+
+<ul>
+<li><a href="Roswell-as-a-Testing-Environment.html">Roswell as a Testing Environment</a></li>
+<li><a href="Travis-CI.html">Travis CI</a></li>
+<li><a href="Circle-CI.html">Circle CI</a></li>
+<li><a href="GitHub-Actions.html">GitHub Actions</a></li>
+<li><a href="Coveralls.html">Coveralls</a></li>
+<li><a href="Roswell-in-Virtual-Environments.html">Roswell in Virtual Environments</a></li>
+</ul>
+
+<h2>Distributing applications</h2>
+
+<ul>
+<li><a href="How-to-distribute-your-software,-not-library,-on-Quicklisp-ala-python-pip.html">How to distribute your software, not library, on Quicklisp ala python pip</a></li>
+</ul>
+
+<h2>FAQ</h2>
+
+<ul>
+<li><a href="FAQ.html">FAQ</a></li>
+</ul>
+
+<h2>For Developers/Maintainers</h2>
+
+<ul>
+<li><a href="Release-Roswell.html">Release Roswell</a></li>
+<li><a href="Support-New-implementation.html">Support New implementation</a></li>
+</ul>
+</div>
+      <div id="content" class="pure-u-1-1 pure-u-md-3-4">
+	<h1>Installation</h1>
+	<article><p>After installation, don't miss the recommended setup. It is necessary to link Slime with Roswell so that installing packages with Slime does this in the context of Roswell.</p>
+
+<p>Note: <strong>This may be your first experience with Lisp and you might have tried other methods/tutorials that you found on the internet (none of which worked for you). Or, you could have managed to make it work but without confidence, only later you found roswell. Our advice is that you are better off removing whatever you did previously, or you end up having two duplicate copies of lisp implementations / quicklisp / asdf, which complicates the matter.</strong></p>
+
+<h2>Dependencies</h2>
+
+<ul>
+<li>libcurl (both v3 and v4 should work) : used for downloading the lisp implementation binaries, etc.</li>
+<li>automake (required when building from source)</li>
+<li>developmental headers of libcurl (required when building from source)</li>
+<li>on Ubuntu, libcurl4-openssl-dev works but libcurl4-nss-dev may not work</li>
+</ul>
+
+<h2>Mac OS X + Homebrew</h2>
+
+<pre><code>$ brew install roswell
+</code></pre>
+
+<h2>Linux</h2>
+
+<p>On <a href="https://www.archlinux.org/">Arch</a>, Roswell is available in AUR:</p>
+
+<pre><code>$ yay -S roswell
+</code></pre>
+
+<p>On <a href="https://voidlinux.org/">Void</a>, Roswell is available in xbps:</p>
+
+<p><pre><code>$ sudo xbps-install -S roswell</code></pre></p>
+
+<p>on <a href="https://www.gentoo.org/">Gentoo</a>, Roswell is available in <a href="https://packages.gentoo.org/packages/dev-lisp/roswell">portage</a>:</p>
+
+<pre><code>$ emerge --ask dev-lisp/roswell
+</code></pre>
+
+<p>(Please note that you cannot install Roswell and <code>dev-libs/librouteros</code> simultaneously due to <a href="https://bugs.gentoo.org/691754">binary file collision</a>.)</p>
+
+<p>Support for other distributions/packaging systems (e.g. debian-based, redhat-based) is future work. However, building from source is fairly straightforward and somewhat stable. See the last section.</p>
+
+<p>Or, you can use <a href="https://brew.sh/">Homebrew</a>.
+It's same way.</p>
+
+<pre><code>$ brew install roswell
+</code></pre>
+
+<p>On Ubuntu/Debian, there seems to be someone who managed to install from the release tarball or the deb file in https://github.com/roswell/roswell/releases, for example:</p>
+
+<pre><code>$ curl -L https://github.com/roswell/roswell/releases/download/v19.08.10.101/roswell_19.08.10.101-1_amd64.deb --output roswell.deb
+$ sudo dpkg -i roswell.deb</code></pre>
+
+<p>If you want to get a latest debian package, you can do that with;</p>
+
+<pre><code>curl -sOL `curl -s https://api.github.com/repos/roswell/roswell/releases/latest | jq -r '.assets | .[] | select(.name|test(&quot;\\\.deb$&quot;)) | .browser_download_url'`</code></pre>
+
+<p>(you need <a href="https://stedolan.github.io/jq/">jq</a> superior to 1.4)</p>
+
+<h2>FreeBSD</h2>
+
+<p>Roswell is available in the <a href="https://www.freebsd.org/ports/">FreeBSD ports tree</a>. To install it system-wide</p>
+
+<pre><code>$ cd /usr/ports/devel/roswell 
+$ sudo make install
+</code></pre>
+
+<p>To avoid system-wide installation, simply define a <code>PREFIX</code> (must be an absolute path)</p>
+
+<pre><code>$ cd /usr/ports/devel/roswell
+$ sudo make PREFIX=/usr/home/&lt;username&gt;/.local install 
+</code></pre>
+
+<h2>Windows</h2>
+
+<p>Using <a href="http://scoop.sh/">Scoop</a>.</p>
+
+<pre><code>$ scoop install roswell
+</code></pre>
+
+<p>Or, if you want to do it manually, just follow the link corresponding to your environment at the latest release page.</p>
+
+<ul>
+<li><a href="https://github.com/roswell/roswell/releases">Latest release</a></li>
+<li><code>roswell_&lt;version&gt;_amd64.zip</code> for 64bit</li>
+<li><code>roswell_&lt;version&gt;_i686.zip</code> for 32bit</li>
+</ul>
+
+<h2>Building from Source</h2>
+
+<p>Instructions for a system-wide installation follows. The <code>./configure</code> script has several useful options, see <code>./configure --help</code> for details. Note this instruction is for Debian based Linux (Debian, Ubuntu, Mint, etc.).</p>
+
+<p>On Debian/Ubuntu, in a nutshell:</p>
+
+<pre><code>sudo apt-get -y install git build-essential automake libcurl4-openssl-dev
+git clone -b release https://github.com/roswell/roswell.git
+cd roswell
+sh bootstrap
+./configure
+make
+sudo make install
+ros setup
+</code></pre>
+
+<p>On some versions, <code>sudo apt-get install zlib1g-dev</code> <a href="https://github.com/roswell/roswell/issues/152">may also be necessary</a>.</p>
+
+<p>To avoid system-wide installation,</p>
+
+<pre><code>git clone -b release https://github.com/roswell/roswell.git
+cd roswell
+sh bootstrap
+./configure --prefix=$HOME/.local
+make
+make install
+echo 'PATH=$HOME/.local/bin:$PATH' &gt;&gt; ~/.profile
+PATH=$HOME/.local/bin:$PATH ros setup
+</code></pre>
+
+<p>(for more details see <a href="Local-installation.html">Local installation</a>)</p>
+
+<p>On a Red Hat based Linux (Fedora, CentOS), replace the first line with </p>
+
+<ul>
+<li><code>sudo dnf install automake libcurl-devel</code> or</li>
+<li><code>sudo yum install automake libcurl-devel</code> (git, make, etc. are installed by default on these Linux).</li>
+<li>On CentOS <a href="https://github.com/roswell/roswell/issues/152"><code>sudo yum install zlib-devel</code> may also be necessary</a>.</li>
+</ul>
+
+<p>On <a href="https://www.freebsd.org/">FreeBSD</a> replace the first line with <code>sudo pkg install git automake curl</code>.
+You may also need to set the include and library search paths prior to running <code>configure</code>.</p>
+
+<pre><code>LDFLAGS=&quot;-L/usr/local/lib/&quot; CFLAGS=&quot;-I/usr/local/include/&quot; ./configure
+</code></pre>
+
+<p>With nix (<a href="http://nixos.org/">NixOS</a>'s package manager) you can compile with this command:
+<code>sh
+nix-shell -p autoconf automake curl --command 'sh -c &quot;./bootstrap &amp;&amp; ./configure &amp;&amp; make&quot;'
+</code></p>
+</article>
+      </div>
+    </main>
+    <footer>
+      Copyright © 2018 Roswell All Rights Reserved.
+    </footer>
+  </body>
+</html>

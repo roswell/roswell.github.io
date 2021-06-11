@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>FAQ</title>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/tomorrow.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/languages/lisp.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/languages/yaml.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  <body>
+    <header class="pure-menu pure-menu-horizontal">
+      <a href="https://roswell.github.io/" class="pure-menu-heading pure-menu-link">Roswell</a>
+      <ul class="pure-menu-list">
+	<li class="pure-menu-item">
+	  <a class="pure-menu-link" href="https://github.com/roswell/roswell">
+	    Contribute in GitHub
+	  </a>
+	</li>
+      </ul>
+    </header>
+    <main class="pure-g">
+      <div id="index" class="pure-u-1-1 pure-u-md-1-4">
+      <h2>Home</h2>
+
+<ul>
+<li><a href="Home.html">Home</a></li>
+<li><a href="How-is-Roswell-different.html">How is Roswell different</a></li>
+</ul>
+
+<h2>Getting started / Tutorials</h2>
+
+<ul>
+<li><a href="Installation.html">Installation</a></li>
+<li><a href="Initial-Recommended-Setup.html">Initial Recommended Setup</a></li>
+<li><a href="Roswell-as-a-Scripting-Environment.html">Roswell as a Scripting Environment</a></li>
+</ul>
+
+<h2>Advanced Installation</h2>
+
+<ul>
+<li><a href="Upgrading-Roswell.html">Upgrading Roswell</a></li>
+<li><a href="Local-installation.html">Local installation</a></li>
+<li><a href="How-to-setup-a-lisp-dev-environment-on-windows-with-Roswell.html">How to setup a lisp dev environment on windows with Roswell</a></li>
+</ul>
+
+<h2>Roswell as a scripting environment</h2>
+
+<ul>
+<li><a href="Roswell-as-a-Scripting-Environment.html">Roswell as a Scripting Environment</a></li>
+<li><a href="Advanced-scripting.html">Advanced scripting</a></li>
+<li><a href="Reducing-Startup-Time.html">Reducing Startup Time</a></li>
+<li><a href="List-of-Roswell-Installable-Scripts.html">List of Roswell Installable Scripts</a></li>
+<li><a href="Practical-Usecases.html">Practical Usecases</a></li>
+<li><a href="Building-images-and-executables.html">Building images and executables</a></li>
+</ul>
+
+<h2>Roswell as an implementation manager</h2>
+
+<ul>
+<li><a href="Roswell-as-an-implementation-manager.html">Roswell as an implementation manager</a></li>
+<li><a href="Listing-various-resources.html">Listing various resources</a></li>
+</ul>
+
+<h2>Roswell as a Testing Environment</h2>
+
+<ul>
+<li><a href="Roswell-as-a-Testing-Environment.html">Roswell as a Testing Environment</a></li>
+<li><a href="Travis-CI.html">Travis CI</a></li>
+<li><a href="Circle-CI.html">Circle CI</a></li>
+<li><a href="GitHub-Actions.html">GitHub Actions</a></li>
+<li><a href="Coveralls.html">Coveralls</a></li>
+<li><a href="Roswell-in-Virtual-Environments.html">Roswell in Virtual Environments</a></li>
+</ul>
+
+<h2>Distributing applications</h2>
+
+<ul>
+<li><a href="How-to-distribute-your-software,-not-library,-on-Quicklisp-ala-python-pip.html">How to distribute your software, not library, on Quicklisp ala python pip</a></li>
+</ul>
+
+<h2>FAQ</h2>
+
+<ul>
+<li><a href="FAQ.html">FAQ</a></li>
+</ul>
+
+<h2>For Developers/Maintainers</h2>
+
+<ul>
+<li><a href="Release-Roswell.html">Release Roswell</a></li>
+<li><a href="Support-New-implementation.html">Support New implementation</a></li>
+</ul>
+</div>
+      <div id="content" class="pure-u-1-1 pure-u-md-3-4">
+	<h1>FAQ</h1>
+	<article><h2>Roswell Installation</h2>
+
+<h3>How does Roswell change my system?</h3>
+
+<p>See <a href="Policy-on-how-Roswell-affects-or-manipulates-your-system.html">Policy on how Roswell affects or manipulates your system</a>.</p>
+
+<h3>Why is Roswell core written in C?</h3>
+
+<p>See <a href="Why-C?.html">Why C?</a></p>
+
+<h3>How do I customize the system-wide installation dir?</h3>
+
+<p>See <a href="Local-installation.html">Local installation</a>.</p>
+
+<h2>Roswell Usage &amp; Customization</h2>
+
+<h3>my .sbclrc are not loaded!!</h3>
+
+<p>for standardize command line behavior roswell's init script are <code>~/.roswell/init.lisp</code> only. The file 
+are referred from all of common lisp implementation which are invoked from roswell.(if not inovoked with <code>+R</code>)</p>
+
+<h3>Where should I put my local projects?</h3>
+
+<p>Roswell adds <code>~/.roswell/local-projects/</code> to ASDF's source registry during the initialization.
+<code>~/common-lisp/</code> is also available, as it's the default local directory ASDF uses to look for systems.
+See in the <a href="http://common-lisp.net/project/asdf/asdf/Configuring-ASDF.htm">ASDF manual</a> for further information.</p>
+
+<h3>Sure, but I don't want to change the dir I'm using now.</h3>
+
+<p>Create a symlink from  <code>~/.roswell/local-projects/</code> to whatever your favorite directory is. ASDF searches for system definitions recursively.</p>
+
+<h3>My SLIME does not jump to the source code of implementation with <code>M-.</code>.</h3>
+
+<p>If you are using <code>sbcl-bin</code> with roswell, the installation doesn't include source code. You need to install the source via <code>ros install sbcl[/version] --without-install</code> which downloads the sbcl source code for sbcl-bin.</p>
+
+<h3>How to Setup Slime with Roswell?</h3>
+
+<p>See <a href="Initial-Recommended-Setup.html">Initial Recommended Setup</a>.</p>
+
+<h3>Why is Roswell's Quicklisp dist old and older than mine in Slime ?</h3>
+
+<p>You probably didn't setup Slime with Roswell.</p>
+
+<p>You probably have been using slime and quicklisp when you installed Roswell.
+If you didn't touch the emacs settings, your slime is the old slime you have been using, and the quicklisp visible from your slime is the quicklisp that you installed.</p>
+
+<p>However, Roswell installs and use a new quicklisp directory installed separately under <code>~/.roswell</code>, and your slime does not tell the underlying lisp to look up this directory on the startup.
+The easiest way to achieve the best result is to follow the instruction for installing slime for roswell, which can be found here: 
+ <a href="Initial-Recommended-Setup.html">Initial Recommended Setup</a>.</p>
+
+<h2>Writing &amp; Launching Roswell Scripts</h2>
+
+<h3>How are roswell scripts evaluated?</h3>
+
+<h4>Related: What's the default package when launching the script?</h4>
+
+<h4>Related: In what environment is <code>main</code> executed?</h4>
+
+<p>In interpreter mode (without dump), the script is evaluated as a top-level form.
+So, if you use <code>in-package</code> within the script, that same package will be effective when launching the <code>main</code> function.
+The <code>main</code> function called by roswell should be in this last effective package.</p>
+
+<p>Edit: now it acts the same in the dumped images. 2015/12/11</p>
+
+<h3>How can I extend the dynamic space size? (sbcl-specific)</h3>
+
+<pre><code><span class="code">$ ros dynamic-space-size=2000 -- ... </span></code></pre>
+
+<h3>Roswell seems to disable the debugger.</h3>
+
+<p>On sbcl, try <code>#+sbcl (sb-ext:enable-debugger)</code>. You may use other impl-specific interfaces in other implementations.</p>
+
+<h3>I gave a script a large (~100k) arglist, caused a memory exhaust</h3>
+
+<p>Consider letting the script read the data from the standard input.</p>
+
+<h3>My roswell script uses a fixed random seed.</h3>
+
+<p>At the moment, you should obtain a fresh random state inside the script by <code>(setf *random-state* (make-random-state t))</code>.</p>
+
+<h3>The script stops working when used as a CRON script</h3>
+
+<p>PATH is set differently under CRON. ~~Use the absolute path for the <code>ros</code> command in the script.~~ Instead of modifying the script, set up the <code>PATH</code> from the caller in <code>crontab</code>.</p>
+
+<h3>Quick recipe for building a binary with my private subprojects</h3>
+
+<ol>
+<li>Place your subprojects under the main projects.</li>
+</ol>
+
+<pre><code>+ projects/
+  + main.ros
+  + src/
+  + t/
+  + subproj1/
+  + subproj2/   ;; or
+  + local-projects/
+    + subproj1/
+    + subproj2/</code></pre>
+
+<ol>
+<li>use <code>ros -e &quot;(setf ql:*local-project-directories* '(#p\&quot;$(PWD)/\&quot;))&quot; dump executable main.ros</code> or equivalent.
+   If you build it with <code>make</code>, use <code>CURDIR</code> instead of <code>PWD</code>, since it is robust against <code>make -C ...</code>.</li>
+</ol>
+
+<p>I (guicho2.71828) use the following makefile:
+```makefile
+submodules:
+    git submodule update --init --recursive --remote</p>
+
+<p>mwup: $(shell find -name &quot;<em>.lisp&quot;) submodules
+    ros -e &quot;(setf ql:</em>local-project-directories* '(#p\&quot;$(CURDIR)/\&quot;))(ql:register-local-projects)&quot; dump executable ./main.ros
+```</p>
+</article>
+      </div>
+    </main>
+    <footer>
+      Copyright © 2018 Roswell All Rights Reserved.
+    </footer>
+  </body>
+</html>

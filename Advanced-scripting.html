@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Advanced scripting</title>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/tomorrow.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/languages/lisp.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/languages/yaml.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  <body>
+    <header class="pure-menu pure-menu-horizontal">
+      <a href="https://roswell.github.io/" class="pure-menu-heading pure-menu-link">Roswell</a>
+      <ul class="pure-menu-list">
+	<li class="pure-menu-item">
+	  <a class="pure-menu-link" href="https://github.com/roswell/roswell">
+	    Contribute in GitHub
+	  </a>
+	</li>
+      </ul>
+    </header>
+    <main class="pure-g">
+      <div id="index" class="pure-u-1-1 pure-u-md-1-4">
+      <h2>Home</h2>
+
+<ul>
+<li><a href="Home.html">Home</a></li>
+<li><a href="How-is-Roswell-different.html">How is Roswell different</a></li>
+</ul>
+
+<h2>Getting started / Tutorials</h2>
+
+<ul>
+<li><a href="Installation.html">Installation</a></li>
+<li><a href="Initial-Recommended-Setup.html">Initial Recommended Setup</a></li>
+<li><a href="Roswell-as-a-Scripting-Environment.html">Roswell as a Scripting Environment</a></li>
+</ul>
+
+<h2>Advanced Installation</h2>
+
+<ul>
+<li><a href="Upgrading-Roswell.html">Upgrading Roswell</a></li>
+<li><a href="Local-installation.html">Local installation</a></li>
+<li><a href="How-to-setup-a-lisp-dev-environment-on-windows-with-Roswell.html">How to setup a lisp dev environment on windows with Roswell</a></li>
+</ul>
+
+<h2>Roswell as a scripting environment</h2>
+
+<ul>
+<li><a href="Roswell-as-a-Scripting-Environment.html">Roswell as a Scripting Environment</a></li>
+<li><a href="Advanced-scripting.html">Advanced scripting</a></li>
+<li><a href="Reducing-Startup-Time.html">Reducing Startup Time</a></li>
+<li><a href="List-of-Roswell-Installable-Scripts.html">List of Roswell Installable Scripts</a></li>
+<li><a href="Practical-Usecases.html">Practical Usecases</a></li>
+<li><a href="Building-images-and-executables.html">Building images and executables</a></li>
+</ul>
+
+<h2>Roswell as an implementation manager</h2>
+
+<ul>
+<li><a href="Roswell-as-an-implementation-manager.html">Roswell as an implementation manager</a></li>
+<li><a href="Listing-various-resources.html">Listing various resources</a></li>
+</ul>
+
+<h2>Roswell as a Testing Environment</h2>
+
+<ul>
+<li><a href="Roswell-as-a-Testing-Environment.html">Roswell as a Testing Environment</a></li>
+<li><a href="Travis-CI.html">Travis CI</a></li>
+<li><a href="Circle-CI.html">Circle CI</a></li>
+<li><a href="GitHub-Actions.html">GitHub Actions</a></li>
+<li><a href="Coveralls.html">Coveralls</a></li>
+<li><a href="Roswell-in-Virtual-Environments.html">Roswell in Virtual Environments</a></li>
+</ul>
+
+<h2>Distributing applications</h2>
+
+<ul>
+<li><a href="How-to-distribute-your-software,-not-library,-on-Quicklisp-ala-python-pip.html">How to distribute your software, not library, on Quicklisp ala python pip</a></li>
+</ul>
+
+<h2>FAQ</h2>
+
+<ul>
+<li><a href="FAQ.html">FAQ</a></li>
+</ul>
+
+<h2>For Developers/Maintainers</h2>
+
+<ul>
+<li><a href="Release-Roswell.html">Release Roswell</a></li>
+<li><a href="Support-New-implementation.html">Support New implementation</a></li>
+</ul>
+</div>
+      <div id="content" class="pure-u-1-1 pure-u-md-3-4">
+	<h1>Advanced scripting</h1>
+	<article><p>TBP</p>
+
+<h1>installation hook</h1>
+
+<p>During the installation of the quicklisp library using <code>ros install [system]</code>, <code>roswell</code> adds <code>:ros.installing</code> to <code>*features*</code>, and also calls <code>ros:*build-hook*</code> when <code>ql:quickload</code> is complete. You can set this hook to a function with no arguments.</p>
+</article>
+      </div>
+    </main>
+    <footer>
+      Copyright © 2018 Roswell All Rights Reserved.
+    </footer>
+  </body>
+</html>

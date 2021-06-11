@@ -1,0 +1,36 @@
+by Masataro Asai, complemented with additional comments by Masatoshi Sano
+
++ Supporting *non-conventional environment*.
+  + For example, Windows servers where a basic unix-compatible shell is not available.
+  + Old linux servers with an incompatible libc version, possibly the kernel is also older.
+  + Memory-restricted environment, e.g. embedded devices. Being written in C, you could also cross-compile roswell. (Roswell is still useful assuming it has a network access)
+  + BSD or other non-conventional OSes.
++ Its *requirement should be small and conventional*. They should be something easy for you to persuade the management to install them, or something that is already available. In roswell, it is just a C compiler suite, the curl header and autotools.
++ *Package manager friendly* (although not fully exploited yet)
+  + With conventional autotools, the effort for building a package (e.g. apt package) would be minimized, riding on the existing tutorials for packaging etc.
++ *Execution speed and memory footprint.*
+   + Perl launches itself under 0.01sec, Python does it under 0.02sec, making them reasonable choices for writing command line scripts.
+   + At the time of starting the project, we once considered writing roswell in lisp. However, there was no lisp implementation that can launch itself, parse the arguments and `exec` the dispatched implementation in a memory-restricted environment under 0.1 sec.
+   + This number is added by the launch time of the dispatched implementation.
+   + This hinders the application of lisp taking a nice part of a sequence of command lines under `for` loop in a shell script. It is unusable.
+   + On slow processors like Raspberry Pi, slow startup time is painful, while the implementations tend to have lesser support on ARM than on the mainstream architecture (x86/64) and have more bugs, which sometimes forces users to try many versions/implementations of Lisps. Roswell eases such effort with less overhead.
++ *Why CLI?*
+   + We do not agree that "we have REPL so we don't need CLI". Instead we say "lisp has a nice REPL but it lacks a coherent, usable CLI". Lacking is lacking, and the rejection is just a sour grape situation. Lisp should have both REPL and CLI. Lisp is great since it has *both* static and dynamic typing. Lisp is great because it has *both* compiled and interpreted code. Lisp is great because it can write *both* a slow prototype and optimized code. For someone claiming "lisp purity", why don't you go Haskell, it is purer. Lisp is a mud-ball that can shape itself into anything. Besides, most lisp bootstrap cores are written in C.
+   + You might say, "CLI is not the right way to use Lisp". There is no RIGHT way to use Lisp, unlike other languages that don't trust programmers and put needless restrictions on us.
+   + "/Shut the fuck up and write some code/" -- /Linus Torvalds/. If you think you can write a better alternative to Roswell, *do it yourself and show us*. We are happy to change ships when it happens.
+
+| command                                  | real time | comment                                                                     |
+|------------------------------------------+-----------+-----------------------------------------------------------------------------|
+| *Reference*                              |           |                                                                             |
+| time python -c "print('hi')"             | 0.021s    |                                                                             |
+| time perl -e "print('hi')"               | 0.006s    |                                                                             |
+| time sbcl --eval "(print :hi)" --quit    | 0.013s    | sbcl without roswell.                                                       |
+| time ./myecl                             | 0.123s    | standalone executable of hello world in [[https://common-lisp.net/project/ecl/static/manual/ch34s06.html#idm45432024690304][ECL tutorial]]                        |
+| time cl-launch -l sbcl -i "(print :hi)"  | 0.779s    | sbcl and cl-launch installed from debian APT.                               |
+|------------------------------------------+-----------+-----------------------------------------------------------------------------|
+| *Roswell*                                |           |                                                                             |
+| time ros -L sbcl-bin +Q -e "(print :hi)" | 0.084s    | +Q for disabling quicklisp. sbcl-bin enables fasl caching for startup files |
+| time ros -L sbcl +Q -e "(print :hi)"     | 0.167s    |                                                                             |
+| time ros -L ccl-bin +Q -e "(print :hi)"  | 0.114s    |                                                                             |
+| time ros -L ecl +Q -e "(print :hi)"      | 0.603s    |                                                                             |
+|------------------------------------------+-----------+-----------------------------------------------------------------------------|

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>List of Roswell Installable Scripts</title>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/tomorrow.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/languages/lisp.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/languages/yaml.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  <body>
+    <header class="pure-menu pure-menu-horizontal">
+      <a href="https://roswell.github.io/" class="pure-menu-heading pure-menu-link">Roswell</a>
+      <ul class="pure-menu-list">
+	<li class="pure-menu-item">
+	  <a class="pure-menu-link" href="https://github.com/roswell/roswell">
+	    Contribute in GitHub
+	  </a>
+	</li>
+      </ul>
+    </header>
+    <main class="pure-g">
+      <div id="index" class="pure-u-1-1 pure-u-md-1-4">
+      <h2>Home</h2>
+
+<ul>
+<li><a href="Home.html">Home</a></li>
+<li><a href="How-is-Roswell-different.html">How is Roswell different</a></li>
+</ul>
+
+<h2>Getting started / Tutorials</h2>
+
+<ul>
+<li><a href="Installation.html">Installation</a></li>
+<li><a href="Initial-Recommended-Setup.html">Initial Recommended Setup</a></li>
+<li><a href="Roswell-as-a-Scripting-Environment.html">Roswell as a Scripting Environment</a></li>
+</ul>
+
+<h2>Advanced Installation</h2>
+
+<ul>
+<li><a href="Upgrading-Roswell.html">Upgrading Roswell</a></li>
+<li><a href="Local-installation.html">Local installation</a></li>
+<li><a href="How-to-setup-a-lisp-dev-environment-on-windows-with-Roswell.html">How to setup a lisp dev environment on windows with Roswell</a></li>
+</ul>
+
+<h2>Roswell as a scripting environment</h2>
+
+<ul>
+<li><a href="Roswell-as-a-Scripting-Environment.html">Roswell as a Scripting Environment</a></li>
+<li><a href="Advanced-scripting.html">Advanced scripting</a></li>
+<li><a href="Reducing-Startup-Time.html">Reducing Startup Time</a></li>
+<li><a href="List-of-Roswell-Installable-Scripts.html">List of Roswell Installable Scripts</a></li>
+<li><a href="Practical-Usecases.html">Practical Usecases</a></li>
+<li><a href="Building-images-and-executables.html">Building images and executables</a></li>
+</ul>
+
+<h2>Roswell as an implementation manager</h2>
+
+<ul>
+<li><a href="Roswell-as-an-implementation-manager.html">Roswell as an implementation manager</a></li>
+<li><a href="Listing-various-resources.html">Listing various resources</a></li>
+</ul>
+
+<h2>Roswell as a Testing Environment</h2>
+
+<ul>
+<li><a href="Roswell-as-a-Testing-Environment.html">Roswell as a Testing Environment</a></li>
+<li><a href="Travis-CI.html">Travis CI</a></li>
+<li><a href="Circle-CI.html">Circle CI</a></li>
+<li><a href="GitHub-Actions.html">GitHub Actions</a></li>
+<li><a href="Coveralls.html">Coveralls</a></li>
+<li><a href="Roswell-in-Virtual-Environments.html">Roswell in Virtual Environments</a></li>
+</ul>
+
+<h2>Distributing applications</h2>
+
+<ul>
+<li><a href="How-to-distribute-your-software,-not-library,-on-Quicklisp-ala-python-pip.html">How to distribute your software, not library, on Quicklisp ala python pip</a></li>
+</ul>
+
+<h2>FAQ</h2>
+
+<ul>
+<li><a href="FAQ.html">FAQ</a></li>
+</ul>
+
+<h2>For Developers/Maintainers</h2>
+
+<ul>
+<li><a href="Release-Roswell.html">Release Roswell</a></li>
+<li><a href="Support-New-implementation.html">Support New implementation</a></li>
+</ul>
+</div>
+      <div id="content" class="pure-u-1-1 pure-u-md-3-4">
+	<h1>List of Roswell Installable Scripts</h1>
+	<article><p>Here're libraries bundling Roswell scripts. The list is not comprehensive, contribute your script!</p>
+
+<p>These commands can be installed by <code>ros install package-name</code>, e.g. <code>ros install clack</code></p>
+
+<ul>
+<li>Clack's <a href="https://github.com/fukamachi/clack/blob/master/roswell/clackup.ros">clackup</a></li>
+<li>Qlot's <a href="https://github.com/fukamachi/qlot/blob/master/roswell/qlot.ros">qlot</a></li>
+<li>prove's <a href="https://github.com/fukamachi/prove/blob/master/roswell/run-prove.ros">run-prove</a></li>
+<li>ufo by <a href="https://github.com/ta2gch/UFO/blob/master/roswell/ufo.ros">UFO</a></li>
+<li>qps  by <code>ros install</code> <a href="https://github.com/guicho271828/quicklisp-project-submission">quicklisp-project-submission</a></li>
+<li>make-project by <code>ros install</code> <a href="https://github.com/fukamachi/cl-project">cl-project</a></li>
+<li>eazy-project by <code>ros install</code> <a href="https://github.com/guicho271828/eazy-project">eazy-project</a></li>
+<li>lake in https://github.com/takagi/lake</li>
+<li>cl-mpi's test script @ https://github.com/marcoheisig/cl-mpi</li>
+<li>asd-generator @ https://github.com/phoe-krk/asd-generator</li>
+<li>asdf-viz @ https://github.com/guicho271828/asdf-viz</li>
+<li>cldomain @ http://40ants.com/cldomain/ an extension for the Sphinx documentation generation tool that allow sphinx to generate documentation for Common Lisp libraries.</li>
+<li><a href="https://github.com/cxxxr/lem">cxxxr/lem</a> - a full-featured zero-configuration Common Lisp editor, also with an Electron version.</li>
+<li><a href="https://github.com/koji-kojiro/cl-repl">koji-kojiro/cl-repl</a>,  A full-featured ipython-like repl.</li>
+<li><a href="https://github.com/singy15/ministg">singy15/ministg</a> a mini shooting game in OpenGL</li>
+<li><a href="https://github.com/fukamachi/psychiq">fukamachi/psychiq</a> - a redis-based background job processing, inspired by Ruby's Sidekiq (and compatible with its web UI).</li>
+<li><a href="https://github.com/yitzchak/common-lisp-jupyter">yitzchak/common-lisp-jupyter</a> - A Common Lisp kernel for Jupyter.</li>
+<li>run-fiveam by <code>ros install</code><a href="https://github.com/neil-lindquist/ci-utils"><code>ci-utils</code></a></li>
+</ul>
+
+<p>Below are just ideas .... send the pull request adding the roswell scripts, let the <a href="https://en.wikipedia.org/wiki/Roswell_UFO_incident">incidents</a> happen!!!</p>
+
+<ul>
+<li>more testing libraries</li>
+<li>codex, sb-texinfo and other doc-generation libraries</li>
+<li>games or irc bots or other misc standalone programs</li>
+<li>in-memory database using cl-fuse</li>
+<li>clever/hilarious ideas are welcome!</li>
+</ul>
+</article>
+      </div>
+    </main>
+    <footer>
+      Copyright © 2018 Roswell All Rights Reserved.
+    </footer>
+  </body>
+</html>

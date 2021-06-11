@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Travis CI</title>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/tomorrow.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/languages/lisp.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/languages/yaml.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  <body>
+    <header class="pure-menu pure-menu-horizontal">
+      <a href="https://roswell.github.io/" class="pure-menu-heading pure-menu-link">Roswell</a>
+      <ul class="pure-menu-list">
+	<li class="pure-menu-item">
+	  <a class="pure-menu-link" href="https://github.com/roswell/roswell">
+	    Contribute in GitHub
+	  </a>
+	</li>
+      </ul>
+    </header>
+    <main class="pure-g">
+      <div id="index" class="pure-u-1-1 pure-u-md-1-4">
+      <h2>Home</h2>
+
+<ul>
+<li><a href="Home.html">Home</a></li>
+<li><a href="How-is-Roswell-different.html">How is Roswell different</a></li>
+</ul>
+
+<h2>Getting started / Tutorials</h2>
+
+<ul>
+<li><a href="Installation.html">Installation</a></li>
+<li><a href="Initial-Recommended-Setup.html">Initial Recommended Setup</a></li>
+<li><a href="Roswell-as-a-Scripting-Environment.html">Roswell as a Scripting Environment</a></li>
+</ul>
+
+<h2>Advanced Installation</h2>
+
+<ul>
+<li><a href="Upgrading-Roswell.html">Upgrading Roswell</a></li>
+<li><a href="Local-installation.html">Local installation</a></li>
+<li><a href="How-to-setup-a-lisp-dev-environment-on-windows-with-Roswell.html">How to setup a lisp dev environment on windows with Roswell</a></li>
+</ul>
+
+<h2>Roswell as a scripting environment</h2>
+
+<ul>
+<li><a href="Roswell-as-a-Scripting-Environment.html">Roswell as a Scripting Environment</a></li>
+<li><a href="Advanced-scripting.html">Advanced scripting</a></li>
+<li><a href="Reducing-Startup-Time.html">Reducing Startup Time</a></li>
+<li><a href="List-of-Roswell-Installable-Scripts.html">List of Roswell Installable Scripts</a></li>
+<li><a href="Practical-Usecases.html">Practical Usecases</a></li>
+<li><a href="Building-images-and-executables.html">Building images and executables</a></li>
+</ul>
+
+<h2>Roswell as an implementation manager</h2>
+
+<ul>
+<li><a href="Roswell-as-an-implementation-manager.html">Roswell as an implementation manager</a></li>
+<li><a href="Listing-various-resources.html">Listing various resources</a></li>
+</ul>
+
+<h2>Roswell as a Testing Environment</h2>
+
+<ul>
+<li><a href="Roswell-as-a-Testing-Environment.html">Roswell as a Testing Environment</a></li>
+<li><a href="Travis-CI.html">Travis CI</a></li>
+<li><a href="Circle-CI.html">Circle CI</a></li>
+<li><a href="GitHub-Actions.html">GitHub Actions</a></li>
+<li><a href="Coveralls.html">Coveralls</a></li>
+<li><a href="Roswell-in-Virtual-Environments.html">Roswell in Virtual Environments</a></li>
+</ul>
+
+<h2>Distributing applications</h2>
+
+<ul>
+<li><a href="How-to-distribute-your-software,-not-library,-on-Quicklisp-ala-python-pip.html">How to distribute your software, not library, on Quicklisp ala python pip</a></li>
+</ul>
+
+<h2>FAQ</h2>
+
+<ul>
+<li><a href="FAQ.html">FAQ</a></li>
+</ul>
+
+<h2>For Developers/Maintainers</h2>
+
+<ul>
+<li><a href="Release-Roswell.html">Release Roswell</a></li>
+<li><a href="Support-New-implementation.html">Support New implementation</a></li>
+</ul>
+</div>
+      <div id="content" class="pure-u-1-1 pure-u-md-3-4">
+	<h1>Travis CI</h1>
+	<article><p><a href="https://travis-ci.org/">Travis CI</a> is currently known as the most prevalent cloud CI service. Although it does not have an official support for Common Lisp, <a href="https://github.com/roswell/roswell">Roswell</a> almost eliminates the otherwise huge amount of effort for testing your Common Lisp product.</p>
+
+<p>Disclaimer: This document is based on Roswell v0.0.3.44 or above, so the content might change in the near future. Check the time stamp of this article and if it seems obsoleted --- contact us (or make it up to date yourself!!!).</p>
+
+<p>Before getting started, sign up to Travis CI and enable the testing for your repository at <a href="https://travis-ci.org/profile">your profile page</a>.</p>
+
+<h2>Basic .travis.yml</h2>
+
+<p>Travis CI's build process can be customized with a file named <code>.travis.yml</code>, which Travis assumes to be located at the project root. (cf. <a href="http://docs.travis-ci.com/user/customizing-the-build/">Customizing the Build - Travis CI</a>) Below is a simple <code>.travis.yml</code> example which runs the unit test for <a href="https://github.com/fukamachi/quri">quri</a>, an improved/faster replacement for PURI URI encoder/decoder, with the latest SBCL binary:</p>
+
+<pre><code>language: common-lisp
+sudo: required
+
+install:
+  - curl -L https://raw.githubusercontent.com/roswell/roswell/release/scripts/install-for-ci.sh | sh
+
+script:
+  - ros -s prove -e '(or (prove:run :quri-test) (uiop:quit -1))'</code></pre>
+
+<p>This basic template is fully functional. However, in order to use the latest and complete testing environment, you should add several options to the yaml file.</p>
+
+<h2>Advanced .travis.yml</h2>
+
+<p>Fast forward, the resulting script is shown below. You can use this as a template.</p>
+
+<pre><code>language: common-lisp
+sudo: false
+
+addons:
+  apt:
+    packages:
+      - libc6-i386
+
+env:
+  global:
+    - PATH=~/.roswell/bin:$PATH
+    - ROSWELL_INSTALL_DIR=$HOME/.roswell
+  matrix:
+    - LISP=sbcl-bin
+    - LISP=ccl-bin
+    - LISP=abcl
+    - LISP=clisp
+    - LISP=ecl
+    - LISP=cmucl
+    - LISP=alisp
+
+matrix:
+  allow_failures:
+    - env: LISP=clisp
+    - env: LISP=abcl
+    - env: LISP=ecl
+    - env: LISP=cmucl
+    - env: LISP=alisp
+
+install:
+  - curl -L https://raw.githubusercontent.com/roswell/roswell/release/scripts/install-for-ci.sh | sh
+  - ros install prove
+  - ros install fukamachi/fast-http
+  - ros install fukamachi/quri
+
+cache:
+  directories:
+    - $HOME/.roswell
+    - $HOME/.config/common-lisp
+
+script:
+  - run-prove quri-test.asd</code></pre>
+
+<h1>Step by Step Instruction</h1>
+
+<h2>Tests with multiple implementations</h2>
+
+<p>The foremost important feature in automated continuous testing is to run the tests on multiple implementations.
+<code>env.matrix</code> in .travis.yml enables this feature, and Travis creates a new build for each Lisp implementations.
+When <code>$LISP</code> is set, Roswell's CI installer sets up the corresponding Lisp implementation, so no need to installing and running each implementation manually.</p>
+
+<pre><code><span class="code"><span class="diff-normal">language: common-lisp</span><span class="diff-normal">
+</span><span class="diff-normal">sudo: required</span><span class="diff-normal">
+</span><span class="diff-normal">
+</span><span class="diff-added">+env:
+</span><span class="diff-added">+  matrix:
+</span><span class="diff-added">+    - LISP=sbcl-bin
+</span><span class="diff-added">+    - LISP=ccl-bin
+</span><span class="diff-added">+    - LISP=abcl
+</span><span class="diff-added">+    - LISP=clisp
+</span><span class="diff-added">+    - LISP=ecl
+</span><span class="diff-normal">
+</span><span class="diff-normal">...</span></span></code></pre>
+
+<h2>Ignore the failures on some implementations</h2>
+
+<p>You might think that the tests on some implementations are less important than on the others.
+In that case, add <code>matrix.allow_failures</code> directive.
+cf. <a href="http://docs.travis-ci.com/user/customizing-the-build/#Rows-that-are-Allowed-to-Fail">Rows that are Allowed to Fail - Travis CI</a></p>
+
+<pre><code><span class="code"><span class="diff-normal">env:</span><span class="diff-normal">
+</span><span class="diff-normal">  matrix:</span><span class="diff-normal">
+</span><span class="diff-normal">    - LISP=sbcl-bin</span><span class="diff-normal">
+</span><span class="diff-normal">    - LISP=ccl-bin</span><span class="diff-normal">
+</span><span class="diff-normal">    - LISP=abcl</span><span class="diff-normal">
+</span><span class="diff-normal">    - LISP=clisp</span><span class="diff-normal">
+</span><span class="diff-normal">    - LISP=ecl</span><span class="diff-normal">
+</span><span class="diff-normal">
+</span><span class="diff-added">+matrix:
+</span><span class="diff-added">+  allow_failures:
+</span><span class="diff-added">+    - env: LISP=clisp</span></span></code></pre>
+
+<h2>Installing the latest dependencies</h2>
+
+<p>You may wonder how you can run the test using a latest version of a library which is not yet included in the quicklisp.
+Libraries at GitHub can be installed with <code>ros install &lt;github username&gt;/&lt;github repos&gt;</code> like this:</p>
+
+<pre><code><span class="code"><span class="diff-normal">install:</span><span class="diff-normal">
+</span><span class="diff-normal">  - curl -L https://raw.githubusercontent.com/roswell/roswell/release/scripts/install-for-ci.sh | sh</span><span class="diff-normal">
+</span><span class="diff-added">+  # Using the latest fast-http and quri
+</span><span class="diff-added">+  - ros install fukamachi/fast-http
+</span><span class="diff-added">+  - ros install fukamachi/quri</span></span></code></pre>
+
+<h2>Activating the container-based infrastructure</h2>
+
+<p>When <code>sudo</code> field is set to <code>false</code> in the yaml configuration, i.e. <code>sudo: false</code>, Travis CI uses its new <a href="http://docs.travis-ci.com/user/workers/container-based-infrastructure/">container-based infrastructure</a>. We can expect faster launch time of the tests compared to the old infrastructure.</p>
+
+<p>For <code>sbcl</code> and <code>ccl</code>, following <code>.travis.yml</code> just works.</p>
+
+<pre><code><span class="code"><span class="diff-normal">language: common-lisp</span><span class="diff-normal">
+</span><span class="diff-deleted">-sudo: required
+</span><span class="diff-added">+sudo: false
+</span><span class="diff-normal">
+</span><span class="diff-normal">env:</span><span class="diff-normal">
+</span><span class="diff-normal">  global:</span><span class="diff-normal">
+</span><span class="diff-normal">    - PATH=~/.roswell/bin:$PATH</span><span class="diff-normal">
+</span><span class="diff-added">+    - ROSWELL_INSTALL_DIR=$HOME/.roswell
+</span><span class="diff-normal">  matrix:</span><span class="diff-normal">
+</span><span class="diff-normal">    - LISP=sbcl-bin</span><span class="diff-normal">
+</span><span class="diff-normal">    - LISP=ccl-bin</span><span class="diff-normal">
+</span><span class="diff-normal">
+</span><span class="diff-normal">install:</span><span class="diff-normal">
+</span><span class="diff-normal">  - curl -L https://raw.githubusercontent.com/roswell/roswell/release/scripts/install-for-ci.sh | sh</span><span class="diff-normal">
+</span><span class="diff-normal">
+</span><span class="diff-normal">script:</span><span class="diff-normal">
+</span><span class="diff-normal">  - ros -s prove -e '(or (prove:run :quri-test) (uiop:quit -1))'</span></span></code></pre>
+
+<p>To use the new infrastructure for <code>clisp</code>, <code>abcl</code>, <code>alisp</code> or <code>cmucl</code>, add the following lines to the yaml file:</p>
+
+<pre><code>addons:
+  apt:
+    packages:
+      - libc6-i386
+      - openjdk-7-jre</code></pre>
+
+<p>This is because <code>clisp</code>, <code>abcl</code>, <code>alisp</code> or <code>cmucl</code> requies <code>openjdk-7-jre</code>, <code>clisp</code> and <code>libc-i386</code> to be installed via APT, respectively.</p>
+
+<h2>Directory caching</h2>
+
+<p>Directory caching makes the launch time even faster.
+cf. <a href="http://docs.travis-ci.com/user/caching/">Caching Dependencies and Directories - Travis CI</a></p>
+
+<pre><code><span class="code"><span class="diff-normal">language: common-lisp</span><span class="diff-normal">
+</span><span class="diff-normal">sudo: false</span><span class="diff-normal">
+</span><span class="diff-normal">
+</span><span class="diff-normal">env:</span><span class="diff-normal">
+</span><span class="diff-normal">  global:</span><span class="diff-normal">
+</span><span class="diff-normal">    - PATH=~/.roswell/bin:$PATH</span><span class="diff-normal">
+</span><span class="diff-normal">    - ROSWELL_INSTALL_DIR=$HOME/.roswell</span><span class="diff-normal">
+</span><span class="diff-normal">  matrix:</span><span class="diff-normal">
+</span><span class="diff-normal">    - LISP=sbcl-bin</span><span class="diff-normal">
+</span><span class="diff-normal">    - LISP=ccl-bin</span><span class="diff-normal">
+</span><span class="diff-normal">
+</span><span class="diff-normal">install:</span><span class="diff-normal">
+</span><span class="diff-normal">  - curl -L https://raw.githubusercontent.com/roswell/roswell/release/scripts/install-for-ci.sh | sh</span><span class="diff-normal">
+</span><span class="diff-normal">
+</span><span class="diff-added">+cache:
+</span><span class="diff-added">+  directories:
+</span><span class="diff-added">+    - $HOME/.roswell
+</span><span class="diff-added">+    - $HOME/.config/common-lisp
+</span><span class="diff-normal">
+</span><span class="diff-normal">script:</span><span class="diff-normal">
+</span><span class="diff-normal">  - ros -s prove -e '(or (prove:run :quri-test) (uiop:quit -1))'</span></span></code></pre>
+
+<h2>Using Roswell script (run-prove)</h2>
+
+<p>Some libraries provide their Roswell scripts, like <a href="https://github.com/fukamachi/prove">prove</a>'s <code>run-prove</code> command. Install these commands via e.g. <code>ros install prove</code>. Make sure <code>~/.roswell/bin</code> is already in the <code>$PATH</code>.</p>
+
+<pre><code><span class="code"><span class="diff-normal">language: common-lisp</span><span class="diff-normal">
+</span><span class="diff-normal">sudo: required</span><span class="diff-normal">
+</span><span class="diff-normal">
+</span><span class="diff-normal">env:</span><span class="diff-normal">
+</span><span class="diff-normal">  global:</span><span class="diff-normal">
+</span><span class="diff-normal">    - PATH=~/.roswell/bin:$PATH       # !!! IMPORTANT !!!</span><span class="diff-normal">
+</span><span class="diff-normal">  matrix:</span><span class="diff-normal">
+</span><span class="diff-normal">    - LISP=sbcl-bin</span><span class="diff-normal">
+</span><span class="diff-normal">    - LISP=ccl-bin</span><span class="diff-normal">
+</span><span class="diff-normal">    - LISP=abcl</span><span class="diff-normal">
+</span><span class="diff-normal">    - LISP=clisp</span><span class="diff-normal">
+</span><span class="diff-normal">    - LISP=ecl</span><span class="diff-normal">
+</span><span class="diff-normal">
+</span><span class="diff-normal">matrix:</span><span class="diff-normal">
+</span><span class="diff-normal">  allow_failures:</span><span class="diff-normal">
+</span><span class="diff-normal">    - env: LISP=clisp</span><span class="diff-normal">
+</span><span class="diff-normal">
+</span><span class="diff-normal">install:</span><span class="diff-normal">
+</span><span class="diff-normal">  - curl -L https://raw.githubusercontent.com/roswell/roswell/release/scripts/install-for-ci.sh | sh</span><span class="diff-normal">
+</span><span class="diff-added">+  - ros install prove
+</span><span class="diff-normal">
+</span><span class="diff-normal">script:</span><span class="diff-normal">
+</span><span class="diff-deleted">-  - ros -s prove -e '(or (prove:run :quri-test) (uiop:quit -1))'
+</span><span class="diff-added">+  - run-prove quri-test.asd</span></span></code></pre>
+</article>
+      </div>
+    </main>
+    <footer>
+      Copyright © 2018 Roswell All Rights Reserved.
+    </footer>
+  </body>
+</html>

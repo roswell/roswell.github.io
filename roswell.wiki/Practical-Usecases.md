@@ -1,0 +1,1 @@
+* https://github.com/guicho271828/aflab-303cluster/tree/master/thermo  --- temparature logging + plotting via gnuplot. Running as a cron script from the root. Roswell runs with no modification : it installs a separate roswell root under the home directory of the root user, `/root/.roswell` . Quicklisp is installed to `/root/.roswell/quicklisp` as well.

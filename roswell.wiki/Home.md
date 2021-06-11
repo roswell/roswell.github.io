@@ -1,0 +1,172 @@
+# Roswell - Common Lisp environment setup Utility.
+
+Roswell is a Lisp implementation installer/manager, launcher, and much more! It started as a command-line tool with the aim to make installing and managing Common Lisp implementations really simple and easy.
+
+Roswell has now evolved into a full-stack environment for Common Lisp development, and has many features that makes it easy to test, share, and distribute your Lisp applications.
+We aim to push the Common Lisp community to a whole new level of productivity.
+
+Roswell is still in beta. Despite this, the basic interfaces are stable and not likely to change. It currently works well on Unix-like platforms such as Linux, Mac OS X and FreeBSD.
+It is also expected to work on other operating systems, but currently some parts or features might be missing or unstable.
+
+Checkout the [issues list](https://github.com/roswell/roswell/issues) if you are interested in what's lacking.
+
+For those who are hesitant, here is the [[Policy on how Roswell affects or manipulates your system]].
+
+## Installation, Tutorials
+
+See [Installation guide](https://github.com/roswell/roswell/wiki/Installation) for details.
+We provide prebuilt binaries for various package managers. Instances include homebrew (OSX), AUR (Arch linux), dpkg (Debian/Ubuntu) (experimental), and **Windows**. Building from the source is also available.
+
+After the installation, we strongly recommend following [[Initial Recommended Setup]].
+
+## Features
+
+* Implementation Manager
+* Scripting environment (similar to cl-launch)
+* Building utility (similar to buildapp)
+* **Novel** : Easier setup for initializing a script
+* **Novel** : Better integration to the command-line interface (Bash completion, etc)
+* **Novel** : Infrastructure for bundling/installing the scripts to/from a quicklisp system
+* **Novel** : Better support for Windows environment (tested exhaustively)
+* **Novel** : Better integration to CI environment (e.g. [Travis-CI](https://github.com/roswell/roswell/wiki/Travis-CI), [CircleCI](https://github.com/roswell/roswell/wiki/Circle-CI), [Coveralls](https://github.com/roswell/roswell/wiki/Coveralls))
+
+## Usage
+
+Roswell has git-like subcommands which resemble that of cl-launch, buildapp.
+
+```
+$ ros
+Common Lisp environment setup Utility.
+
+Usage:
+
+   ros [options] Command [arguments...]
+or
+   ros [options] [[--] script-path arguments...]
+
+commands:
+   run       Run repl
+   install   Install a given implementation or a system for roswell environment
+   update    Update installed systems.
+   build     Make executable from script.
+   use       Change default implementation.
+   init      Creates a new ros script, optionally based on a template.
+   list      List Information
+   delete    Delete installed implementations
+   config    Get and set options
+   version   Show the roswell version information
+
+Use "ros help [command]" for more information about a command.
+
+Additional help topics:
+
+   options
+
+Use "ros help [topic]" for more information about the topic.
+```
+
+### Managing/Installing Several Lisp Installations
+
+    $ ros install               # displays a list of all installable implementations
+    
+    $ ros install sbcl-bin      # default sbcl
+    $ ros install sbcl          # The newest released version of sbcl
+    $ ros install ccl-bin       # default prebuilt binary of ccl
+    $ ros install sbcl/1.2.0    # A specific version of sbcl
+    
+    $ ros list installed sbcl   # Listing the installed implementations
+    $ ros run -- --version      # check which implementation is used
+    SBCL 1.2.15
+    $ ros use sbcl/1.2.3        # change the default implementation
+
+To use an implementation that was not installed by roswell, use i.e. `ros use sbcl/system`.
+
+The list of supported implementations continues to grow!
+
+### Installing scripts
+
+It is also possible to install scripts using `ros install`:
+
+    $ ros install qlot            # will install a program from quicklisp
+    $ ros install fukamachi/qlot  # will install it from the GitHub
+
+To add installable scripts into the system, you need to put roswell
+scripts (files having `.ros` extensions) into a `roswell` subdirectory.
+Take a look at [qlot's roswell/qlot.ros](https://github.com/fukamachi/qlot/tree/master/roswell).
+
+
+### Scripting with Roswell
+
+```diff
+$ ros init
+Usage: ros init [template] name [options...]
+
+$ ros init fact
+Successfully generated: fact.ros
+
+$ emacs fact.ros
+## editing the fact.ros ...
+
+$ cat fact.ros
+#!/bin/sh
+#|-*- mode:lisp -*-|#
+#|
+exec ros -Q -- $0 "$@"
+|#
+
+(defun fact (n)
+  (if (zerop n)
+      1
+      (* n (fact (1- n)))))
+
+(defun main (n &rest argv)
+  (declare (ignore argv))
+  (format t "~&Factorial ~D = ~D~%" n (fact (parse-integer n))))
+
+$ ./fact.ros 10
+Factorial 10 = 3628800
+```
+
+## Chef recipe for roswell
+
+[@Rudolph-Miller](https://github.com/Rudolph-Miller) is providing a Chef recipe for setting roswell up.
+
+- [Rudolph-Miller/chef-roswell](https://github.com/Rudolph-Miller/chef-roswell)
+
+## Roswell with CircleCI
+
+[@fukamachi](https://github.com/fukamachi) uses Roswell with CircleCI.
+
+- [fukamachi/legion/circle.yml](https://github.com/fukamachi/legion/blob/master/circle.yml)
+
+## Name Origin
+
+From &lsquo;[made with secret alien technology](http://www.lisperati.com/logo.html)&rsquo;.
+
+I felt making it easier to use Lisp for people is a kind of making opportunity for humanbeings to mingle with alien technology. I recall &lsquo;roswell incident&rsquo; by the concept. I'm not sure what you feel.
+
+## Author
+SANO Masatoshi (snmsts@gmail.com)
+
+## Contributors
+ * Eitaro Fukamachi (e.arrows@gmail.com)
+ * Tomoya KAWANISHI (chopsticks.tk.ppfm@gmail.com)
+ * Masataro Asai (guicho2.71828@gmail.com)
+
+## Special Thanks to
+ * Eitaro Fukamachi (e.arrows@gmail.com) for naming this project.
+ * Sunrin SHIMURA for [keens/cim](https://github.com/keens/cim) that motivate me to start this project.
+
+## License
+Licensed under the MIT License.
+
+### Found a bug ?
+
+Report it in the [Issues](https://github.com/roswell/roswell/issues) page.
+If you find a bug, don't forget to include the following information in the report:
+
+* your OS and its version
+* `ros version`
+* `ros config`
+
+Thanks !
