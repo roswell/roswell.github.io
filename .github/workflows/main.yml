@@ -15,7 +15,8 @@ jobs:
         run: curl -L https://raw.githubusercontent.com/roswell/roswell/master/scripts/install-for-ci.sh | sh
       - name: build HTML
         run: ./wiki2html.ros
-      - name: GitHub Pages
-        uses: crazy-max/ghaction-github-pages@v2.5.0
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          build_dir: "."
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: .
